@@ -7,4 +7,5 @@ dependencies = [
     "langchain-anthropic>=1.7.7",
     "langgraph>=1.2.18",
     "python-dotenv>=1.2.4",
+    "sympy>=1.14.0",
 ]

@@ -1,18 +1,25 @@
-"""Calculator agent built with the LangGraph Graph API.
+"""Main calculator agent (LangGraph Graph API).
+
+Handles arithmetic itself and delegates to two subagents:
+  - calculus_agent: differentiation / integration over multiple inputs
+  - trig_agent: trigonometry evaluation, simplification, identities, equations
 
 Written from the standard Graph API agent pattern (not the fetched quickstart,
 which was unreachable) -- compare against the quickstart when it is accessible.
 """
-from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-from langchain.messages import AnyMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain.messages import HumanMessage
 from langchain.tools import tool
-from langgraph.graph import END, START, MessagesState, StateGraph
-from typing_extensions import Literal
 
-load_dotenv()
+import calculus_agent
+import trig_agent
+from base import build_agent
 
-model = init_chat_model("claude-sonnet-5-5", model_provider="anthropic", temperature=0)
+SYSTEM_PROMPT = (
+    "You are a helpful calculator assistant. Use add/multiply/divide for arithmetic. "
+    "Delegate calculus (derivatives, integrals) to ask_calculus_agent and trigonometry "
+    "to ask_trig_agent, passing the full request including all inputs. "
+    "Combine the results into one clear answer."
+)
 
 
 @tool
@@ -33,45 +40,35 @@ def divide(a: int, b: int) -> float:
     return a / b
 
 
-tools = [add, multiply, divide]
-tools_by_name = {t.name: t for t in tools}
-model_with_tools = model.bind_tools(tools)
+def _delegate(subagent, request: str) -> str:
+    result = subagent.invoke({"messages": [HumanMessage(content=request)]})
+    content = result["messages"][-1].content
+    if isinstance(content, list):  # content blocks -> plain text
+        content = "".join(b.get("text", "") for b in content if isinstance(b, dict))
+    return content
 
 
-def llm_call(state: MessagesState):
-    """LLM decides whether to call a tool or answer."""
-    response = model_with_tools.invoke(
-        [SystemMessage(content="You are a helpful assistant that performs arithmetic on inputs.")]
-        + state["messages"]
-    )
-    return {"messages": [response]}
+@tool
+def ask_calculus_agent(request: str) -> str:
+    """Delegate differentiation or integration (one or many expressions) to the calculus subagent."""
+    return _delegate(calculus_agent.make_agent(), request)
 
 
-def tool_node(state: MessagesState):
-    """Execute the tool calls requested by the last AI message."""
-    results = []
-    for call in state["messages"][-1].tool_calls:
-        observation = tools_by_name[call["name"]].invoke(call["args"])
-        results.append(ToolMessage(content=str(observation), tool_call_id=call["id"]))
-    return {"messages": results}
+@tool
+def ask_trig_agent(request: str) -> str:
+    """Delegate trigonometry (evaluate, simplify, verify identities, solve equations) to the trig subagent."""
+    return _delegate(trig_agent.make_agent(), request)
 
 
-def should_continue(state: MessagesState) -> Literal["tool_node", "__end__"]:
-    """Route to the tool node if the LLM made tool calls, otherwise finish."""
-    return "tool_node" if state["messages"][-1].tool_calls else END
-
-
-builder = StateGraph(MessagesState)
-builder.add_node("llm_call", llm_call)
-builder.add_node("tool_node", tool_node)
-builder.add_edge(START, "llm_call")
-builder.add_conditional_edges("llm_call", should_continue, ["tool_node", END])
-builder.add_edge("tool_node", "llm_call")
-agent = builder.compile()
+agent = build_agent([add, multiply, divide, ask_calculus_agent, ask_trig_agent], SYSTEM_PROMPT)
 
 
 if __name__ == "__main__":
-    result = agent.invoke({"messages": [HumanMessage(content="Add 3 and 4, multiply the result by 6, then divide by 2.")]})
+    prompt = (
+        "Add 3 and 4, multiply the result by 6, then divide by 2. "
+        "Also differentiate x^3, sin(x)*x and exp(2x), integrate x^2 from 0 to 3, "
+        "and solve 2*sin(x) = 1."
+    )
+    result = agent.invoke({"messages": [HumanMessage(content=prompt)]})
     for m in result["messages"]:
         m.pretty_print()
-    print("\nFinal answer:", result["messages"][-1].content)
