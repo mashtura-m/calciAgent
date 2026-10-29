@@ -5,6 +5,7 @@ requires-python = ">=3.13"
 dependencies = [
     "langchain>=1.4.7",
     "langchain-anthropic>=1.7.7",
+    "langchain-openai>=1.7.3",
     "langgraph>=1.2.18",
     "python-dotenv>=1.2.4",
     "sympy>=1.14.0",
