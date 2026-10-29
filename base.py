@@ -1,6 +1,4 @@
 """Shared helpers: a tool-calling LangGraph agent builder and a safe sympy parser."""
-import os
-
 import sympy
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
@@ -16,9 +14,7 @@ from typing_extensions import Literal
 
 load_dotenv()
 
-# Override with e.g. MODEL_PROVIDER=anthropic MODEL_NAME=claude-sonnet-5-5
-MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "openai")
-MODEL_NAME = os.getenv("MODEL_NAME", "gpt-6-luna")
+MODEL_NAME = "gpt-6-luna"
 
 _TRANSFORMS = standard_transformations + (implicit_multiplication_application, convert_xor)
 # Only sympy names are visible to parsed input; no Python builtins.
@@ -44,7 +40,7 @@ def per_input(items: list[str], fn) -> str:
 
 def build_agent(tools: list, system_prompt: str):
     """Compile a Graph API agent: llm_call <-> tool_node until no tool calls remain."""
-    model = init_chat_model(MODEL_NAME, model_provider=MODEL_PROVIDER)
+    model = init_chat_model(MODEL_NAME, model_provider="openai")
     model_with_tools = model.bind_tools(tools)
     tools_by_name = {t.name: t for t in tools}
 
