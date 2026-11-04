@@ -1,0 +1,1156 @@
+<title>ReveChat Mobile</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  --navy: #0F1A2E;
+  --navy-mid: #1B2A4A;
+  --navy-soft: #2D3F5E;
+  --ochre: #D4A017;
+  --ochre-light: #FFF8E1;
+  --ochre-dark: #B8860B;
+  --ai: #7C5CFF;
+  --ai-light: #F0ECFF;
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --text: #0F1A2E;
+  --text-sec: #5A6577;
+  --text-cap: #8E99A8;
+  --border: #DFE3E8;
+  --green: #1A8754;
+  --green-lt: #E3F5EC;
+  --red: #C9302C;
+  --red-lt: #FDE8E8;
+  --orange: #E67E22;
+  --orange-lt: #FEF3E2;
+  --wa: #25D366;
+  --fb: #0084FF;
+  --ig: #E1306C;
+  --r: 12px;
+  --rs: 8px;
+  --rx: 5px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: light; } }
+:root[data-theme="dark"] { color-scheme: light; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #E8EAF0;
+  display: flex; justify-content: center; align-items: center; min-height: 100vh;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px;
+}
+.phone {
+  width: 390px; height: 844px; background: var(--bg);
+  border-radius: 44px; overflow: hidden; position: relative;
+  box-shadow: 0 20px 60px rgba(15,26,46,0.25), 0 0 0 1.5px #C4C8D0;
+  display: flex; flex-direction: column;
+}
+@media (max-width: 430px) {
+  body { padding:0; background: var(--bg); }
+  .phone { width:100%; height:100vh; border-radius:0; box-shadow:none; }
+}
+.scr { display:none; flex-direction:column; flex:1; overflow:hidden; }
+.scr.on { display:flex; }
+.scroll { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.scroll::-webkit-scrollbar { display:none; }
+
+/* Nav */
+.nav { height:62px; background:var(--surface); display:flex; border-top:1px solid var(--border); flex-shrink:0; }
+.nav.hide { display:none; }
+.ni { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; cursor:pointer; position:relative; color:var(--text-cap); border:none; background:none; font-family:inherit; font-size:9.5px; font-weight:500; letter-spacing:0.02em; transition:color 0.15s; }
+.ni.on { color:var(--navy); font-weight:600; }
+.ni svg { width:20px; height:20px; }
+.ni .bg { position:absolute; top:4px; right:calc(50% - 16px); background:var(--red); color:#fff; font-size:8px; font-weight:700; min-width:14px; height:14px; border-radius:7px; display:flex; align-items:center; justify-content:center; padding:0 3px; }
+
+/* Topbar */
+.tb { height:52px; background:var(--navy); display:flex; align-items:center; padding:0 16px; flex-shrink:0; gap:10px; }
+.tb h1 { font-size:17px; font-weight:700; color:#fff; flex:1; }
+.tb-btn { background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.7); font-size:16px; padding:5px; border-radius:6px; }
+.tb-btn:hover { color:#fff; background:rgba(255,255,255,0.1); }
+.tb-sub { font-size:11px; color:rgba(255,255,255,0.6); font-weight:400; }
+.tb-light { background:var(--surface); border-bottom:1px solid var(--border); }
+.tb-light h1 { color:var(--text); }
+.tb-light .tb-btn { color:var(--text-sec); }
+
+.role-bar { display:flex; gap:0; background:var(--navy-mid); padding:4px; border-radius:8px; }
+.role-btn { flex:1; padding:7px 0; text-align:center; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; color:rgba(255,255,255,0.6); background:transparent; }
+.role-btn.on { background:var(--ochre); color:var(--navy); }
+
+/* Login */
+#login { background:var(--navy); }
+.login-inner { padding:60px 24px 24px; flex:1; }
+.logo-mark { width:52px; height:52px; background:var(--ochre); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:var(--navy); margin-bottom:24px; }
+.login-inner h1 { font-size:26px; font-weight:800; color:#fff; margin-bottom:4px; }
+.login-inner .sub { font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:32px; }
+.fl { font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:5px; display:block; text-transform:uppercase; letter-spacing:0.05em; }
+.fi { width:100%; height:46px; background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.15); border-radius:var(--rs); padding:0 14px; font-size:14px; font-family:inherit; color:#fff; margin-bottom:14px; outline:none; }
+.fi:focus { border-color:var(--ochre); }
+.fi::placeholder { color:rgba(255,255,255,0.3); }
+.btn-y { width:100%; height:48px; background:var(--ochre); color:var(--navy); border:none; border-radius:var(--rs); font-size:15px; font-weight:800; cursor:pointer; font-family:inherit; letter-spacing:0.02em; box-shadow:0 2px 8px rgba(212,160,23,0.3); }
+
+/* Chips */
+.chips { display:flex; gap:5px; padding:8px 16px; overflow-x:auto; flex-shrink:0; }
+.chips::-webkit-scrollbar { display:none; }
+.ch { padding:5px 11px; border-radius:16px; font-size:12px; font-weight:500; white-space:nowrap; cursor:pointer; border:1.5px solid var(--border); font-family:inherit; background:var(--surface); color:var(--text-sec); transition:all 0.12s; }
+.ch.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+.ch .ct { font-weight:700; margin-left:2px; opacity:0.7; }
+
+/* Inbox sort bar */
+.sort-bar { display:flex; align-items:center; padding:4px 16px; gap:6px; flex-shrink:0; }
+.sort-bar select { height:26px; border:1px solid var(--border); border-radius:var(--rx); font-size:10px; font-family:inherit; color:var(--text-sec); padding:0 6px; background:var(--surface); outline:none; }
+.sort-bar .sb-label { font-size:10px; color:var(--text-cap); font-weight:500; }
+.queue-badge { font-size:9px; font-weight:700; color:var(--ochre-dark); background:var(--ochre-light); padding:2px 6px; border-radius:8px; margin-left:auto; }
+
+/* Conv card */
+.cv { display:flex; gap:10px; padding:10px 16px; cursor:pointer; border-bottom:1px solid var(--border); transition:background 0.1s; }
+.cv:hover { background:var(--ochre-light); }
+.av { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; position:relative; }
+.av .cb { position:absolute; bottom:-1px; right:-1px; width:14px; height:14px; border-radius:50%; border:2px solid var(--surface); display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; }
+.cv-b { flex:1; min-width:0; }
+.cv-r1 { display:flex; align-items:center; gap:4px; }
+.cv-nm { font-size:13px; font-weight:600; color:var(--text); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-nm.bd { font-weight:700; }
+.cv-tm { font-size:10px; color:var(--text-cap); }
+.cv-tm.hl { color:var(--ochre-dark); font-weight:600; }
+.cv-r2 { display:flex; align-items:center; gap:4px; margin-top:1px; }
+.tg-ai { font-size:8px; font-weight:700; color:var(--ai); background:var(--ai-light); padding:1px 4px; border-radius:3px; }
+.tg-ag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
+.cv-pv { font-size:12px; color:var(--text-sec); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-pv.bd { color:var(--text); font-weight:500; }
+.ub { min-width:16px; height:16px; border-radius:8px; background:var(--ochre); color:var(--navy); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; }
+.nd { width:7px; height:7px; border-radius:50%; background:var(--red); flex-shrink:0; }
+.cv-r3 { font-size:10px; color:var(--text-cap); margin-top:1px; display:flex; align-items:center; gap:4px; }
+.sla-tag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
+.sla-ok { background:var(--green-lt); color:var(--green); }
+.sla-warn { background:var(--orange-lt); color:var(--orange); }
+.sla-breach { background:var(--red-lt); color:var(--red); }
+.sent-tag { font-size:8px; color:var(--text-cap); background:var(--bg); padding:1px 4px; border-radius:3px; }
+
+/* Chat */
+#chat .ct-bar { height:52px; background:var(--navy); display:flex; align-items:center; padding:0 8px; flex-shrink:0; gap:6px; }
+.ct-bar .bk { background:none; border:none; font-size:18px; cursor:pointer; color:rgba(255,255,255,0.8); padding:6px; }
+.ct-bar .av { width:30px; height:30px; font-size:11px; }
+.ct-inf { flex:1; min-width:0; }
+.ct-inf h3 { font-size:13px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ct-inf .st { font-size:10px; display:flex; align-items:center; gap:3px; color:rgba(255,255,255,0.6); }
+.st-dot { width:5px; height:5px; border-radius:50%; }
+.ai-tog { display:flex; align-items:center; gap:3px; padding:3px 7px; border-radius:12px; font-size:10px; font-weight:600; cursor:pointer; border:none; font-family:inherit; }
+.ai-tog.on { background:rgba(124,92,255,0.2); color:#B8A4FF; }
+.ai-tog.off { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.4); }
+.ai-tog .trk { width:24px; height:14px; border-radius:7px; position:relative; }
+.ai-tog.on .trk { background:var(--ai); }
+.ai-tog.off .trk { background:rgba(255,255,255,0.2); }
+.trk .thb { width:10px; height:10px; border-radius:50%; background:#fff; position:absolute; top:2px; transition:left 0.15s; }
+.ai-tog.on .thb { left:12px; }
+.ai-tog.off .thb { left:2px; }
+
+.msgs { flex:1; overflow-y:auto; padding:8px 0; display:flex; flex-direction:column; gap:2px; }
+.msgs::-webkit-scrollbar { display:none; }
+.mr { padding:0 14px; display:flex; flex-direction:column; }
+.mr.cust { align-items:flex-start; }
+.mr.ai { align-items:flex-start; }
+.mr.human { align-items:flex-end; }
+.mr.sys { align-items:center; }
+.mr.whisper { align-items:flex-end; }
+
+.bb { max-width:80%; padding:9px 12px; font-size:13px; line-height:1.42; word-wrap:break-word; }
+.bb.c-bb { background:var(--surface); border:1px solid var(--border); border-radius:3px 12px 12px 12px; color:var(--text); }
+.bb.h-bb { background:var(--navy); color:#fff; border-radius:12px 3px 12px 12px; }
+.bb.a-bb { background:var(--surface); border:1px solid var(--border); border-radius:3px 12px 12px 12px; color:var(--text); }
+.bb.s-bb { background:var(--bg); color:var(--text-sec); font-size:10px; font-weight:500; border-radius:14px; padding:3px 12px; max-width:85%; }
+.bb.w-bb { background:var(--ochre-light); border:1px dashed var(--ochre); border-radius:12px 3px 12px 12px; color:var(--navy); font-style:italic; }
+.w-label { font-size:9px; font-weight:700; color:var(--ochre-dark); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px; }
+
+.ai-line { display:flex; align-items:center; gap:4px; margin-bottom:2px; padding:0 2px; }
+.ai-line .aidot { width:5px; height:5px; border-radius:50%; background:var(--ai); }
+.ai-line span { font-size:10px; font-weight:600; color:var(--ai); }
+.cf { font-size:9px; font-weight:500; margin-left:3px; }
+.cf-h { color:var(--green); }
+.cf-m { color:var(--orange); }
+.cf-l { color:var(--red); }
+.mt { font-size:9px; color:var(--text-cap); margin-top:1px; padding:0 3px; }
+
+.bb-img { border-radius:var(--rs); overflow:hidden; max-width:80%; }
+.bb-img img { width:100%; display:block; height:150px; object-fit:cover; background:var(--bg); }
+.bb-img .icp { padding:7px 10px; font-size:13px; line-height:1.35; }
+.bb-img.ci { border:1px solid var(--border); border-radius:3px 12px 12px 12px; }
+.bb-img.ci .icp { color:var(--text); }
+
+/* Product Carousel */
+.carousel-wrap { max-width:85%; overflow:hidden; }
+.carousel { display:flex; gap:8px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 0; }
+.carousel::-webkit-scrollbar { display:none; }
+.p-card { min-width:150px; max-width:150px; scroll-snap-align:start; border-radius:var(--rs); border:1px solid var(--border); overflow:hidden; background:var(--surface); flex-shrink:0; }
+.p-card img { width:100%; height:100px; object-fit:cover; background:var(--bg); }
+.p-card .pc-info { padding:8px; }
+.p-card .pc-nm { font-size:11px; font-weight:600; color:var(--text); line-height:1.3; }
+.p-card .pc-pr { font-size:13px; font-weight:700; color:var(--ochre-dark); margin-top:2px; }
+.p-card .pc-btn { width:100%; padding:7px; background:var(--ochre); color:var(--navy); border:none; border-radius:var(--rx); font-size:10px; font-weight:800; cursor:pointer; font-family:inherit; margin-top:5px; letter-spacing:0.02em; }
+
+/* Button message */
+.btn-msg { max-width:80%; }
+.btn-msg .bm-text { padding:9px 12px; background:var(--surface); border:1px solid var(--border); border-radius:3px 12px 0 0; font-size:13px; color:var(--text); line-height:1.4; }
+.btn-msg .bm-btns { display:flex; flex-direction:column; border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; overflow:hidden; }
+.btn-msg .bm-btn { padding:10px 12px; background:var(--surface); border:none; border-top:1px solid var(--border); font-size:13px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; text-align:center; transition:all 0.12s; }
+.btn-msg .bm-btn:hover { background:var(--ochre); color:var(--navy); }
+.btn-msg .bm-btn:first-child { border-top:none; }
+
+/* Order bubble */
+.ob { border-radius:var(--r); padding:10px; max-width:220px; background:var(--surface); border:1px solid var(--border); }
+.ob .oi { font-weight:700; color:var(--navy); font-size:12px; margin-bottom:3px; }
+.ob .os { font-size:10px; font-weight:600; padding:2px 6px; border-radius:3px; background:var(--green-lt); color:var(--green); display:inline-block; margin-bottom:4px; }
+.ob .ol { font-size:11px; color:var(--text-sec); }
+.ob .otl { display:flex; justify-content:space-between; margin-top:5px; padding-top:5px; border-top:1px solid var(--border); font-size:12px; }
+
+/* Handover */
+.ho { margin:6px 14px; padding:10px; background:var(--red-lt); border:1px solid rgba(201,48,44,0.12); border-radius:var(--rs); display:flex; align-items:center; gap:8px; }
+.ho-i { width:28px; height:28px; border-radius:50%; background:rgba(201,48,44,0.08); display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.ho-t { flex:1; }
+.ho-t h4 { font-size:11px; font-weight:600; color:var(--red); }
+.ho-t p { font-size:10px; color:var(--text-sec); }
+.btn-tk { padding:8px 12px; background:var(--red); color:#fff; border:none; border-radius:var(--rx); font-size:12px; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 2px 6px rgba(201,48,44,0.25); }
+
+/* AI Draft */
+.drf { margin:6px 14px; padding:10px; background:var(--ai-light); border:1px solid rgba(124,92,255,0.1); border-radius:var(--rs); }
+.drf-h { display:flex; align-items:center; gap:4px; margin-bottom:5px; }
+.drf-h span { font-size:11px; font-weight:600; color:var(--ai); }
+.drf-c { margin-left:auto; font-size:9px; font-weight:600; color:var(--ai); background:rgba(124,92,255,0.08); padding:1px 5px; border-radius:6px; }
+.drf p { font-size:12px; color:var(--text); line-height:1.4; margin-bottom:8px; }
+.drf-a { display:flex; gap:5px; }
+.drf-a button { flex:1; padding:6px; border-radius:var(--rx); font-size:11px; font-weight:600; cursor:pointer; font-family:inherit; }
+.drf-a .rj { background:none; border:1px solid var(--border); color:var(--text-sec); }
+.drf-a .ed { background:none; border:1px solid rgba(124,92,255,0.15); color:var(--ai); }
+.drf-a .sd { background:var(--ai); border:none; color:#fff; }
+
+/* Chat input */
+.qr { display:flex; gap:5px; padding:5px 14px; overflow-x:auto; flex-shrink:0; }
+.qr::-webkit-scrollbar { display:none; }
+.qrc { padding:5px 10px; border-radius:14px; font-size:11px; white-space:nowrap; background:var(--ochre-light); color:var(--ochre-dark); border:1px solid rgba(212,160,23,0.15); cursor:pointer; font-family:inherit; font-weight:500; }
+.c-in { padding:6px 8px; background:var(--surface); border-top:1px solid var(--border); display:flex; align-items:flex-end; gap:4px; flex-shrink:0; }
+.c-in .ab { background:none; border:none; font-size:18px; color:var(--text-sec); cursor:pointer; padding:6px; }
+.c-inp { flex:1; background:var(--bg); border:none; border-radius:18px; padding:8px 12px; font-size:13px; font-family:inherit; color:var(--text); outline:none; line-height:1.35; }
+.c-inp::placeholder { color:var(--text-cap); }
+.c-sb { background:none; border:none; font-size:18px; color:var(--ochre-dark); cursor:pointer; padding:6px; }
+.ai-hbar { padding:8px 14px; background:var(--ai-light); border-top:1px solid var(--border); display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.ai-hbar span { flex:1; font-size:11px; font-weight:500; color:var(--ai); }
+.ai-hbar .boff { padding:4px 8px; border:1px solid rgba(124,92,255,0.15); background:none; color:var(--ai); border-radius:var(--rx); font-size:10px; font-weight:600; cursor:pointer; font-family:inherit; }
+.whisper-in { padding:6px 8px; background:var(--ochre-light); border-top:1px solid var(--ochre); display:flex; align-items:flex-end; gap:4px; flex-shrink:0; }
+.whisper-in .c-inp { background:rgba(255,255,255,0.7); }
+
+/* Info panel overlay */
+.info-panel { position:absolute; top:0; right:0; bottom:0; width:85%; background:var(--surface); z-index:50; box-shadow:-4px 0 24px rgba(0,0,0,0.12); display:flex; flex-direction:column; transform:translateX(100%); transition:transform 0.25s ease; }
+.info-panel.open { transform:translateX(0); }
+.ip-head { padding:12px 14px; background:var(--navy); display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.ip-head .ip-close { background:none; border:none; color:rgba(255,255,255,0.7); font-size:18px; cursor:pointer; padding:4px; }
+.ip-head h3 { font-size:14px; font-weight:600; color:#fff; flex:1; }
+.ip-body { flex:1; overflow-y:auto; }
+.ip-body::-webkit-scrollbar { display:none; }
+.ip-section { padding:12px 14px; border-bottom:1px solid var(--border); }
+.ip-section h4 { font-size:10px; font-weight:700; color:var(--text-cap); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
+.ip-avatar { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; margin:0 auto 8px; }
+.ip-name { text-align:center; font-size:16px; font-weight:700; color:var(--text); }
+.ip-meta { text-align:center; font-size:11px; color:var(--text-sec); margin-top:2px; }
+.ip-row { display:flex; align-items:flex-start; padding:5px 0; gap:8px; }
+.ip-row .ip-lbl { font-size:11px; color:var(--text-cap); width:70px; flex-shrink:0; }
+.ip-row .ip-val { font-size:12px; color:var(--text); font-weight:500; flex:1; word-break:break-all; }
+.ip-tags { display:flex; flex-wrap:wrap; gap:4px; }
+.ip-tag { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:500; }
+.ip-note { padding:8px 10px; background:var(--bg); border-radius:var(--rx); font-size:11px; color:var(--text-sec); line-height:1.4; margin-top:6px; }
+.ip-note .note-by { font-size:9px; font-weight:600; color:var(--text-cap); margin-top:3px; }
+.ip-add-note { width:100%; padding:7px; background:none; border:1.5px dashed var(--border); border-radius:var(--rx); font-size:11px; color:var(--text-sec); cursor:pointer; font-family:inherit; margin-top:6px; text-align:center; }
+.ip-timeline { position:relative; padding-left:16px; }
+.ip-tl-item { position:relative; padding-bottom:12px; padding-left:10px; border-left:1.5px solid var(--border); }
+.ip-tl-item:last-child { border-left:none; }
+.ip-tl-item::before { content:''; position:absolute; left:-4px; top:2px; width:8px; height:8px; border-radius:50%; background:var(--navy); }
+.ip-tl-item.ai-ev::before { background:var(--ai); }
+.ip-tl-item h5 { font-size:11px; font-weight:600; color:var(--text); }
+.ip-tl-item p { font-size:10px; color:var(--text-sec); }
+.ip-tl-item .tl-time { font-size:9px; color:var(--text-cap); }
+.sentiment-bar { display:flex; align-items:center; gap:4px; margin-top:4px; }
+.sent-icon { font-size:16px; }
+.sent-fill { flex:1; height:6px; border-radius:3px; background:var(--bg); overflow:hidden; }
+.sent-fill div { height:100%; border-radius:3px; }
+.sent-label { font-size:10px; font-weight:600; width:50px; }
+
+/* Break/Offline modal */
+.modal-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(15,26,46,0.5); z-index:100; display:flex; align-items:center; justify-content:center; }
+.modal { width:85%; background:var(--surface); border-radius:var(--r); overflow:hidden; }
+.modal-head { padding:14px 16px; background:var(--navy); }
+.modal-head h3 { font-size:15px; font-weight:700; color:#fff; }
+.modal-head p { font-size:11px; color:rgba(255,255,255,0.6); margin-top:2px; }
+.modal-body { padding:14px 16px; }
+.modal-body .m-label { font-size:11px; font-weight:600; color:var(--text-sec); margin-bottom:4px; }
+.modal-body select, .modal-body input { width:100%; height:38px; border:1.5px solid var(--border); border-radius:var(--rs); padding:0 10px; font-size:13px; font-family:inherit; color:var(--text); margin-bottom:10px; outline:none; }
+.modal-foot { display:flex; gap:8px; padding:0 16px 14px; }
+.modal-foot button { flex:1; padding:10px; border-radius:var(--rs); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+.modal-foot .m-cancel { background:none; border:1.5px solid var(--border); color:var(--text-sec); }
+.modal-foot .m-ok { background:var(--ochre); border:none; color:var(--navy); }
+
+/* Dashboard */
+.dash-top { background:var(--navy); padding:16px; padding-top:8px; border-radius:0 0 20px 20px; }
+.dash-stats { display:flex; gap:8px; margin-top:10px; }
+.ds { flex:1; text-align:center; padding:10px 4px; background:rgba(255,255,255,0.08); border-radius:var(--rs); }
+.ds .dv { font-size:20px; font-weight:800; color:#fff; }
+.ds .dl { font-size:9px; color:rgba(255,255,255,0.55); margin-top:1px; }
+.sec-t { font-size:13px; font-weight:700; color:var(--text); padding:0 16px; margin:14px 0 8px; display:flex; align-items:center; gap:5px; }
+.sec-bg { font-size:10px; font-weight:700; padding:2px 6px; border-radius:6px; }
+.sg { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 16px; }
+.sc { padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); }
+.sc .sv { font-size:18px; font-weight:800; color:var(--text); }
+.sc .sl { font-size:10px; color:var(--text-sec); }
+.sc .sd { font-size:10px; font-weight:600; margin-top:2px; }
+.sd.up { color:var(--green); }
+.sd.dn { color:var(--red); }
+.bar-c { margin:0 16px; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); }
+.br { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+.br:last-child { margin-bottom:0; }
+.br .bl { font-size:10px; color:var(--text-sec); width:50px; text-align:right; flex-shrink:0; }
+.br .bt { flex:1; height:16px; background:var(--bg); border-radius:3px; overflow:hidden; }
+.br .bf { height:100%; border-radius:3px; }
+.br .bv { font-size:10px; font-weight:600; color:var(--text); width:24px; }
+.ag-card { display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); margin:0 16px 6px; }
+.ag-av { width:32px; height:32px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:13px; position:relative; }
+.ag-dot { position:absolute; bottom:0; right:0; width:10px; height:10px; border-radius:50%; border:2px solid var(--surface); }
+.ag-info { flex:1; }
+.ag-info h4 { font-size:13px; font-weight:600; color:var(--text); }
+.ag-info p { font-size:10px; color:var(--text-sec); }
+.ag-stats { text-align:right; }
+.ag-stats .av-num { font-size:14px; font-weight:700; color:var(--text); }
+.ag-stats .av-lab { font-size:9px; color:var(--text-cap); }
+
+/* Tickets */
+.tkc { margin:0 16px 8px; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); cursor:pointer; }
+.tkc:hover { border-color:var(--navy); }
+.tk-r1 { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+.tk-id { font-weight:700; color:var(--navy); font-size:13px; flex:1; }
+.tk-pri { font-size:9px; font-weight:600; padding:2px 6px; border-radius:3px; text-transform:uppercase; }
+.tk-pri.high { background:var(--red-lt); color:var(--red); }
+.tk-pri.med { background:var(--orange-lt); color:var(--orange); }
+.tk-pri.low { background:var(--green-lt); color:var(--green); }
+.tk-subj { font-size:13px; font-weight:500; color:var(--text); margin-bottom:3px; }
+.tk-meta { display:flex; align-items:center; gap:6px; font-size:10px; color:var(--text-cap); flex-wrap:wrap; }
+.tk-st { font-size:10px; font-weight:600; padding:1px 6px; border-radius:3px; }
+.tk-st.open { background:var(--green-lt); color:var(--green); }
+.tk-st.pending { background:var(--orange-lt); color:var(--orange); }
+.tk-st.closed { background:var(--bg); color:var(--text-cap); }
+.tk-ait { font-size:9px; font-weight:600; color:var(--ai); background:var(--ai-light); padding:1px 5px; border-radius:3px; }
+
+/* Contacts */
+.sb { margin:6px 16px; position:relative; }
+.sb input { width:100%; height:38px; background:var(--bg); border:1.5px solid var(--border); border-radius:var(--rs); padding:0 12px 0 34px; font-size:12px; font-family:inherit; color:var(--text); outline:none; }
+.sb input::placeholder { color:var(--text-cap); }
+.sb input:focus { border-color:var(--navy); }
+.sb .sbi { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-cap); font-size:14px; }
+.imp-row { display:flex; gap:6px; padding:0 16px; margin:6px 0; }
+.imp-b { flex:1; padding:8px; background:var(--surface); border:1.5px dashed var(--border); border-radius:var(--rs); text-align:center; cursor:pointer; }
+.imp-b:hover { border-color:var(--ochre); }
+.imp-b .ib-i { font-size:16px; }
+.imp-b .ib-t { font-size:11px; font-weight:600; color:var(--text); }
+.imp-b .ib-s { font-size:9px; color:var(--text-cap); }
+
+.filter-panel { margin:8px 16px; padding:10px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); }
+.fp-title { font-size:10px; font-weight:700; color:var(--text-cap); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.04em; }
+.fp-row { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+.fp-chip { padding:4px 8px; border-radius:12px; font-size:10px; font-weight:500; border:1px solid var(--border); background:var(--surface); color:var(--text-sec); cursor:pointer; font-family:inherit; transition:all 0.1s; }
+.fp-chip.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+.fp-chip.seg-on { background:var(--ochre); color:var(--navy); border-color:var(--ochre); }
+.fp-range select { height:28px; border:1px solid var(--border); border-radius:var(--rx); font-size:10px; font-family:inherit; color:var(--text); padding:0 6px; background:var(--surface); outline:none; width:100%; }
+.ct-item { display:flex; align-items:center; gap:10px; padding:8px 16px; border-bottom:1px solid var(--border); cursor:pointer; }
+.ct-item:hover { background:var(--ochre-light); }
+.ct-i { flex:1; }
+.ct-i h4 { font-size:13px; font-weight:600; color:var(--text); }
+.ct-i p { font-size:10px; color:var(--text-sec); }
+.ct-tags { display:flex; gap:3px; flex-wrap:wrap; margin-top:2px; }
+.ct-tag { font-size:8px; padding:1px 4px; border-radius:3px; font-weight:500; }
+
+/* Integration (admin only) */
+.int-card { margin:0 16px 10px; padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); }
+.int-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.int-ico { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.int-info { flex:1; }
+.int-info h4 { font-size:13px; font-weight:600; color:var(--text); }
+.int-info p { font-size:10px; color:var(--text-sec); }
+.int-status { font-size:10px; font-weight:600; padding:3px 8px; border-radius:var(--rx); }
+.int-status.connected { background:var(--green-lt); color:var(--green); }
+.int-status.pending { background:var(--orange-lt); color:var(--orange); }
+.int-status.disconn { background:var(--bg); color:var(--text-cap); }
+.int-steps { padding:8px 10px; background:var(--bg); border-radius:var(--rx); margin-bottom:8px; }
+.int-step { display:flex; align-items:flex-start; gap:6px; padding:4px 0; font-size:11px; color:var(--text-sec); }
+.int-step .step-num { width:18px; height:18px; border-radius:50%; background:var(--navy); color:#fff; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.int-step.done .step-num { background:var(--green); }
+.api-box { padding:8px 10px; background:var(--bg); border-radius:var(--rx); margin-top:6px; font-size:10px; color:var(--text-sec); font-family:'Courier New',monospace; word-break:break-all; line-height:1.5; }
+.api-box strong { color:var(--text); font-family:inherit; }
+.btn-connect { width:100%; padding:10px; background:var(--ochre); color:var(--navy); border:none; border-radius:var(--rx); font-size:13px; font-weight:800; cursor:pointer; font-family:inherit; margin-top:8px; box-shadow:0 2px 8px rgba(212,160,23,0.3); letter-spacing:0.02em; }
+
+/* Collapsible sections */
+.collapse-header { display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--border); background:var(--surface); }
+.collapse-header h3 { flex:1; font-size:14px; font-weight:700; color:var(--text); }
+.collapse-header .c-icon { font-size:12px; color:var(--text-cap); transition:transform 0.2s; }
+.collapse-header.open .c-icon { transform:rotate(90deg); }
+.collapse-header .c-badge { font-size:10px; font-weight:600; padding:2px 6px; border-radius:8px; }
+.collapse-body { display:none; }
+.collapse-body.open { display:block; }
+
+/* Segment folders */
+.seg-folder { margin:0 16px 8px; border:1px solid var(--border); border-radius:var(--rs); overflow:hidden; background:var(--surface); }
+.seg-head { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; }
+.seg-head .sf-icon { font-size:16px; }
+.seg-head .sf-name { flex:1; font-size:13px; font-weight:700; color:var(--text); }
+.seg-head .sf-count { font-size:11px; font-weight:600; color:var(--text-cap); background:var(--bg); padding:2px 8px; border-radius:10px; }
+.seg-head .sf-arrow { font-size:10px; color:var(--text-cap); transition:transform 0.2s; }
+.seg-head.open .sf-arrow { transform:rotate(90deg); }
+.seg-contacts { display:none; border-top:1px solid var(--border); }
+.seg-contacts.open { display:block; }
+
+/* Editable tags */
+.ip-tag-edit { display:inline-flex; align-items:center; gap:2px; cursor:pointer; }
+.ip-tag-edit .ip-tag-x { display:none; font-size:8px; font-weight:700; color:currentColor; opacity:0.5; width:12px; height:12px; border-radius:50%; background:rgba(0,0,0,0.08); align-items:center; justify-content:center; cursor:pointer; }
+.ip-tag-edit:hover .ip-tag-x { display:flex; }
+.ip-add-tag { font-size:10px; padding:2px 7px; border-radius:10px; border:1.5px dashed var(--border); color:var(--text-cap); cursor:pointer; background:none; font-family:inherit; font-weight:500; }
+
+/* Profile */
+.pf-card { margin:16px; padding:16px; background:var(--surface); border-radius:var(--r); display:flex; align-items:center; gap:12px; }
+.pf-av { width:50px; height:50px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:var(--ochre); }
+.pf-i h2 { font-size:16px; font-weight:700; color:var(--text); }
+.pf-i .rl { font-size:11px; color:var(--text-sec); }
+.pf-i .ol { font-size:10px; color:var(--green); display:flex; align-items:center; gap:3px; }
+.stg { margin:0 16px 12px; background:var(--surface); border-radius:var(--r); overflow:hidden; }
+.si { display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--border); cursor:pointer; }
+.si:last-child { border-bottom:none; }
+.si .sic { font-size:16px; width:20px; text-align:center; color:var(--text-sec); }
+.si .sit { flex:1; }
+.si .sit h4 { font-size:13px; font-weight:500; color:var(--text); }
+.si .sit p { font-size:10px; color:var(--text-sec); }
+.si .tl { font-size:11px; color:var(--text-cap); }
+.tg { width:36px; height:20px; border-radius:10px; position:relative; cursor:pointer; border:none; }
+.tg.on { background:var(--ochre); }
+.tg.off { background:#bbb; }
+.tg::after { content:''; width:16px; height:16px; border-radius:50%; background:#fff; position:absolute; top:2px; transition:left 0.15s; }
+.tg.on::after { left:18px; }
+.tg.off::after { left:2px; }
+.lo h4 { color:var(--red) !important; }
+.lo .sic { color:var(--red) !important; }
+.vr { text-align:center; font-size:10px; color:var(--text-cap); padding:12px; }
+</style>
+
+<div class="phone" id="app">
+  <!-- LOGIN -->
+  <div class="scr on" id="login">
+    <div class="login-inner scroll">
+      <div class="logo-mark">R</div>
+      <h1>ReveChat</h1>
+      <p class="sub">Customer engagement, powered by AI</p>
+      <label class="fl">Email or Phone</label>
+      <input class="fi" value="nusrat@revechat.com" readonly>
+      <label class="fl">Password</label>
+      <input class="fi" type="password" value="••••••••" readonly>
+      <div style="height:16px"></div>
+      <button class="btn-y" onclick="nav('dashboard')">Login as Nusrat (Demo)</button>
+      <div style="text-align:center;margin-top:12px"><span style="font-size:12px;color:var(--ochre);cursor:pointer;font-weight:500">Forgot Password?</span></div>
+      <div style="text-align:center;margin-top:36px;font-size:10px;color:rgba(255,255,255,0.35)">v3.3.0 · ReveChat Fashion Store</div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="scr" id="dashboard">
+    <div class="dash-top">
+      <div style="display:flex;align-items:center;gap:8px">
+        <h1 style="font-size:17px;font-weight:700;color:#fff;flex:1">Dashboard</h1>
+        <span style="font-size:10px;color:rgba(255,255,255,0.5)">Nov 4, 2026</span>
+        <button class="tb-btn">⟳</button>
+      </div>
+      <div class="role-bar" style="margin:8px 0 0" id="role-bar">
+        <button class="role-btn on" onclick="setRole('admin')">Admin</button>
+        <button class="role-btn" onclick="setRole('agent')">Agent</button>
+      </div>
+      <div class="dash-stats" id="dash-stats"></div>
+    </div>
+    <div class="scroll" id="dash-body"></div>
+  </div>
+
+  <!-- INBOX -->
+  <div class="scr" id="inbox">
+    <div class="tb">
+      <div style="flex:1"><h1 style="font-size:17px">Inbox</h1><span class="tb-sub" id="inbox-sub"></span></div>
+      <button class="tb-btn">⚙</button>
+    </div>
+    <div class="chips" id="filters"></div>
+    <div class="sort-bar" id="sort-bar"></div>
+    <div class="scroll" id="conv-list"></div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="scr" id="chat" style="position:relative">
+    <div class="ct-bar">
+      <button class="bk" onclick="closeCht()">←</button>
+      <div class="av" id="chat-av" style="width:30px;height:30px;font-size:11px"></div>
+      <div class="ct-inf"><h3 id="chat-nm"></h3><div class="st" id="chat-st"></div></div>
+      <button class="ai-tog on" id="ai-tog" onclick="togAi()"><span style="font-size:8px">✦</span>AI<div class="trk"><div class="thb"></div></div></button>
+      <button class="tb-btn" id="whisper-btn" onclick="toggleWhisper()" title="Whisper" style="display:none">💬</button>
+      <button class="tb-btn" id="info-btn" onclick="toggleInfo()">ⓘ</button>
+    </div>
+    <div id="ho-zone"></div>
+    <div class="msgs" id="msgs"></div>
+    <div id="drf-zone"></div>
+    <div id="qr-zone"></div>
+    <div id="in-zone"></div>
+    <div class="info-panel" id="info-panel"></div>
+  </div>
+
+  <!-- TICKETS -->
+  <div class="scr" id="tickets">
+    <div class="tb"><h1 style="font-size:17px">Tickets</h1><button class="tb-btn">＋</button></div>
+    <div class="chips" id="tk-fl"></div>
+    <div class="scroll" id="tk-list"></div>
+  </div>
+
+  <!-- CONTACTS -->
+  <div class="scr" id="contacts">
+    <div class="tb-light tb"><h1 style="font-size:17px">Contacts</h1><button class="tb-btn" onclick="toggleFP()">⫶</button></div>
+    <div class="sb"><span class="sbi">🔍</span><input placeholder="Search contacts..." oninput="fltCt(this.value)"></div>
+    <div class="imp-row">
+      <div class="imp-b"><div class="ib-i">📊</div><div class="ib-t">Excel</div><div class="ib-s">.xlsx, .csv</div></div>
+      <div class="imp-b"><div class="ib-i">📱</div><div class="ib-t">Phone</div><div class="ib-s">Sync</div></div>
+      <div class="imp-b"><div class="ib-i">📋</div><div class="ib-t">Paste</div><div class="ib-s">Bulk</div></div>
+    </div>
+    <div id="fp-panel" hidden></div>
+    <div class="scroll" id="ct-list"></div>
+  </div>
+
+  <!-- SETTINGS (unified) -->
+  <div class="scr" id="settings">
+    <div class="tb-light tb"><h1 style="font-size:17px">Settings</h1></div>
+    <div class="scroll" id="settings-body"></div>
+  </div>
+
+  <!-- BREAK MODAL -->
+  <div class="modal-overlay" id="break-modal" style="display:none">
+    <div class="modal">
+      <div class="modal-head"><h3>Go on Break</h3><p>Reassign your active chats before going offline</p></div>
+      <div class="modal-body">
+        <div class="m-label">Break Duration</div>
+        <select id="break-dur">
+          <option>15 minutes</option><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>End of day</option>
+        </select>
+        <div class="m-label">Reassign active chats to</div>
+        <select id="break-assign">
+          <option>Rahat (5 active)</option><option>Mim (3 active)</option><option>Auto-assign by routing</option>
+        </select>
+        <div class="m-label">Reason (optional)</div>
+        <input placeholder="e.g. Lunch break, Prayer time..." id="break-reason">
+      </div>
+      <div class="modal-foot">
+        <button class="m-cancel" onclick="hideBreak()">Cancel</button>
+        <button class="m-ok" onclick="goOnBreak()">Go on Break</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav hide" id="bnav"></nav>
+</div>
+
+<script>
+const CH={whatsapp:'#25D366',messenger:'#0084FF',instagram:'#E1306C',livechat:'#0F1A2E'};
+const CL={whatsapp:'W',messenger:'M',instagram:'I',livechat:'L'};
+const AGC={Nusrat:'#1B6B93',Rahat:'#2E7D32',Mim:'#C2185B'};
+let cur=null,flt='all',tkF='all',role='admin',whisperMode=false,fpOpen=false,infoOpen=false,
+    ctFlt={ch:'all',seg:'all',label:'all',time:'all'},inboxSort='fifo',inboxChFlt='all',isOnline=true;
+
+const AGENTS=[
+  {name:'Nusrat',role:'Senior Agent',active:8,resolved:12,rating:4.8,online:true},
+  {name:'Rahat',role:'Agent',active:5,resolved:9,rating:4.5,online:true},
+  {name:'Mim',role:'Agent',active:3,resolved:7,rating:4.6,online:false,breakUntil:'1:30 PM',breakReason:'Lunch'},
+];
+
+const CONVS=[
+  {id:'1',name:'Fatima Akter',ch:'whatsapp',unread:3,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Refund Request',assigned:null,agentAssigned:null,queuePos:1,queuedAt:Date.now()-120000,
+   custTags:['refund','repeat'],custLabel:'Buyer',custSeg:'VIP',
+   custInfo:{phone:'+8801711111111',email:'fatima@gmail.com',location:'Dhaka',ltv:'৳12,400',orders:5,lastOrder:'Oct 28',lang:'Bangla',source:'WhatsApp Ad'},
+   sentiment:{score:25,label:'Frustrated',icon:'😤'},
+   notes:[{text:'Received damaged dress, wants full refund not exchange',by:'AI Sara',time:'11:35 AM'}],
+   preview:'আমি refund চাই',time:'2m',sla:'breach',
+   msgs:[
+     {t:'text',s:'customer',text:'হ্যালো, আমি একটা ড্রেস কিনেছিলাম',time:'11:30'},
+     {t:'img_cap',s:'customer',img:'https://picsum.photos/seed/dress1/400/300',cap:'এইটা ফেটে গেছে',time:'11:32'},
+     {t:'text',s:'ai',text:'ফাতিমা, সমস্যার জন্য দুঃখিত। পণ্যটি কবে ডেলিভারি হয়েছিল?',time:'11:33',conf:92},
+     {t:'text',s:'customer',text:'গত সোমবার',time:'11:35'},
+     {t:'btn',s:'ai',text:'Refund process শুরু করতে চাই। আপনি কি এতে agree করছেন?',btns:['Yes, Refund চাই','No, Exchange চাই','Talk to Human'],time:'11:36',conf:85},
+     {t:'sys',text:'⚠ AI handover → Refund Request'},
+     {t:'text',s:'customer',text:'আমি refund চাই',time:'11:58'},
+   ],
+   draft:{text:'ফাতিমা, আপনার refund ৳1,650 bKash এ ৩ দিনে পৌঁছাবে।',conf:88},
+   timeline:[
+     {ev:'First contact via WhatsApp',time:'Oct 15',ai:false},
+     {ev:'Purchased Red Dress (৳1,650)',time:'Oct 25',ai:false},
+     {ev:'Delivery confirmed',time:'Oct 28',ai:true},
+     {ev:'Damage complaint started',time:'Nov 4',ai:true},
+     {ev:'AI escalated → Refund review',time:'Nov 4',ai:true},
+   ]},
+  {id:'2',name:'Rahim Uddin',ch:'messenger',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:4,queuedAt:Date.now()-900000,
+   custTags:['loyal'],custLabel:'Buyer',custSeg:'Regular',
+   custInfo:{phone:'+8801722222222',email:'rahim.u@yahoo.com',location:'Chittagong',ltv:'৳6,200',orders:3,lastOrder:'Nov 1',lang:'Bangla',source:'Messenger Organic'},
+   sentiment:{score:80,label:'Happy',icon:'😊'},
+   notes:[{text:'Repeat buyer, interested in polo shirts',by:'AI Sara',time:'11:02 AM'}],
+   preview:'ডেলিভারি আগামীকাল',time:'15m',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'আমার অর্ডার কোথায়?',time:'11:00'},
+     {t:'text',s:'ai',text:'রহিম ভাই, আপনার অর্ডার চেক করছি।',time:'11:02',conf:95},
+     {t:'order',s:'ai',oid:'ORD-1234',ost:'Shipped',items:['Blue Polo x1','Black Chinos x1'],total:'৳2,450',time:'11:03',conf:97},
+     {t:'carousel',s:'ai',time:'11:10',conf:90,products:[
+       {name:'Premium Cotton Polo',img:'https://picsum.photos/seed/polo1/300/300',price:'৳1,250'},
+       {name:'Slim Fit Chinos',img:'https://picsum.photos/seed/chinos/300/300',price:'৳1,450'},
+       {name:'Casual Sneakers',img:'https://picsum.photos/seed/shoes1/300/300',price:'৳2,800'},
+     ]},
+     {t:'btn',s:'ai',text:'এই প্রোডাক্টগুলো আপনার পছন্দ হতে পারে! কোনটা দেখতে চান?',btns:['View Polo','View Chinos','View Sneakers','Browse All'],time:'11:11',conf:90},
+   ]},
+  {id:'3',name:'Sumaiya Rahman',ch:'instagram',unread:1,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:3,queuedAt:Date.now()-2700000,
+   custTags:['fashion','influencer'],custLabel:'Lead',custSeg:'New',
+   custInfo:{phone:'+8801733333333',email:'sumaiya.r@insta.com',location:'Sylhet',ltv:'৳0',orders:0,lastOrder:'—',lang:'English/Bangla',source:'Instagram DM'},
+   sentiment:{score:70,label:'Interested',icon:'🤔'},
+   notes:[{text:'Fashion influencer, potential brand collab',by:'Nusrat',time:'10:15 AM'}],
+   preview:'এই শাড়িটার price কত?',time:'45m',sla:'warn',
+   msgs:[
+     {t:'text',s:'customer',text:'Hi! I love your new collection 😍',time:'10:00'},
+     {t:'text',s:'human',text:'Thank you Sumaiya! Which collection?',time:'10:10',agent:'Nusrat'},
+     {t:'img_cap',s:'customer',img:'https://picsum.photos/seed/saree1/400/500',cap:'Red Saree Collection',time:'11:15'},
+     {t:'text',s:'customer',text:'এই শাড়িটার price কত?',time:'11:16'},
+     {t:'whisper',s:'admin',text:'Sumaiya is a VIP influencer — offer 10% discount',time:'11:17',from:'Admin'},
+   ]},
+  {id:'4',name:'Kamal Hossain',ch:'whatsapp',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:5,queuedAt:Date.now()-3600000,
+   custTags:['bulk','repeat'],custLabel:'Buyer',custSeg:'VIP',
+   custInfo:{phone:'+8801744444444',email:'kamal.h@gmail.com',location:'Rajshahi',ltv:'৳28,600',orders:7,lastOrder:'Oct 30',lang:'Bangla',source:'Referral'},
+   sentiment:{score:65,label:'Neutral',icon:'😐'},
+   notes:[{text:'Bulk buyer, orders for his shop in Rajshahi',by:'AI Sara',time:'10:02 AM'},{text:'Prefers XL sizes, cotton fabric',by:'Rahat',time:'Sep 20'}],
+   preview:'Size chart পাঠান',time:'1h',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'ভাই XL size আছে?',time:'10:00'},
+     {t:'text',s:'ai',text:'জি, XL available!',time:'10:02',conf:91},
+     {t:'carousel',s:'ai',time:'10:05',conf:88,products:[
+       {name:'Premium Cotton Polo',img:'https://picsum.photos/seed/polo1/300/300',price:'৳1,250'},
+       {name:'Oxford Button Down',img:'https://picsum.photos/seed/shirt1/300/300',price:'৳1,550'},
+     ]},
+     {t:'btn',s:'ai',text:'আপনি কি সাইজ চার্ট দেখতে চান?',btns:['Size Chart দেখুন','Order করুন','More Options'],time:'10:08',conf:90},
+     {t:'text',s:'customer',text:'Size chart পাঠান',time:'11:00'},
+   ],
+   draft:{text:'সাইজ চার্ট: S(36"), M(38"), L(40"), XL(42"), XXL(44")।',conf:93},
+   timeline:[
+     {ev:'First contact',time:'Aug 5',ai:false},
+     {ev:'Bulk order (12 items, ৳15,000)',time:'Aug 12',ai:false},
+     {ev:'Repeat order (৳8,600)',time:'Sep 20',ai:true},
+     {ev:'Size inquiry today',time:'Nov 4',ai:true},
+   ]},
+  {id:'5',name:'Nadia Islam',ch:'livechat',unread:5,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Pacify Angry Customer',assigned:null,agentAssigned:null,queuePos:0,queuedAt:Date.now()-60000,
+   custTags:['refund','escalated'],custLabel:'Complainant',custSeg:'At Risk',
+   custInfo:{phone:'+8801755555555',email:'nadia.i@outlook.com',location:'Dhaka',ltv:'৳9,800',orders:4,lastOrder:'Oct 22',lang:'English',source:'Website'},
+   sentiment:{score:10,label:'Angry',icon:'😡'},
+   notes:[{text:'URGENT: 3rd follow-up on refund. Customer threatening social media complaint',by:'AI Sara',time:'11:45 AM'}],
+   preview:'I need a manager NOW',time:'5m',sla:'breach',
+   msgs:[
+     {t:'text',s:'customer',text:'THIRD time asking about my refund!',time:'11:40'},
+     {t:'text',s:'ai',text:'I understand your frustration, Nadia. Let me check.',time:'11:41',conf:78},
+     {t:'text',s:'customer',text:'10 days and no refund!',time:'11:45'},
+     {t:'btn',s:'ai',text:'I apologize sincerely. Your refund ৳3,200 is processing. Would you like to:',btns:['Check Refund Status','Talk to Manager','File Complaint'],time:'11:46',conf:72},
+     {t:'sys',text:'⚠ AI handover → Pacify Angry Customer'},
+     {t:'text',s:'customer',text:'I need a manager NOW',time:'11:55'},
+   ],
+   timeline:[
+     {ev:'Purchased Winter Jacket (৳3,200)',time:'Oct 15',ai:false},
+     {ev:'Return request filed',time:'Oct 22',ai:true},
+     {ev:'Refund approved',time:'Oct 25',ai:false},
+     {ev:'1st follow-up (refund delayed)',time:'Oct 30',ai:true},
+     {ev:'2nd follow-up (escalated)',time:'Nov 2',ai:true},
+     {ev:'3rd follow-up — ANGRY',time:'Nov 4',ai:true},
+   ]},
+  {id:'6',name:'Arif Mahmud',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:6,queuedAt:Date.now()-10800000,
+   custTags:['loyal'],custLabel:'Buyer',custSeg:'Regular',
+   custInfo:{phone:'+8801766666666',email:'arif.m@gmail.com',location:'Khulna',ltv:'৳4,200',orders:2,lastOrder:'Nov 3',lang:'Bangla',source:'WhatsApp'},
+   sentiment:{score:90,label:'Very Happy',icon:'😄'},
+   notes:[{text:'Smooth transaction, praised service quality',by:'Nusrat',time:'9:45 AM'}],
+   preview:'ধন্যবাদ! ভালো সার্ভিস 👍',time:'3h',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'পেমেন্ট করেছি bKash এ',time:'9:00'},
+     {t:'img_cap',s:'customer',img:'https://picsum.photos/seed/bkash/400/600',cap:'bKash payment screenshot',time:'9:05'},
+     {t:'text',s:'human',text:'কনফার্ম! ২-৩ দিনে ডেলিভারি পাবেন।',time:'9:30',agent:'Nusrat'},
+     {t:'text',s:'customer',text:'ধন্যবাদ! ভালো সার্ভিস 👍',time:'9:45'},
+   ]},
+  {id:'7',name:'Rafi Ahmed',ch:'livechat',unread:1,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Get Online Payment',assigned:null,agentAssigned:null,queuePos:2,queuedAt:Date.now()-600000,
+   custTags:['payment-issue'],custLabel:'Lead',custSeg:'New',
+   custInfo:{phone:'+8801788888888',email:'rafi.a@gmail.com',location:'Comilla',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Google Ad'},
+   sentiment:{score:40,label:'Anxious',icon:'😟'},
+   notes:[{text:'First-time buyer, payment failing on bKash',by:'AI Sara',time:'11:42 AM'}],
+   preview:'bKash payment error',time:'10m',sla:'warn',
+   msgs:[
+     {t:'text',s:'customer',text:'Online payment হচ্ছে না',time:'11:40'},
+     {t:'text',s:'ai',text:'Rafi, payment issue নিয়ে দুঃখিত। কোন method?',time:'11:41',conf:80},
+     {t:'btn',s:'ai',text:'Payment method select করুন:',btns:['bKash','Nagad','Card Payment','Cash on Delivery'],time:'11:42',conf:82},
+     {t:'text',s:'customer',text:'bKash দিয়ে error',time:'11:43'},
+     {t:'sys',text:'⚠ AI handover → Get Online Payment'},
+   ],
+   timeline:[
+     {ev:'Landed from Google Ad',time:'Nov 4',ai:true},
+     {ev:'Added to cart (Jacket ৳2,100)',time:'Nov 4',ai:true},
+     {ev:'Payment failed — bKash',time:'Nov 4',ai:true},
+   ]},
+  {id:'8',name:'Tasnim Jahan',ch:'messenger',unread:2,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:7,queuedAt:Date.now()-1800000,
+   custTags:['repeat','fashion'],custLabel:'Buyer',custSeg:'VIP',
+   custInfo:{phone:'+8801799999999',email:'tasnim.j@gmail.com',location:'Dhaka',ltv:'৳18,500',orders:6,lastOrder:'Nov 2',lang:'Bangla',source:'Messenger Ad'},
+   sentiment:{score:75,label:'Content',icon:'🙂'},
+   notes:[{text:'Frequent buyer, prefers cash on delivery',by:'Rahat',time:'Oct 28'}],
+   preview:'নতুন collection কবে আসবে?',time:'30m',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'আপনাদের winter collection?',time:'10:30'},
+     {t:'text',s:'human',text:'তাসনিম, winter collection আসছে next week!',time:'10:45',agent:'Rahat'},
+     {t:'text',s:'customer',text:'নতুন collection কবে আসবে?',time:'11:30'},
+   ]},
+];
+
+const TICKETS=[
+  {id:'TK-1001',subj:'Refund not received — ORD-5678',cust:'Nadia Islam',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'livechat'},
+  {id:'TK-1002',subj:'Wrong item delivered',cust:'Fatima Akter',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'whatsapp'},
+  {id:'TK-1003',subj:'bKash payment error',cust:'Rafi Ahmed',pri:'med',st:'pending',aiF:true,date:'Nov 4',ch:'livechat'},
+  {id:'TK-1004',subj:'Size exchange — Polo Shirt',cust:'Kamal Hossain',pri:'low',st:'open',aiF:false,date:'Nov 2',ch:'whatsapp'},
+  {id:'TK-1005',subj:'Delivery delayed 5 days',cust:'Rahim Uddin',pri:'med',st:'pending',aiF:true,date:'Nov 1',ch:'messenger'},
+  {id:'TK-1006',subj:'Product quality — Saree',cust:'Sumaiya Rahman',pri:'low',st:'closed',aiF:false,date:'Oct 29',ch:'instagram'},
+];
+
+const CONTACTS=[
+  {name:'Fatima Akter',phone:'+8801711111111',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['refund','repeat'],last:'2h ago',chats:5},
+  {name:'Rahim Uddin',phone:'+8801722222222',ch:'messenger',seg:'Regular',label:'Buyer',tags:['loyal'],last:'15m ago',chats:3},
+  {name:'Sumaiya Rahman',phone:'+8801733333333',ch:'instagram',seg:'New',label:'Lead',tags:['fashion','influencer'],last:'45m ago',chats:2},
+  {name:'Kamal Hossain',phone:'+8801744444444',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['bulk','repeat'],last:'1h ago',chats:7},
+  {name:'Nadia Islam',phone:'+8801755555555',ch:'livechat',seg:'At Risk',label:'Complainant',tags:['refund','escalated'],last:'5m ago',chats:4},
+  {name:'Arif Mahmud',phone:'+8801766666666',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['loyal'],last:'3h ago',chats:2},
+  {name:'Tasnim Jahan',phone:'+8801799999999',ch:'messenger',seg:'VIP',label:'Buyer',tags:['repeat','fashion'],last:'30m ago',chats:6},
+  {name:'Rafi Ahmed',phone:'+8801788888888',ch:'livechat',seg:'New',label:'Lead',tags:['payment-issue'],last:'10m ago',chats:1},
+];
+
+const QR=['ধন্যবাদ! 😊','অর্ডার প্রসেস হচ্ছে','ডেলিভারি ২-৩ দিনে','চেক করে জানাচ্ছি','COD available','Refund ৩ দিনে'];
+
+function nav(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');if(id==='login'||id==='chat')hn();else sn();}
+function sn(){document.getElementById('bnav').classList.remove('hide');}
+function hn(){document.getElementById('bnav').classList.add('hide');}
+function buildNav(){
+  const tabs=[{id:'dashboard',icon:'📊',label:'Dashboard'},{id:'inbox',icon:'💬',label:'Inbox',badge:true},{id:'tickets',icon:'🎫',label:'Tickets'},{id:'contacts',icon:'👥',label:'Contacts'},{id:'settings',icon:'⚙',label:'Settings'}];
+  const ur=CONVS.reduce((a,c)=>a+c.unread,0);
+  document.getElementById('bnav').innerHTML=tabs.map((t,i)=>`<button class="ni ${i===0?'on':''}" onclick="tab('${t.id}')">${t.badge?`<span class="bg" id="ib-bg">${ur}</span>`:''}${t.icon}<span style="margin-top:1px">${t.label}</span></button>`).join('');
+}
+function tab(t){nav(t);sn();document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  const btns=document.querySelectorAll('.ni');
+  const tabs=['dashboard','inbox','tickets','contacts','settings'];
+  const idx=tabs.indexOf(t);if(idx>=0&&btns[idx])btns[idx].classList.add('on');
+  if(t==='dashboard')rDash();if(t==='inbox')rInbox();if(t==='tickets')rTk();if(t==='contacts')rCt();if(t==='settings')rSettings();}
+function avH(n,c,s=40){const cl=CH[c]||'#0F1A2E';return `<div class="av" style="width:${s}px;height:${s}px;font-size:${s*.35}px;background:${cl}12;color:${cl}">${n[0]}<div class="cb" style="background:${cl};font-size:${s*.17}px;width:${s*.35}px;height:${s*.35}px">${CL[c]||'C'}</div></div>`;}
+function cf(c){return c>=85?'cf-h':c>=75?'cf-m':'cf-l';}
+
+function setRole(r){
+  role=r;
+  document.querySelectorAll('.role-btn').forEach((b,i)=>b.classList.toggle('on',i===(r==='admin'?0:1)));
+  buildNav();rDash();
+}
+
+/* DASHBOARD */
+function rDash(){
+  const total=CONVS.length,aiH=CONVS.filter(c=>c.handler==='ai').length,huH=CONVS.filter(c=>c.handler==='human').length,pend=CONVS.filter(c=>c.needsHuman).length,q=CONVS.filter(c=>c.needsHuman).length;
+  document.getElementById('dash-stats').innerHTML=`
+    <div class="ds"><div class="dv">${total}</div><div class="dl">Total</div></div>
+    <div class="ds"><div class="dv">${aiH}</div><div class="dl">AI</div></div>
+    <div class="ds"><div class="dv">${huH}</div><div class="dl">Human</div></div>
+    <div class="ds"><div class="dv" style="color:var(--ochre)">${q}</div><div class="dl">Queue</div></div>`;
+  let h=`<div class="sg" style="margin-top:12px">
+    <div class="sc"><div class="sv">156</div><div class="sl">Messages Today</div><div class="sd up">↑ 12%</div></div>
+    <div class="sc"><div class="sv">18s</div><div class="sl">Avg Response</div><div class="sd up">↑ 24%</div></div>
+    <div class="sc"><div class="sv">89%</div><div class="sl">Resolution Rate</div><div class="sd up">↑ 5%</div></div>
+    <div class="sc"><div class="sv">4.6</div><div class="sl">CSAT Score</div><div class="sd up">↑ 0.3</div></div>
+  </div>`;
+
+  h+=`<div class="sec-t">Handover Reasons</div>
+  <div class="bar-c">
+    <div class="br"><div class="bl">Refund</div><div class="bt"><div class="bf" style="width:55%;background:var(--red)"></div></div><div class="bv">14</div></div>
+    <div class="br"><div class="bl">Payment</div><div class="bt"><div class="bf" style="width:30%;background:var(--orange)"></div></div><div class="bv">8</div></div>
+    <div class="br"><div class="bl">Angry</div><div class="bt"><div class="bf" style="width:15%;background:var(--ochre)"></div></div><div class="bv">4</div></div>
+  </div>`;
+
+  h+=`<div class="sec-t">AI Performance <span class="sec-bg" style="background:var(--ai-light);color:var(--ai)">✦ Sara</span></div>
+  <div class="sg" style="margin-bottom:14px">
+    <div class="sc"><div class="sv" style="color:var(--ai)">72%</div><div class="sl">Auto-resolved</div></div>
+    <div class="sc"><div class="sv">3.2s</div><div class="sl">AI Avg Reply</div></div>
+  </div>`;
+
+  h+=`<div class="sec-t">Channel Distribution</div>
+  <div class="bar-c">
+    <div class="br"><div class="bl" style="display:flex;align-items:center;gap:3px;width:auto"><span style="color:#25D366">●</span>WhatsApp</div><div class="bt"><div class="bf" style="width:45%;background:#25D366"></div></div><div class="bv">45%</div></div>
+    <div class="br"><div class="bl" style="display:flex;align-items:center;gap:3px;width:auto"><span style="color:#0084FF">●</span>Messenger</div><div class="bt"><div class="bf" style="width:30%;background:#0084FF"></div></div><div class="bv">30%</div></div>
+    <div class="br"><div class="bl" style="display:flex;align-items:center;gap:3px;width:auto"><span style="color:#E1306C">●</span>Instagram</div><div class="bt"><div class="bf" style="width:15%;background:#E1306C"></div></div><div class="bv">15%</div></div>
+    <div class="br"><div class="bl" style="display:flex;align-items:center;gap:3px;width:auto"><span style="color:#0F1A2E">●</span>LiveChat</div><div class="bt"><div class="bf" style="width:10%;background:#0F1A2E"></div></div><div class="bv">10%</div></div>
+  </div>`;
+
+  if(role==='admin'){
+    h+=`<div class="sec-t">Agents <span class="sec-bg" style="background:var(--green-lt);color:var(--green)">${AGENTS.filter(a=>a.online).length} online</span></div>`;
+    AGENTS.forEach(a=>{h+=`<div class="ag-card"><div class="ag-av">${a.name[0]}<div class="ag-dot" style="background:${a.online?'var(--green)':'var(--text-cap)'}"></div></div><div class="ag-info"><h4>${a.name}</h4><p>${a.role} · ${a.online?a.active+' active':'On break'+(a.breakReason?' — '+a.breakReason:'')}</p></div><div class="ag-stats"><div class="av-num">${a.resolved}</div><div class="av-lab">resolved</div></div></div>`;});
+  } else {
+    h+=`<div style="padding:12px 16px"><button class="btn-y" style="background:${isOnline?'var(--red)':'var(--green)'}; color:#fff" onclick="${isOnline?'showBreak()':'comeOnline()'}">☕ ${isOnline?'Go on Break':'Come Online'}</button></div>`;
+  }
+  h+='<div style="height:16px"></div>';
+  document.getElementById('dash-body').innerHTML=h;
+}
+
+/* BREAK MODAL */
+function showBreak(){document.getElementById('break-modal').style.display='flex';}
+function hideBreak(){document.getElementById('break-modal').style.display='none';}
+function goOnBreak(){
+  isOnline=false;hideBreak();
+  CONVS.filter(c=>c.agentAssigned==='Nusrat').forEach(c=>{c.agentAssigned='Rahat';c.assigned='Rahat';});
+  rDash();
+}
+function comeOnline(){isOnline=true;rDash();}
+
+/* INBOX */
+function rInbox(){
+  const cts={all:CONVS.length,ai:CONVS.filter(c=>c.handler==='ai').length,human:CONVS.filter(c=>c.handler==='human').length,pending:CONVS.filter(c=>c.needsHuman).length};
+  const ur=CONVS.reduce((a,c)=>a+c.unread,0);
+  document.getElementById('inbox-sub').textContent=ur+' unread · FIFO Queue';
+  try{document.getElementById('ib-bg').textContent=ur;}catch(e){}
+  const lb={all:'All',ai:'AI',human:'Human',pending:'Review'};
+  document.getElementById('filters').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${flt===f?'on':''}" onclick="flt='${f}';rInbox()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
+
+  document.getElementById('sort-bar').innerHTML=`
+    <span class="sb-label">Sort:</span>
+    <select onchange="inboxSort=this.value;rInbox()">
+      <option value="fifo" ${inboxSort==='fifo'?'selected':''}>Queue (FIFO)</option>
+      <option value="unread" ${inboxSort==='unread'?'selected':''}>Unread first</option>
+      <option value="newest" ${inboxSort==='newest'?'selected':''}>Newest first</option>
+      <option value="sla" ${inboxSort==='sla'?'selected':''}>SLA urgency</option>
+    </select>
+    <select onchange="inboxChFlt=this.value;rInbox()">
+      <option value="all" ${inboxChFlt==='all'?'selected':''}>All channels</option>
+      <option value="whatsapp" ${inboxChFlt==='whatsapp'?'selected':''}>WhatsApp</option>
+      <option value="messenger" ${inboxChFlt==='messenger'?'selected':''}>Messenger</option>
+      <option value="instagram" ${inboxChFlt==='instagram'?'selected':''}>Instagram</option>
+      <option value="livechat" ${inboxChFlt==='livechat'?'selected':''}>LiveChat</option>
+    </select>
+    <span class="queue-badge">Q: ${CONVS.filter(c=>c.needsHuman).length} waiting</span>`;
+
+  let list=[...CONVS];
+  if(flt==='ai')list=list.filter(c=>c.handler==='ai');
+  if(flt==='human')list=list.filter(c=>c.handler==='human');
+  if(flt==='pending')list=list.filter(c=>c.needsHuman);
+  if(inboxChFlt!=='all')list=list.filter(c=>c.ch===inboxChFlt);
+  if(role==='agent')list=list.filter(c=>c.agentAssigned==='Nusrat'||c.handler==='ai');
+
+  const slaPri={breach:0,warn:1,ok:2};
+  if(inboxSort==='fifo')list.sort((a,b)=>a.queuePos-b.queuePos);
+  else if(inboxSort==='unread')list.sort((a,b)=>b.unread-a.unread);
+  else if(inboxSort==='newest')list.sort((a,b)=>b.queuedAt-a.queuedAt);
+  else if(inboxSort==='sla')list.sort((a,b)=>(slaPri[a.sla]||2)-(slaPri[b.sla]||2));
+
+  document.getElementById('conv-list').innerHTML=list.map(c=>{
+    const agTag=c.handler==='ai'?'<span class="tg-ai">✦ AI Sara</span>':`<span class="tg-ag" style="background:${(AGC[c.agentAssigned]||'#0F1A2E')}18;color:${AGC[c.agentAssigned]||'#0F1A2E'}">👤 ${c.agentAssigned||'Unassigned'}</span>`;
+    const slaH=c.sla==='breach'?'<span class="sla-tag sla-breach">SLA Breach</span>':c.sla==='warn'?'<span class="sla-tag sla-warn">SLA Warning</span>':'';
+    const sentH=c.sentiment?`<span class="sent-tag">${c.sentiment.icon} ${c.sentiment.label}</span>`:'';
+    return `<div class="cv" onclick="openChat('${c.id}')">
+      ${avH(c.name,c.ch,38)}
+      <div class="cv-b">
+        <div class="cv-r1"><span class="cv-nm ${c.unread?'bd':''}">${c.name}</span><span class="cv-tm ${c.unread?'hl':''}">${c.time}</span></div>
+        <div class="cv-r2">${agTag}<span class="cv-pv ${c.unread?'bd':''}">${c.preview}</span>${c.unread?`<span class="ub">${c.unread}</span>`:''}</div>
+        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* CHAT */
+function openChat(id){
+  cur=CONVS.find(c=>c.id===id);if(!cur)return;whisperMode=false;infoOpen=false;
+  document.getElementById('info-panel').classList.remove('open');
+  hn();nav('chat');
+  const ca=document.getElementById('chat-av');ca.style.background=(CH[cur.ch]||'#0F1A2E')+'12';ca.style.color=CH[cur.ch]||'#0F1A2E';ca.textContent=cur.name[0];
+  document.getElementById('chat-nm').textContent=cur.name;
+  const st=document.getElementById('chat-st');
+  if(cur.handler==='ai'&&cur.aiOn)st.innerHTML=`<span class="st-dot" style="background:var(--ai)"></span><span style="color:var(--ai)">AI handling</span>`;
+  else st.innerHTML=`<span class="st-dot" style="background:var(--green)"></span><span>${cur.ch}</span>`;
+  document.getElementById('ai-tog').className='ai-tog '+(cur.aiOn?'on':'off');
+  document.getElementById('whisper-btn').style.display=role==='admin'?'block':'none';
+  rMsgs();
+}
+function closeCht(){infoOpen=false;document.getElementById('info-panel').classList.remove('open');nav('inbox');sn();rInbox();}
+function togAi(){
+  cur.aiOn=!cur.aiOn;
+  if(!cur.aiOn){cur.needsHuman=false;cur.handler='human';cur.assigned='Nusrat';cur.agentAssigned='Nusrat';}
+  else{cur.handler='ai';cur.assigned='AI Sara';cur.agentAssigned=null;}
+  openChat(cur.id);
+}
+function toggleWhisper(){whisperMode=!whisperMode;rMsgs();}
+function toggleInfo(){
+  infoOpen=!infoOpen;
+  const p=document.getElementById('info-panel');
+  if(infoOpen){rInfoPanel();p.classList.add('open');}else{p.classList.remove('open');}
+}
+
+function rInfoPanel(){
+  if(!cur)return;
+  const ci=cur.custInfo||{};
+  const s=cur.sentiment||{score:50,label:'Neutral',icon:'😐'};
+  const sColor=s.score>=70?'var(--green)':s.score>=40?'var(--ochre)':'var(--red)';
+  let h=`<div class="ip-head"><button class="ip-close" onclick="toggleInfo()">✕</button><h3>Customer Info</h3></div><div class="ip-body">`;
+
+  h+=`<div class="ip-section" style="text-align:center;padding-top:16px">
+    <div class="ip-avatar" style="background:${CH[cur.ch]||'#0F1A2E'}18;color:${CH[cur.ch]||'#0F1A2E'}">${cur.name[0]}</div>
+    <div class="ip-name">${cur.name}</div>
+    <div class="ip-meta">${cur.ch} · ${ci.location||'—'}</div>
+    <div class="sentiment-bar" style="margin-top:8px"><span class="sent-icon">${s.icon}</span><div class="sent-fill"><div style="width:${s.score}%;background:${sColor}"></div></div><span class="sent-label" style="color:${sColor}">${s.label}</span></div>
+  </div>`;
+
+  h+=`<div class="ip-section"><h4>Details</h4>
+    <div class="ip-row"><span class="ip-lbl">Phone</span><span class="ip-val">${ci.phone||'—'}</span></div>
+    <div class="ip-row"><span class="ip-lbl">Email</span><span class="ip-val">${ci.email||'—'}</span></div>
+    <div class="ip-row"><span class="ip-lbl">Language</span><span class="ip-val">${ci.lang||'—'}</span></div>
+    <div class="ip-row"><span class="ip-lbl">Source</span><span class="ip-val">${ci.source||'—'}</span></div>
+    <div class="ip-row"><span class="ip-lbl">LTV</span><span class="ip-val" style="font-weight:700;color:var(--ochre-dark)">${ci.ltv||'—'}</span></div>
+    <div class="ip-row"><span class="ip-lbl">Orders</span><span class="ip-val">${ci.orders||0} (last: ${ci.lastOrder||'—'})</span></div>
+  </div>`;
+
+  h+=`<div class="ip-section"><h4>Segment</h4><div class="ip-tags">
+    <span class="ip-tag" style="background:var(--ochre-light);color:var(--ochre-dark)">${cur.custSeg||'—'}</span>
+  </div></div>`;
+
+  const lblOpts=['Buyer','Lead','Complainant','VIP','Partner'];
+  h+=`<div class="ip-section"><h4>Label</h4><div class="ip-tags">
+    ${cur.custLabel?`<span class="ip-tag ip-tag-edit" style="background:var(--navy);color:#fff">${cur.custLabel}<span class="ip-tag-x" onclick="event.stopPropagation();cur.custLabel='';rInfoPanel()">✕</span></span>`:''}
+    <select style="font-size:10px;padding:2px 6px;border-radius:10px;border:1.5px dashed var(--border);background:none;color:var(--text-cap);font-family:inherit;cursor:pointer" onchange="if(this.value){cur.custLabel=this.value;rInfoPanel()}">
+      <option value="">+ Label</option>${lblOpts.map(l=>`<option value="${l}">${l}</option>`).join('')}
+    </select>
+  </div></div>`;
+
+  const tagOpts=['refund','repeat','loyal','fashion','bulk','escalated','payment-issue','influencer','new'];
+  h+=`<div class="ip-section"><h4>Tags</h4><div class="ip-tags">
+    ${(cur.custTags||[]).map((t,i)=>`<span class="ip-tag ip-tag-edit" style="background:var(--bg);color:var(--text-sec)">${t}<span class="ip-tag-x" onclick="event.stopPropagation();cur.custTags.splice(${i},1);rInfoPanel()">✕</span></span>`).join('')}
+    <select style="font-size:10px;padding:2px 6px;border-radius:10px;border:1.5px dashed var(--border);background:none;color:var(--text-cap);font-family:inherit;cursor:pointer" onchange="if(this.value){cur.custTags=cur.custTags||[];if(!cur.custTags.includes(this.value))cur.custTags.push(this.value);rInfoPanel()}">
+      <option value="">+ Tag</option>${tagOpts.map(t=>`<option value="${t}">${t}</option>`).join('')}
+    </select>
+  </div></div>`;
+
+  h+=`<div class="ip-section"><h4>Notes</h4>`;
+  (cur.notes||[]).forEach(n=>{h+=`<div class="ip-note">${n.text}<div class="note-by">${n.by} · ${n.time}</div></div>`;});
+  h+=`<button class="ip-add-note">+ Add Note</button></div>`;
+
+  if(cur.timeline){
+    h+=`<div class="ip-section"><h4>Timeline</h4><div class="ip-timeline">`;
+    cur.timeline.forEach(e=>{h+=`<div class="ip-tl-item ${e.ai?'ai-ev':''}"><h5>${e.ev}</h5><span class="tl-time">${e.time}</span></div>`;});
+    h+=`</div></div>`;
+  }
+
+  h+=`<div class="ip-section"><h4>Previous Conversations</h4>
+    <div style="font-size:12px;color:var(--text);font-weight:600">${(ci.orders||0)+1} conversations</div>
+    <div style="font-size:10px;color:var(--text-sec);margin-top:2px">Across ${cur.ch}</div>
+  </div>`;
+
+  h+=`</div>`;
+  document.getElementById('info-panel').innerHTML=h;
+}
+
+function rMsgs(){
+  const m=document.getElementById('msgs');
+  m.innerHTML=cur.msgs.map(msg=>{
+    if(msg.t==='sys')return `<div class="mr sys"><div class="bb s-bb">${msg.text}</div></div>`;
+    if(msg.t==='whisper')return `<div class="mr whisper"><div class="w-label">💬 Whisper from ${msg.from}</div><div class="bb w-bb">${msg.text}</div><span class="mt">${msg.time||''}</span></div>`;
+    if(msg.s==='ai'){
+      let c='';
+      if(msg.t==='text')c=`<div class="bb a-bb">${msg.text}</div>`;
+      else if(msg.t==='btn')c=`<div class="btn-msg"><div class="bm-text">${msg.text}</div><div class="bm-btns">${msg.btns.map(b=>`<button class="bm-btn">${b}</button>`).join('')}</div></div>`;
+      else if(msg.t==='carousel')c=`<div class="carousel-wrap"><div class="carousel">${msg.products.map(p=>`<div class="p-card"><img src="${p.img}"><div class="pc-info"><div class="pc-nm">${p.name}</div><div class="pc-pr">${p.price}</div><button class="pc-btn">View Details</button></div></div>`).join('')}</div></div>`;
+      else if(msg.t==='order')c=`<div class="ob"><div class="oi">📋 ${msg.oid}</div><span class="os">${msg.ost}</span><div class="ol">${msg.items.map(i=>'• '+i).join('<br>')}</div><div class="otl"><span>Total</span><strong>${msg.total}</strong></div></div>`;
+      return `<div class="mr ai"><div class="ai-line"><span class="aidot"></span><span>AI Sara</span>${msg.conf?`<span class="cf ${cf(msg.conf)}">${msg.conf}%</span>`:''}</div>${c}<span class="mt">${msg.time||''}</span></div>`;
+    }
+    const isCust=msg.s==='customer';const side=isCust?'cust':'human';
+    let c='';
+    if(msg.t==='text')c=`<div class="bb ${isCust?'c':'h'}-bb">${msg.text}</div>`;
+    else if(msg.t==='img_cap')c=`<div class="bb-img ${isCust?'ci':''}"><img src="${msg.img}"><div class="icp" style="${isCust?'color:var(--text)':'color:#fff'}">${msg.cap}</div></div>`;
+    const agLabel=!isCust&&msg.agent?`<div style="font-size:10px;font-weight:600;color:var(--navy);padding:0 3px;margin-bottom:1px">${msg.agent}</div>`:'';
+    return `<div class="mr ${side}">${agLabel}${c}<span class="mt">${msg.time||''}</span></div>`;
+  }).join('');
+
+  document.getElementById('ho-zone').innerHTML=cur.needsHuman?`<div class="ho"><div class="ho-i">✋</div><div class="ho-t"><h4>Human Review Required</h4><p>${cur.hoReason}</p></div><button class="btn-tk" onclick="takeOver()">Take Over</button></div>`:'';
+
+  const d=cur.draft;
+  document.getElementById('drf-zone').innerHTML=d&&cur.aiOn?`<div class="drf"><div class="drf-h"><span>✦ AI Draft</span><span class="drf-c">${d.conf}%</span></div><p>${d.text}</p><div class="drf-a"><button class="rj">✕</button><button class="ed">✏</button><button class="sd" onclick="sDrf()">➤ Send</button></div></div>`:'';
+
+  document.getElementById('qr-zone').innerHTML=!cur.aiOn&&!whisperMode?`<div class="qr">${QR.map(q=>`<button class="qrc" onclick="sMsg('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('')}</div>`:'';
+
+  if(whisperMode&&role==='admin'){
+    document.getElementById('in-zone').innerHTML=`<div style="font-size:10px;font-weight:700;color:var(--ochre-dark);padding:6px 14px 0;text-transform:uppercase;letter-spacing:0.04em;background:var(--ochre-light)">💬 Whisper to Agent</div><div class="whisper-in"><input class="c-inp" placeholder="Type whisper..." id="wi" onkeydown="if(event.key==='Enter'){sWhisper(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('wi');sWhisper(i.value);i.value=''">➤</button></div>`;
+  } else if(cur.aiOn){
+    document.getElementById('in-zone').innerHTML=`<div class="ai-hbar"><span>✦</span><span>AI Sara is handling this chat</span><button class="boff" onclick="togAi()">Turn OFF</button></div>`;
+  } else {
+    document.getElementById('in-zone').innerHTML=`<div class="c-in"><button class="ab">＋</button><input class="c-inp" placeholder="Reply as ${role==='admin'?'Admin':'Nusrat'}..." id="mi" onkeydown="if(event.key==='Enter'){sMsg(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('mi');sMsg(i.value);i.value=''">➤</button></div>`;
+  }
+  m.scrollTop=m.scrollHeight;
+}
+
+function takeOver(){
+  cur.aiOn=false;cur.needsHuman=false;cur.handler='human';cur.assigned='Nusrat';cur.agentAssigned='Nusrat';
+  cur.msgs.push({t:'sys',text:'Nusrat took over — '+cur.hoReason});
+  openChat(cur.id);
+}
+function sMsg(t){if(!t||!t.trim())return;cur.msgs.push({t:'text',s:'human',text:t.trim(),time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),agent:role==='admin'?'Admin':'Nusrat'});cur.preview=t.trim();rMsgs();}
+function sDrf(){if(!cur.draft)return;cur.msgs.push({t:'text',s:'ai',text:cur.draft.text,time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),conf:cur.draft.conf});cur.draft=null;rMsgs();}
+function sWhisper(t){if(!t||!t.trim())return;cur.msgs.push({t:'whisper',s:'admin',text:t.trim(),time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),from:'Admin'});whisperMode=false;rMsgs();}
+
+/* TICKETS */
+function rTk(){
+  const lb={all:'All',open:'Open',pending:'Pending',closed:'Closed'};
+  const cts={all:TICKETS.length,open:TICKETS.filter(t=>t.st==='open').length,pending:TICKETS.filter(t=>t.st==='pending').length,closed:TICKETS.filter(t=>t.st==='closed').length};
+  document.getElementById('tk-fl').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${tkF===f?'on':''}" onclick="tkF='${f}';rTk()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
+  let list=TICKETS;if(tkF!=='all')list=list.filter(t=>t.st===tkF);
+  document.getElementById('tk-list').innerHTML=list.map(t=>`<div class="tkc"><div class="tk-r1"><span class="tk-id">${t.id}</span><span class="tk-pri ${t.pri}">${t.pri}</span></div><div class="tk-subj">${t.subj}</div><div class="tk-meta"><span>${t.cust}</span><span>·</span><span>${t.date}</span><span>·</span><span style="color:${CH[t.ch]||'inherit'}">${t.ch}</span><span class="tk-st ${t.st}">${t.st}</span>${t.aiF?'<span class="tk-ait">✦ AI Following</span>':''}</div></div>`).join('');
+}
+
+/* CONTACTS */
+let ctView='segments',ctSearch='';
+const SEGS=[
+  {name:'VIP Customers',icon:'⭐',color:'var(--ochre)',filter:{seg:'VIP'}},
+  {name:'Regular Buyers',icon:'🛒',color:'var(--navy)',filter:{seg:'Regular'}},
+  {name:'New Leads',icon:'🆕',color:'var(--green)',filter:{seg:'New'}},
+  {name:'At Risk',icon:'⚠',color:'var(--red)',filter:{seg:'At Risk'}},
+];
+let openSegs={};
+function toggleFP(){fpOpen=!fpOpen;rCt();}
+function toggleSeg(s){openSegs[s]=!openSegs[s];rCt();}
+function rCt(q){
+  if(q!==undefined)ctSearch=q;
+  if(fpOpen){
+    document.getElementById('fp-panel').hidden=false;
+    document.getElementById('fp-panel').innerHTML=`<div class="filter-panel">
+      <div style="display:flex;gap:4px;margin-bottom:8px">
+        <button class="fp-chip ${ctView==='segments'?'on':''}" onclick="ctView='segments';rCt()" style="font-weight:700">Segments</button>
+        <button class="fp-chip ${ctView==='all'?'on':''}" onclick="ctView='all';rCt()" style="font-weight:700">All Contacts</button>
+      </div>
+      <div class="fp-title">Channel</div>
+      <div class="fp-row">${['all','whatsapp','messenger','instagram','livechat'].map(c=>`<button class="fp-chip ${ctFlt.ch===c?'on':''}" onclick="ctFlt.ch='${c}';rCt()">${c==='all'?'All':c}</button>`).join('')}</div>
+      <div class="fp-title">Label</div>
+      <div class="fp-row">${['all','Buyer','Lead','Complainant'].map(l=>`<button class="fp-chip ${ctFlt.label===l?'on':''}" onclick="ctFlt.label='${l}';rCt()">${l==='all'?'All':l}</button>`).join('')}</div>
+      <div class="fp-title">Last Contacted</div>
+      <div class="fp-range"><select onchange="ctFlt.time=this.value;rCt()"><option value="all">Any time</option><option value="1h">Last 1 hour</option><option value="24h">Last 24 hours</option><option value="7d">Last 7 days</option><option value="30d">Last 30 days</option></select></div>
+    </div>`;
+  } else { document.getElementById('fp-panel').hidden=true; }
+
+  const segC={VIP:'background:var(--ochre-light);color:var(--ochre-dark)',Regular:'background:var(--bg);color:var(--text-sec)',New:'background:var(--green-lt);color:var(--green)','At Risk':'background:var(--red-lt);color:var(--red)'};
+  const labC={Buyer:'background:var(--navy);color:#fff',Lead:'background:var(--ai-light);color:var(--ai)',Complainant:'background:var(--red-lt);color:var(--red)'};
+  function fList(list){return list.filter(c=>{
+    if(ctSearch&&!c.name.toLowerCase().includes(ctSearch.toLowerCase())&&!c.phone.includes(ctSearch))return false;
+    if(ctFlt.ch!=='all'&&c.ch!==ctFlt.ch)return false;
+    if(ctFlt.label!=='all'&&c.label!==ctFlt.label)return false;
+    return true;
+  });}
+  function ctHTML(list){return list.map(c=>`<div class="ct-item">${avH(c.name,c.ch,36)}<div class="ct-i"><h4>${c.name}</h4><p>${c.phone} · ${c.chats} chats · ${c.last}</p><div class="ct-tags"><span class="ct-tag" style="${segC[c.seg]||''}">${c.seg}</span><span class="ct-tag" style="${labC[c.label]||''}">${c.label}</span>${c.tags.map(t=>`<span class="ct-tag" style="background:var(--bg);color:var(--text-cap)">${t}</span>`).join('')}</div></div></div>`).join('');}
+
+  if(ctView==='segments'){
+    document.getElementById('ct-list').innerHTML=SEGS.map(sg=>{
+      const members=fList(CONTACTS.filter(c=>c.seg===sg.filter.seg));
+      const isOpen=openSegs[sg.name];
+      return `<div class="seg-folder">
+        <div class="seg-head ${isOpen?'open':''}" onclick="toggleSeg('${sg.name}')">
+          <span class="sf-icon">${sg.icon}</span>
+          <span class="sf-name">${sg.name}</span>
+          <span class="sf-count">${members.length}</span>
+          <span class="sf-arrow">▶</span>
+        </div>
+        <div class="seg-contacts ${isOpen?'open':''}">
+          ${members.length?ctHTML(members):'<div style="padding:12px;text-align:center;font-size:11px;color:var(--text-cap)">No contacts match filters</div>'}
+        </div>
+      </div>`;
+    }).join('');
+  } else {
+    document.getElementById('ct-list').innerHTML=ctHTML(fList(CONTACTS));
+  }
+}
+function fltCt(q){rCt(q);}
+
+/* SETTINGS — unified profile + integration + preferences */
+let settingsOpen={profile:true,integration:false,preferences:false};
+let metaConnected={whatsapp:true,messenger:true,instagram:false};
+function toggleSection(s){settingsOpen[s]=!settingsOpen[s];rSettings();}
+function metaOneClick(){metaConnected={whatsapp:true,messenger:true,instagram:true};rSettings();}
+function rSettings(){
+  let h='';
+  // Profile section
+  h+=`<div class="collapse-header ${settingsOpen.profile?'open':''}" onclick="toggleSection('profile')">
+    <span style="font-size:18px">👤</span><h3>Profile</h3>
+    <span style="font-size:10px;color:var(--green);font-weight:600">${isOnline?'Online':'On Break'}</span>
+    <span class="c-icon">▶</span>
+  </div>
+  <div class="collapse-body ${settingsOpen.profile?'open':''}">
+    <div class="pf-card"><div class="pf-av">N</div><div class="pf-i"><h2>Nusrat</h2><div class="rl">${role==='admin'?'Admin':'Senior Agent'} · ReveChat Fashion Store</div><div class="ol"><span class="st-dot" style="background:${isOnline?'var(--green)':'var(--text-cap)'}"></span>${isOnline?'Online':'On Break'}</div></div></div>
+    ${role==='agent'?`<div style="padding:0 16px 12px"><button class="btn-y" style="background:${isOnline?'var(--red)':'var(--green)'}; color:#fff" onclick="${isOnline?'showBreak()':'comeOnline()'}">☕ ${isOnline?'Go on Break':'Come Online'}</button></div>`:''}
+  </div>`;
+
+  // Integration section — admin only
+  if(role==='admin'){
+    const allConnected=metaConnected.whatsapp&&metaConnected.messenger&&metaConnected.instagram;
+    h+=`<div class="collapse-header ${settingsOpen.integration?'open':''}" onclick="toggleSection('integration')">
+      <span style="font-size:18px">🔗</span><h3>META Integration</h3>
+      <span class="c-badge" style="background:${allConnected?'var(--green-lt);color:var(--green)':'var(--orange-lt);color:var(--orange)'}">${allConnected?'All Connected':'Setup Needed'}</span>
+      <span class="c-icon">▶</span>
+    </div>
+    <div class="collapse-body ${settingsOpen.integration?'open':''}">
+      <div style="padding:12px 16px 0"><div style="padding:12px;background:var(--navy);border-radius:var(--rs);display:flex;align-items:center;gap:10px">
+        <div style="width:42px;height:42px;border-radius:50%;background:#1877F2;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0">f</div>
+        <div style="flex:1"><div style="font-size:15px;font-weight:700;color:#fff">META Business Platform</div><div style="font-size:11px;color:rgba(255,255,255,0.6)">One-click connect via Facebook Login API</div></div>
+      </div></div>
+
+      ${!allConnected?`<div style="padding:8px 16px"><button class="btn-connect" onclick="metaOneClick()" style="background:linear-gradient(135deg,#1877F2,#0668E1);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px">
+        <span style="font-size:18px;font-weight:800">f</span> Connect All META Platforms
+      </button>
+      <div style="font-size:10px;color:var(--text-cap);text-align:center;margin-top:6px">Uses META Login API — grants WhatsApp, Messenger &amp; Instagram in one step</div></div>`:''}
+
+      <div class="int-card" style="margin-top:8px">
+        <div class="int-top"><div class="int-ico" style="background:#25D36612;color:#25D366;font-weight:700">W</div><div class="int-info"><h4>WhatsApp Business</h4><p>Cloud API v21.0</p></div><span class="int-status ${metaConnected.whatsapp?'connected':'disconn'}">${metaConnected.whatsapp?'Live':'Setup'}</span></div>
+        ${metaConnected.whatsapp?'<div class="api-box"><strong>Phone ID:</strong> 1234567890123456<br><strong>WABA ID:</strong> 9876543210987654<br><strong>Webhook:</strong> https://api.revechat.com/wh/wa</div>':''}
+      </div>
+
+      <div class="int-card">
+        <div class="int-top"><div class="int-ico" style="background:#0084FF12;color:#0084FF;font-weight:700">M</div><div class="int-info"><h4>Messenger</h4><p>Page: ReveChat Fashion</p></div><span class="int-status ${metaConnected.messenger?'connected':'disconn'}">${metaConnected.messenger?'Live':'Setup'}</span></div>
+        ${metaConnected.messenger?'<div class="api-box"><strong>Page ID:</strong> 112233445566778<br><strong>App ID:</strong> 998877665544<br><strong>Subscriptions:</strong> messages, messaging_postbacks</div>':''}
+      </div>
+
+      <div class="int-card">
+        <div class="int-top"><div class="int-ico" style="background:linear-gradient(45deg,#FCAF45,#E1306C,#833AB4);color:#fff;border-radius:50%;font-weight:700">I</div><div class="int-info"><h4>Instagram Messaging</h4><p>${metaConnected.instagram?'Connected':'Not connected'}</p></div><span class="int-status ${metaConnected.instagram?'connected':'disconn'}">${metaConnected.instagram?'Live':'Setup'}</span></div>
+        ${metaConnected.instagram?'<div class="api-box"><strong>IG Account ID:</strong> 556677889900<br><strong>Webhook:</strong> https://api.revechat.com/wh/ig<br><strong>Scope:</strong> instagram_manage_messages</div>':'<div class="int-steps"><div class="int-step done"><div class="step-num">✓</div><span>Connect Facebook Page</span></div><div class="int-step done"><div class="step-num">✓</div><span>Link Instagram Business</span></div><div class="int-step"><div class="step-num">3</div><span>Enable Messaging API</span></div></div>'}
+      </div>
+
+      <div class="int-card">
+        <div class="int-top"><div class="int-ico" style="background:var(--navy);color:#fff;border-radius:50%;font-weight:700;font-size:14px">API</div><div class="int-info"><h4>META Graph API</h4><p>Token &amp; permissions</p></div></div>
+        <div class="api-box"><strong>Graph API:</strong> v21.0<br><strong>Token Expiry:</strong> Feb 3, 2027<br><strong>Permissions:</strong> whatsapp_business_messaging, pages_messaging, instagram_manage_messages, business_management</div>
+      </div>
+    </div>`;
+  }
+
+  // Preferences section
+  h+=`<div class="collapse-header ${settingsOpen.preferences?'open':''}" onclick="toggleSection('preferences')">
+    <span style="font-size:18px">⚙</span><h3>Preferences</h3>
+    <span class="c-icon">▶</span>
+  </div>
+  <div class="collapse-body ${settingsOpen.preferences?'open':''}">
+    <div class="stg" style="margin:8px 16px">
+      <div class="si"><span class="sic">🎧</span><div class="sit"><h4>Available</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+      <div class="si"><span class="sic">🔔</span><div class="sit"><h4>Notifications</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+      <div class="si"><span class="sic">🔊</span><div class="sit"><h4>Sounds</h4></div><button class="tg off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+    </div>
+    <div class="stg" style="margin:0 16px 12px">
+      <div class="si"><span class="sic">📝</span><div class="sit"><h4>Canned Responses</h4><p>Manage quick replies</p></div><span class="tl">6 saved ›</span></div>
+      <div class="si"><span class="sic">🌐</span><div class="sit"><h4>Language</h4></div><span class="tl">English ›</span></div>
+      <div class="si"><span class="sic">❓</span><div class="sit"><h4>Help</h4></div><span class="tl">›</span></div>
+    </div>
+  </div>`;
+
+  // Logout
+  h+=`<div style="padding:12px 16px"><button class="btn-y" style="background:var(--red);color:#fff" onclick="nav('login')">↪ Log Out</button></div>
+  <div class="vr">ReveChat v3.3.0</div>`;
+  document.getElementById('settings-body').innerHTML=h;
+}
+
+buildNav();rDash();
+</script>
