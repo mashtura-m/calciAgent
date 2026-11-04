@@ -1070,10 +1070,14 @@ function rCt(q){
 function fltCt(q){rCt(q);}
 
 /* SETTINGS — unified profile + integration + preferences */
-let settingsOpen={profile:true,integration:false,preferences:false};
+let settingsOpen={profile:true,integrations:false,preferences:false};
 let metaConnected={whatsapp:true,messenger:true,instagram:false};
+let reveApiKey='';
+let intStatus={revesms:false,payment:false,phone:false,kloudtalk:false};
 function toggleSection(s){settingsOpen[s]=!settingsOpen[s];rSettings();}
 function metaOneClick(){metaConnected={whatsapp:true,messenger:true,instagram:true};rSettings();}
+function saveReveKey(){var v=document.getElementById('reve-key-input');if(v&&v.value.trim()){reveApiKey=v.value.trim();rSettings();}}
+function toggleInt(k){intStatus[k]=!intStatus[k];rSettings();}
 function rSettings(){
   let h='';
   // Profile section
@@ -1087,44 +1091,123 @@ function rSettings(){
     ${role==='agent'?`<div style="padding:0 16px 12px"><button class="btn-y" style="background:${isOnline?'var(--red)':'var(--green)'}; color:#fff" onclick="${isOnline?'showBreak()':'comeOnline()'}">☕ ${isOnline?'Go on Break':'Come Online'}</button></div>`:''}
   </div>`;
 
-  // Integration section — admin only
+  // Integrations section — admin only
   if(role==='admin'){
-    const allConnected=metaConnected.whatsapp&&metaConnected.messenger&&metaConnected.instagram;
-    h+=`<div class="collapse-header ${settingsOpen.integration?'open':''}" onclick="toggleSection('integration')">
-      <span style="font-size:18px">🔗</span><h3>META Integration</h3>
-      <span class="c-badge" style="background:${allConnected?'var(--green-lt);color:var(--green)':'var(--orange-lt);color:var(--orange)'}">${allConnected?'All Connected':'Setup Needed'}</span>
+    const allMeta=metaConnected.whatsapp&&metaConnected.messenger&&metaConnected.instagram;
+    const reveCount=Object.values(intStatus).filter(Boolean).length;
+    const totalConnected=(allMeta?3:(metaConnected.whatsapp?1:0)+(metaConnected.messenger?1:0)+(metaConnected.instagram?1:0))+reveCount;
+    h+=`<div class="collapse-header ${settingsOpen.integrations?'open':''}" onclick="toggleSection('integrations')">
+      <span style="font-size:18px">🔗</span><h3>Integrations</h3>
+      <span class="c-badge" style="background:var(--green-lt);color:var(--green)">${totalConnected} connected</span>
       <span class="c-icon">▶</span>
     </div>
-    <div class="collapse-body ${settingsOpen.integration?'open':''}">
-      <div style="padding:12px 16px 0"><div style="padding:12px;background:var(--navy);border-radius:var(--rs);display:flex;align-items:center;gap:10px">
-        <div style="width:42px;height:42px;border-radius:50%;background:#1877F2;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0">f</div>
-        <div style="flex:1"><div style="font-size:15px;font-weight:700;color:#fff">META Business Platform</div><div style="font-size:11px;color:rgba(255,255,255,0.6)">One-click connect via Facebook Login API</div></div>
-      </div></div>
+    <div class="collapse-body ${settingsOpen.integrations?'open':''}">
 
-      ${!allConnected?`<div style="padding:8px 16px"><button class="btn-connect" onclick="metaOneClick()" style="background:linear-gradient(135deg,#1877F2,#0668E1);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px">
-        <span style="font-size:18px;font-weight:800">f</span> Connect All META Platforms
-      </button>
-      <div style="font-size:10px;color:var(--text-cap);text-align:center;margin-top:6px">Uses META Login API — grants WhatsApp, Messenger &amp; Instagram in one step</div></div>`:''}
+      <!-- Reve API Key -->
+      <div style="padding:12px 16px 0">
+        <div style="padding:12px;background:var(--ochre-light);border:1.5px solid var(--ochre);border-radius:var(--rs)">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Reve API Key</div>
+          <div style="font-size:10px;color:var(--text-sec);margin-bottom:8px">Required for ReveSMS, Phone &amp; KloudTalk. Get your key from your Reve account manager.</div>
+          <div style="display:flex;gap:6px">
+            <input id="reve-key-input" style="flex:1;height:34px;border:1.5px solid var(--border);border-radius:var(--rx);padding:0 10px;font-size:12px;font-family:inherit;color:var(--text);outline:none" placeholder="Paste your Reve API key..." value="${reveApiKey}">
+            <button class="btn-connect" style="width:auto;margin:0;padding:8px 14px;font-size:12px" onclick="saveReveKey()">${reveApiKey?'Saved ✓':'Save'}</button>
+          </div>
+        </div>
+      </div>
 
-      <div class="int-card" style="margin-top:8px">
-        <div class="int-top"><div class="int-ico" style="background:#25D36612;color:#25D366;font-weight:700">W</div><div class="int-info"><h4>WhatsApp Business</h4><p>Cloud API v21.0</p></div><span class="int-status ${metaConnected.whatsapp?'connected':'disconn'}">${metaConnected.whatsapp?'Live':'Setup'}</span></div>
-        ${metaConnected.whatsapp?'<div class="api-box"><strong>Phone ID:</strong> 1234567890123456<br><strong>WABA ID:</strong> 9876543210987654<br><strong>Webhook:</strong> https://api.revechat.com/wh/wa</div>':''}
+      <!-- META -->
+      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--text-cap);text-transform:uppercase;letter-spacing:0.04em">Social Channels</div>
+      <div class="int-card">
+        <div class="int-top">
+          <div class="int-ico" style="background:#1877F212;color:#1877F2;font-weight:800">f</div>
+          <div class="int-info"><h4>META Business</h4><p>WhatsApp, Messenger &amp; Instagram DM</p></div>
+          <span class="int-status ${allMeta?'connected':'pending'}">${allMeta?'All Live':metaConnected.whatsapp?'2 of 3':'Setup'}</span>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--rx);background:${metaConnected.whatsapp?'var(--green-lt)':'var(--bg)'}">
+            <div style="font-size:14px">💬</div><div style="font-size:9px;font-weight:600;color:${metaConnected.whatsapp?'var(--green)':'var(--text-cap)'}">WhatsApp${metaConnected.whatsapp?' ✓':''}</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--rx);background:${metaConnected.messenger?'var(--green-lt)':'var(--bg)'}">
+            <div style="font-size:14px">💬</div><div style="font-size:9px;font-weight:600;color:${metaConnected.messenger?'var(--green)':'var(--text-cap)'}">Messenger${metaConnected.messenger?' ✓':''}</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--rx);background:${metaConnected.instagram?'var(--green-lt)':'var(--bg)'}">
+            <div style="font-size:14px">📸</div><div style="font-size:9px;font-weight:600;color:${metaConnected.instagram?'var(--green)':'var(--text-cap)'}">Instagram${metaConnected.instagram?' ✓':''}</div>
+          </div>
+        </div>
+        ${!allMeta?`<button class="btn-connect" onclick="metaOneClick()" style="background:linear-gradient(135deg,#1877F2,#0668E1);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px">
+          <span style="font-size:16px;font-weight:800">f</span> Connect with Facebook Account
+        </button>
+        <div style="font-size:10px;color:var(--text-cap);text-align:center;margin-top:4px">Login once to connect all three platforms</div>`
+        :`<div style="font-size:10px;color:var(--green);font-weight:600;text-align:center;padding:4px">All META channels connected and receiving messages</div>`}
+      </div>
+
+      <!-- ReveSMS -->
+      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--text-cap);text-transform:uppercase;letter-spacing:0.04em">Reve Services</div>
+      <div class="int-card">
+        <div class="int-top">
+          <div class="int-ico" style="background:var(--ochre-light);color:var(--ochre-dark);font-weight:800;font-size:14px">SMS</div>
+          <div class="int-info"><h4>ReveSMS</h4><p>Bulk SMS, OTP &amp; campaign messaging</p></div>
+          <span class="int-status ${intStatus.revesms?'connected':'disconn'}">${intStatus.revesms?'Active':'Off'}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-sec);margin-bottom:6px">Send SMS notifications, OTP verification, and marketing campaigns to your customers.</div>
+        <button class="btn-connect" onclick="toggleInt('revesms')" style="${intStatus.revesms?'background:var(--bg);color:var(--text-sec)':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.revesms?'Disconnect':'Activate ReveSMS'}</button>
+        ${!reveApiKey?'<div style="font-size:9px;color:var(--red);margin-top:4px">Enter your Reve API Key above first</div>':''}
+      </div>
+
+      <!-- Payment -->
+      <div style="padding:6px 16px 4px;font-size:11px;font-weight:700;color:var(--text-cap);text-transform:uppercase;letter-spacing:0.04em">Payments</div>
+      <div class="int-card">
+        <div class="int-top">
+          <div class="int-ico" style="background:var(--green-lt);color:var(--green);font-weight:800;font-size:16px">৳</div>
+          <div class="int-info"><h4>Payment Gateway</h4><p>Accept payments in-chat</p></div>
+          <span class="int-status ${intStatus.payment?'connected':'disconn'}">${intStatus.payment?'Active':'Off'}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-sec);margin-bottom:8px">Let customers pay directly inside the chat. Supports multiple providers:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+          <div style="padding:8px;background:var(--bg);border-radius:var(--rx);text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#E2136E">b</div>
+            <div style="font-size:10px;font-weight:600;color:var(--text)">bKash</div>
+          </div>
+          <div style="padding:8px;background:var(--bg);border-radius:var(--rx);text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#F4721C">N</div>
+            <div style="font-size:10px;font-weight:600;color:var(--text)">Nagad</div>
+          </div>
+          <div style="padding:8px;background:var(--bg);border-radius:var(--rx);text-align:center">
+            <div style="font-size:14px;font-weight:800;color:#2A4894">SSL</div>
+            <div style="font-size:10px;font-weight:600;color:var(--text)">SSLCommerz</div>
+          </div>
+          <div style="padding:8px;background:var(--bg);border-radius:var(--rx);text-align:center">
+            <div style="font-size:14px;font-weight:800;color:var(--text-sec)">💳</div>
+            <div style="font-size:10px;font-weight:600;color:var(--text)">Card / Bank</div>
+          </div>
+        </div>
+        <button class="btn-connect" onclick="toggleInt('payment')" style="${intStatus.payment?'background:var(--bg);color:var(--text-sec)':''}">${intStatus.payment?'Disconnect':'Enable Payments'}</button>
+      </div>
+
+      <!-- Phone -->
+      <div style="padding:6px 16px 4px;font-size:11px;font-weight:700;color:var(--text-cap);text-transform:uppercase;letter-spacing:0.04em">Voice</div>
+      <div class="int-card">
+        <div class="int-top">
+          <div class="int-ico" style="background:var(--ai-light);color:var(--ai);font-weight:700;font-size:16px">📞</div>
+          <div class="int-info"><h4>Phone Integration</h4><p>Click-to-call &amp; call logging</p></div>
+          <span class="int-status ${intStatus.phone?'connected':'disconn'}">${intStatus.phone?'Active':'Off'}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-sec);margin-bottom:6px">Enable phone calls from customer profiles. Call logs are recorded in chat timeline.</div>
+        <button class="btn-connect" onclick="toggleInt('phone')" style="${intStatus.phone?'background:var(--bg);color:var(--text-sec)':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.phone?'Disconnect':'Enable Phone'}</button>
+        ${!reveApiKey?'<div style="font-size:9px;color:var(--red);margin-top:4px">Enter your Reve API Key above first</div>':''}
       </div>
 
       <div class="int-card">
-        <div class="int-top"><div class="int-ico" style="background:#0084FF12;color:#0084FF;font-weight:700">M</div><div class="int-info"><h4>Messenger</h4><p>Page: ReveChat Fashion</p></div><span class="int-status ${metaConnected.messenger?'connected':'disconn'}">${metaConnected.messenger?'Live':'Setup'}</span></div>
-        ${metaConnected.messenger?'<div class="api-box"><strong>Page ID:</strong> 112233445566778<br><strong>App ID:</strong> 998877665544<br><strong>Subscriptions:</strong> messages, messaging_postbacks</div>':''}
+        <div class="int-top">
+          <div class="int-ico" style="background:var(--navy);color:var(--ochre);font-weight:800;font-size:10px;letter-spacing:-0.5px">KT</div>
+          <div class="int-info"><h4>KloudTalk</h4><p>Cloud call center &amp; IVR</p></div>
+          <span class="int-status ${intStatus.kloudtalk?'connected':'disconn'}">${intStatus.kloudtalk?'Active':'Off'}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-sec);margin-bottom:6px">Full call center with IVR, call queue, agent routing, recording &amp; analytics. Powered by Reve.</div>
+        <button class="btn-connect" onclick="toggleInt('kloudtalk')" style="${intStatus.kloudtalk?'background:var(--bg);color:var(--text-sec)':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.kloudtalk?'Disconnect':'Connect KloudTalk'}</button>
+        ${!reveApiKey?'<div style="font-size:9px;color:var(--red);margin-top:4px">Enter your Reve API Key above first</div>':''}
       </div>
 
-      <div class="int-card">
-        <div class="int-top"><div class="int-ico" style="background:linear-gradient(45deg,#FCAF45,#E1306C,#833AB4);color:#fff;border-radius:50%;font-weight:700">I</div><div class="int-info"><h4>Instagram Messaging</h4><p>${metaConnected.instagram?'Connected':'Not connected'}</p></div><span class="int-status ${metaConnected.instagram?'connected':'disconn'}">${metaConnected.instagram?'Live':'Setup'}</span></div>
-        ${metaConnected.instagram?'<div class="api-box"><strong>IG Account ID:</strong> 556677889900<br><strong>Webhook:</strong> https://api.revechat.com/wh/ig<br><strong>Scope:</strong> instagram_manage_messages</div>':'<div class="int-steps"><div class="int-step done"><div class="step-num">✓</div><span>Connect Facebook Page</span></div><div class="int-step done"><div class="step-num">✓</div><span>Link Instagram Business</span></div><div class="int-step"><div class="step-num">3</div><span>Enable Messaging API</span></div></div>'}
-      </div>
-
-      <div class="int-card">
-        <div class="int-top"><div class="int-ico" style="background:var(--navy);color:#fff;border-radius:50%;font-weight:700;font-size:14px">API</div><div class="int-info"><h4>META Graph API</h4><p>Token &amp; permissions</p></div></div>
-        <div class="api-box"><strong>Graph API:</strong> v21.0<br><strong>Token Expiry:</strong> Feb 3, 2027<br><strong>Permissions:</strong> whatsapp_business_messaging, pages_messaging, instagram_manage_messages, business_management</div>
-      </div>
     </div>`;
   }
 
