@@ -101,9 +101,9 @@ body {
 .btn-p { width:100%; height:48px; background:var(--primary); color:var(--primary-fg); border:none; border-radius:var(--r-md); font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; letter-spacing:0.02em; box-shadow:0 2px 8px rgba(0,79,255,0.25); }
 
 /* Chips */
-.chips { display:flex; gap:5px; padding:8px 16px; overflow-x:auto; flex-shrink:0; }
+.chips { display:flex; gap:4px; padding:6px 16px; overflow-x:auto; flex-shrink:0; }
 .chips::-webkit-scrollbar { display:none; }
-.ch { padding:5px 11px; border-radius:16px; font-size:12px; font-weight:500; white-space:nowrap; cursor:pointer; border:1.5px solid var(--offwhite-100); font-family:inherit; background:var(--background); color:var(--gray-100); transition:all 0.12s; }
+.ch { padding:4px 8px; border-radius:16px; font-size:11px; font-weight:500; white-space:nowrap; cursor:pointer; border:1px solid var(--offwhite-100); font-family:inherit; background:var(--background); color:var(--gray-100); transition:all 0.12s; }
 .ch.on { background:var(--foreground); color:var(--primary-fg); border-color:var(--foreground); }
 .ch .ct { font-weight:700; margin-left:2px; opacity:0.7; }
 
@@ -124,14 +124,14 @@ body {
 .cv-nm.bd { font-weight:700; }
 .cv-tm { font-size:10px; color:var(--gray-60); }
 .cv-tm.hl { color:var(--primary-dark); font-weight:600; }
-.cv-r2 { display:flex; align-items:center; gap:4px; margin-top:1px; }
+.cv-r2 { display:flex; align-items:center; gap:4px; margin-top:0; }
 .tg-ai { font-size:8px; font-weight:700; color:var(--purple-100); background:var(--purple-10); padding:1px 4px; border-radius:3px; }
 .tg-ag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
 .cv-pv { font-size:12px; color:var(--gray-100); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .cv-pv.bd { color:var(--foreground); font-weight:500; }
 .ub { min-width:16px; height:16px; border-radius:8px; background:var(--primary); color:var(--primary-fg); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; }
 .nd { width:7px; height:7px; border-radius:50%; background:var(--destructive); flex-shrink:0; }
-.cv-r3 { font-size:10px; color:var(--gray-60); margin-top:1px; display:flex; align-items:center; gap:4px; }
+.cv-r3 { font-size:10px; color:var(--gray-60); margin-top:0; display:flex; align-items:center; gap:4px; }
 .sla-tag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
 .sla-ok { background:var(--success-lt); color:var(--success); }
 .sla-warn { background:var(--warning-lt); color:#996B00; }
@@ -376,9 +376,9 @@ body {
 .ct-tag { font-size:8px; padding:1px 4px; border-radius:3px; font-weight:500; }
 
 /* Integration (admin only) */
-.int-card { margin:0 16px 10px; padding:14px; background:var(--background); border:1px solid var(--offwhite-100); border-radius:var(--r-lg); }
-.int-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
-.int-ico { width:36px; height:36px; border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.int-card { margin:0 16px 10px; padding:10px; background:var(--background); border:1px solid var(--offwhite-100); border-radius:var(--r-lg); }
+.int-top { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.int-ico { width:30px; height:30px; border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
 .int-info { flex:1; }
 .int-info h4 { font-size:13px; font-weight:600; color:var(--foreground); }
 .int-info p { font-size:10px; color:var(--gray-100); }
@@ -427,7 +427,7 @@ body {
 .pf-i .rl { font-size:11px; color:var(--gray-100); }
 .pf-i .ol { font-size:10px; color:var(--success); display:flex; align-items:center; gap:3px; }
 .stg { margin:0 16px 12px; background:var(--background); border-radius:var(--r-xl); overflow:hidden; border:1px solid var(--offwhite-100); }
-.si { display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--offwhite-100); cursor:pointer; }
+.si { display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--offwhite-100); cursor:pointer; }
 .si:last-child { border-bottom:none; }
 .si .sic { font-size:16px; width:20px; text-align:center; color:var(--gray-100); }
 .si .sit { flex:1; }
@@ -498,8 +498,8 @@ body {
 .cr-mgmt-actions button:hover { color:var(--foreground); }
 
 /* Routing policy section */
-.rp-row { display:flex; align-items:center; gap:8px; padding:8px 16px; }
-.rp-row label { font-size:12px; font-weight:600; color:var(--foreground); flex:1; }
+.rp-row { display:flex; align-items:center; gap:8px; padding:6px 16px; }
+.rp-row label { font-size:11px; font-weight:600; color:var(--foreground); flex:1; }
 .rp-row select, .rp-row input[type="number"], .rp-row input[type="text"] {
   height:32px; border:1.5px solid var(--offwhite-100); border-radius:var(--r-sm); font-size:12px; font-family:inherit; color:var(--foreground); padding:0 8px; background:var(--background); outline:none; width:120px;
 }
@@ -590,7 +590,7 @@ body {
     <div class="tb">
       <div style="flex:1"><h1 style="font-size:17px">Inbox</h1><span class="tb-sub" id="inbox-sub"></span></div>
       <button class="tb-btn" onclick="toggleInboxSearch()">🔍</button>
-      <button class="tb-btn">⚙</button>
+      <button class="tb-btn" onclick="openInboxSettings()">⚙</button>
     </div>
     <div class="inbox-search" id="inbox-search" style="position:relative">
       <span class="is-icon">🔍</span>
@@ -1084,7 +1084,7 @@ function rInbox(){
       <div class="cv-b">
         <div class="cv-r1"><span class="cv-nm ${c.unread?'bd':''}">${c.name}</span>${chIcon(c.ch)}<span class="cv-tm ${c.unread?'hl':''}">${c.time}</span></div>
         <div class="cv-r2">${agTag}${snzH}<span class="cv-pv ${c.unread?'bd':''}">${c.preview}</span>${c.unread?`<span class="ub">${c.unread}</span>`:''}</div>
-        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${chIcon(c.ch)}<span class="sent-tag">${chEmoji(c.ch)}${CHI[c.ch]?CHI[c.ch].name:c.ch}</span>${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
+        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
       </div>
     </div>`;
   }).join('');
@@ -1554,71 +1554,48 @@ function rSettings(){
         :`<div style="font-size:10px;color:var(--success);font-weight:600;text-align:center;padding:4px">All META channels connected and receiving messages</div>`}
       </div>
 
-      <!-- ReveSMS -->
+      <!-- Reve Services (stacked) -->
       <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Reve Services</div>
-      <div class="int-card">
-        <div class="int-top">
-          <div class="int-ico" style="background:var(--primary-light);color:var(--primary-dark);font-weight:800;font-size:14px">SMS</div>
-          <div class="int-info"><h4>ReveSMS</h4><p>Bulk SMS, OTP &amp; campaign messaging</p></div>
-          <span class="int-status ${intStatus.revesms?'connected':'disconn'}">${intStatus.revesms?'Active':'Off'}</span>
-        </div>
-        <div style="font-size:11px;color:var(--gray-100);margin-bottom:6px">Send SMS notifications, OTP verification, and marketing campaigns to your customers.</div>
-        <button class="btn-connect" onclick="toggleInt('revesms')" style="${intStatus.revesms?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.revesms?'Disconnect':'Activate ReveSMS'}</button>
-        ${!reveApiKey?'<div style="font-size:9px;color:var(--destructive);margin-top:4px">Enter your Reve API Key above first</div>':''}
+      <div class="int-card" style="padding:10px">
+        ${[
+          {key:'revesms',icon:'SMS',label:'ReveSMS',desc:'Bulk SMS & OTP',color:'var(--primary-light)',tcolor:'var(--primary-dark)'},
+          {key:'phone',icon:'📞',label:'Phone',desc:'Click-to-call',color:'var(--purple-10)',tcolor:'var(--purple-100)'},
+          {key:'kloudtalk',icon:'KT',label:'KloudTalk',desc:'Cloud call center',color:'var(--foreground)',tcolor:'var(--primary-light)'}
+        ].map(s=>\`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;\${s.key!=='revesms'?'border-top:1px solid var(--offwhite-100);':''}">
+          <div style="width:30px;height:30px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:\${s.icon.length>2?'10px':'14px'};font-weight:800;background:\${s.color};color:\${s.tcolor};flex-shrink:0">\${s.icon}</div>
+          <div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;color:var(--foreground)">\${s.label}</div><div style="font-size:10px;color:var(--gray-100)">\${s.desc}</div></div>
+          <button style="padding:4px 10px;border-radius:var(--r-sm);font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid \${intStatus[s.key]?'var(--success)':'var(--offwhite-100)'};background:\${intStatus[s.key]?'var(--success-lt)':'var(--background)'};color:\${intStatus[s.key]?'var(--success)':'var(--gray-100)'};\${!reveApiKey?'opacity:0.5;pointer-events:none':''}" onclick="toggleInt('\${s.key}')">\${intStatus[s.key]?'Active ✓':'Enable'}</button>
+        </div>\`).join('')}
+        ${!reveApiKey?'<div style="font-size:9px;color:var(--destructive);padding:4px 0 0">Enter your Reve API Key above to enable these services</div>':''}
       </div>
 
       <!-- Payment -->
       <div style="padding:6px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Payments</div>
       <div class="int-card">
         <div class="int-top">
-          <div class="int-ico" style="background:var(--success-lt);color:var(--success);font-weight:800;font-size:16px">৳</div>
+          <div class="int-ico" style="background:var(--success-lt);color:var(--success);font-weight:800;font-size:14px">৳</div>
           <div class="int-info"><h4>Payment Gateway</h4><p>Accept payments in-chat</p></div>
           <span class="int-status ${intStatus.payment?'connected':'disconn'}">${intStatus.payment?'Active':'Off'}</span>
         </div>
-        <div style="font-size:11px;color:var(--gray-100);margin-bottom:8px">Let customers pay directly inside the chat. Supports multiple providers:</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
-          <div style="padding:8px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:14px;font-weight:800;color:#E2136E">b</div>
-            <div style="font-size:10px;font-weight:600;color:var(--foreground)">bKash</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-bottom:6px">
+          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
+            <div style="font-size:12px;font-weight:800;color:#E2136E">b</div>
+            <div style="font-size:9px;font-weight:600;color:var(--foreground)">bKash</div>
           </div>
-          <div style="padding:8px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:14px;font-weight:800;color:#F4721C">N</div>
-            <div style="font-size:10px;font-weight:600;color:var(--foreground)">Nagad</div>
+          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
+            <div style="font-size:12px;font-weight:800;color:#F4721C">N</div>
+            <div style="font-size:9px;font-weight:600;color:var(--foreground)">Nagad</div>
           </div>
-          <div style="padding:8px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:14px;font-weight:800;color:#2A4894">SSL</div>
-            <div style="font-size:10px;font-weight:600;color:var(--foreground)">SSLCommerz</div>
+          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
+            <div style="font-size:12px;font-weight:800;color:#2A4894">SSL</div>
+            <div style="font-size:9px;font-weight:600;color:var(--foreground)">SSLCommerz</div>
           </div>
-          <div style="padding:8px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:14px;font-weight:800;color:var(--gray-100)">💳</div>
-            <div style="font-size:10px;font-weight:600;color:var(--foreground)">Card / Bank</div>
+          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
+            <div style="font-size:12px;font-weight:800;color:var(--gray-100)">💳</div>
+            <div style="font-size:9px;font-weight:600;color:var(--foreground)">Card</div>
           </div>
         </div>
-        <button class="btn-connect" onclick="toggleInt('payment')" style="${intStatus.payment?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}">${intStatus.payment?'Disconnect':'Enable Payments'}</button>
-      </div>
-
-      <!-- Phone -->
-      <div style="padding:6px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Voice</div>
-      <div class="int-card">
-        <div class="int-top">
-          <div class="int-ico" style="background:var(--purple-10);color:var(--purple-100);font-weight:700;font-size:16px">📞</div>
-          <div class="int-info"><h4>Phone Integration</h4><p>Click-to-call &amp; call logging</p></div>
-          <span class="int-status ${intStatus.phone?'connected':'disconn'}">${intStatus.phone?'Active':'Off'}</span>
-        </div>
-        <div style="font-size:11px;color:var(--gray-100);margin-bottom:6px">Enable phone calls from customer profiles. Call logs are recorded in chat timeline.</div>
-        <button class="btn-connect" onclick="toggleInt('phone')" style="${intStatus.phone?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.phone?'Disconnect':'Enable Phone'}</button>
-        ${!reveApiKey?'<div style="font-size:9px;color:var(--destructive);margin-top:4px">Enter your Reve API Key above first</div>':''}
-      </div>
-
-      <div class="int-card">
-        <div class="int-top">
-          <div class="int-ico" style="background:var(--foreground);color:var(--primary-light);font-weight:800;font-size:10px;letter-spacing:-0.5px">KT</div>
-          <div class="int-info"><h4>KloudTalk</h4><p>Cloud call center &amp; IVR</p></div>
-          <span class="int-status ${intStatus.kloudtalk?'connected':'disconn'}">${intStatus.kloudtalk?'Active':'Off'}</span>
-        </div>
-        <div style="font-size:11px;color:var(--gray-100);margin-bottom:6px">Full call center with IVR, call queue, agent routing, recording &amp; analytics. Powered by Reve.</div>
-        <button class="btn-connect" onclick="toggleInt('kloudtalk')" style="${intStatus.kloudtalk?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}${!reveApiKey?'opacity:0.5;pointer-events:none':''}">${intStatus.kloudtalk?'Disconnect':'Connect KloudTalk'}</button>
-        ${!reveApiKey?'<div style="font-size:9px;color:var(--destructive);margin-top:4px">Enter your Reve API Key above first</div>':''}
+        <button class="btn-connect" onclick="toggleInt('payment')" style="padding:8px;font-size:12px;${intStatus.payment?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}">${intStatus.payment?'Disconnect':'Enable Payments'}</button>
       </div>
 
     </div>`;
@@ -1630,7 +1607,6 @@ function rSettings(){
       <span class="c-icon">▶</span>
     </div>
     <div class="collapse-body ${settingsOpen.routing?'open':''}">
-      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Assignment</div>
       <div class="rp-row"><label>Routing Mode</label><select onchange="routingPolicy.mode=this.value;rSettings()">
         <option value="round-robin" ${routingPolicy.mode==='round-robin'?'selected':''}>Round Robin</option>
         <option value="least-active" ${routingPolicy.mode==='least-active'?'selected':''}>Least Active</option>
@@ -1638,12 +1614,10 @@ function rSettings(){
       </select></div>
       <div class="rp-row"><label>Max Concurrent Chats</label><input type="number" value="${routingPolicy.maxChats}" min="1" max="50" onchange="routingPolicy.maxChats=+this.value" style="width:70px"></div>
       <div class="rp-row"><label>Auto-assign new chats</label><button class="rp-tg ${routingPolicy.autoAssign?'on':'off'}" onclick="routingPolicy.autoAssign=!routingPolicy.autoAssign;rSettings()"></button></div>
-      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Hours & SLA</div>
       <div class="rp-row"><label>Business Hours Only</label><button class="rp-tg ${routingPolicy.businessHours?'on':'off'}" onclick="routingPolicy.businessHours=!routingPolicy.businessHours;rSettings()"></button></div>
       <div class="rp-row"><label>Auto-close idle (hours)</label><input type="number" value="${routingPolicy.autoCloseHours}" min="1" max="168" onchange="routingPolicy.autoCloseHours=+this.value" style="width:70px"></div>
       <div class="rp-row"><label>SLA Response (min)</label><input type="number" value="${routingPolicy.slaResponse}" min="1" max="60" onchange="routingPolicy.slaResponse=+this.value" style="width:70px"></div>
       <div class="rp-row"><label>SLA Resolution (hours)</label><input type="number" value="${routingPolicy.slaResolution}" min="1" max="72" onchange="routingPolicy.slaResolution=+this.value" style="width:70px"></div>
-      <div style="height:8px"></div>
     </div>`;
   }
 
@@ -1653,12 +1627,10 @@ function rSettings(){
     <span class="c-icon">▶</span>
   </div>
   <div class="collapse-body ${settingsOpen.preferences?'open':''}">
-    <div class="stg" style="margin:8px 16px">
+    <div class="stg" style="margin:8px 16px 12px">
       <div class="si"><span class="sic">🎧</span><div class="sit"><h4>Available</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
       <div class="si"><span class="sic">🔔</span><div class="sit"><h4>Notifications</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
       <div class="si"><span class="sic">🔊</span><div class="sit"><h4>Sounds</h4></div><button class="tg off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
-    </div>
-    <div class="stg" style="margin:0 16px 12px">
       ${role==='admin'?`<div class="si" onclick="openCannedMgmt()"><span class="sic">📝</span><div class="sit"><h4>Canned Responses</h4><p>Manage quick replies</p></div><span class="tl">${CANNED_RESPONSES.length} saved ›</span></div>`:''}
       <div class="si"><span class="sic">🌐</span><div class="sit"><h4>Language</h4></div><span class="tl">English ›</span></div>
       <div class="si"><span class="sic">❓</span><div class="sit"><h4>Help</h4></div><span class="tl">›</span></div>
@@ -1669,6 +1641,23 @@ function rSettings(){
   h+=`<div style="padding:12px 16px"><button class="btn-p" style="background:var(--destructive)" onclick="nav('login')">↪ Log Out</button></div>
   <div class="vr">ReveChat v3.4.0</div>`;
   document.getElementById('settings-body').innerHTML=h;
+}
+
+function openInboxSettings(){
+  showBS(`<div class="bs-handle"></div><div class="bs-title">⚙ Inbox Settings</div>
+    <div style="padding:0 16px 8px">
+      <div style="font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Default Sort</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
+        ${['fifo','unread','newest','sla'].map(s=>`<button class="fp-chip ${inboxSort===s?'on':''}" onclick="inboxSort='${s}';rInbox();hideBS()" style="font-size:11px;padding:5px 10px">${s==='fifo'?'Queue (FIFO)':s==='unread'?'Unread first':s==='newest'?'Newest first':'SLA urgency'}</button>`).join('')}
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Notifications</div>
+      <div style="background:var(--background);border:1px solid var(--offwhite-100);border-radius:var(--r-lg);overflow:hidden;margin-bottom:12px">
+        <div class="si"><span class="sic">🔔</span><div class="sit"><h4 style="font-size:13px">New message alerts</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+        <div class="si"><span class="sic">⚠</span><div class="sit"><h4 style="font-size:13px">SLA breach alerts</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+        <div class="si"><span class="sic">✋</span><div class="sit"><h4 style="font-size:13px">Handover requests</h4></div><button class="tg on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+      </div>
+    </div>
+    <button class="bs-cancel" onclick="hideBS()">Done</button>`);
 }
 
 buildNav();rDash();
