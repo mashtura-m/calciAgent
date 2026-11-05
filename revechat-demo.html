@@ -512,6 +512,18 @@ body {
 .bs-item .bs-info p { font-size:10px; color:var(--gray-100); }
 .bs-cancel { width:calc(100% - 32px); margin:8px 16px 16px; padding:12px; background:var(--offwhite-60); border:none; border-radius:var(--r-md); font-size:14px; font-weight:600; color:var(--gray-100); cursor:pointer; font-family:inherit; text-align:center; }
 
+/* Bulk actions */
+.bulk-bar { position:absolute; bottom:62px; left:0; right:0; background:var(--background); border-top:1px solid var(--offwhite-100); display:flex; justify-content:space-around; padding:8px 16px; z-index:50; box-shadow:0 -2px 8px rgba(0,0,0,0.08); }
+.bulk-btn { display:flex; flex-direction:column; align-items:center; gap:2px; background:none; border:none; cursor:pointer; font-family:inherit; font-size:10px; font-weight:500; color:var(--gray-100); padding:4px 12px; border-radius:var(--r-sm); }
+.bulk-btn:hover { background:var(--offwhite-40); }
+.bulk-btn .b-ico { width:32px; height:32px; border-radius:50%; background:var(--offwhite-60); display:flex; align-items:center; justify-content:center; font-size:14px; }
+.bulk-btn.destructive .b-ico { background:var(--destructive-lt); }
+.bulk-sel-bar { display:flex; align-items:center; gap:8px; padding:0 16px; height:44px; background:var(--primary-light); border-bottom:1px solid var(--offwhite-100); flex-shrink:0; }
+.bulk-sel-bar .bsc { font-size:13px; font-weight:600; color:var(--primary-dark); flex:1; }
+.bulk-sel-bar button { background:none; border:none; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; color:var(--primary); padding:4px 8px; }
+.cv .bulk-cb { width:20px; height:20px; border-radius:4px; border:2px solid var(--offwhite-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; }
+.cv .bulk-cb.checked { background:var(--primary); border-color:var(--primary); color:#fff; font-size:11px; font-weight:700; }
+
 /* Inbox search bar */
 .inbox-search { padding:6px 16px; flex-shrink:0; display:none; }
 .inbox-search.open { display:block; }
@@ -628,6 +640,7 @@ body {
   <div class="scr" id="inbox">
     <div class="tb">
       <div style="flex:1"><h1 style="font-size:17px">Inbox</h1><span class="tb-sub" id="inbox-sub"></span></div>
+      <button class="tb-btn" onclick="toggleBulkMode()" id="bulk-toggle-btn" title="Bulk actions">☑</button>
       <button class="tb-btn" id="inbox-filter-btn" onclick="openInboxFilter()" style="position:relative">☰</button>
       <button class="tb-btn" onclick="toggleInboxSearch()">🔍</button>
       <button class="tb-btn" onclick="openInboxSettings()">⚙</button>
@@ -639,7 +652,9 @@ body {
     <div class="search-filters" id="search-filters"></div>
     <div class="chips" id="filters"></div>
     <div class="sort-bar" id="sort-bar"></div>
+    <div id="bulk-sel-bar" hidden></div>
     <div class="conv-list-wrap"><div class="scroll" id="conv-list"></div></div>
+    <div id="bulk-action-bar" hidden></div>
   </div>
 
   <!-- CHAT -->
@@ -730,6 +745,7 @@ let cur=null,flt='all',tkF='all',role='admin',whisperMode=false,fpOpen=false,inf
     ctFlt={ch:'all',seg:'all',label:'all',time:'all'},inboxSort='fifo',inboxChFlt='all',isOnline=true;
 let inboxSearchOpen=false, inboxSearchQuery='', searchDateFlt='all', searchChFlt='all', sortBarOpen=false;
 let inboxFilters={visitorId:'',channel:'all',subChannel:'all',sentiment:'all',replyStatus:'all',customerLabel:'all'};
+let bulkMode=false, bulkSelected=new Set();
 let cannedMgmtOpen=false;
 
 const AGENTS=[
@@ -1120,6 +1136,92 @@ function resetInboxFilter(){
   hideBS();rInbox();
 }
 
+/* BULK ACTIONS */
+function toggleBulkMode(){bulkMode=!bulkMode;bulkSelected.clear();rInbox();}
+function toggleBulkSelect(id,ev){if(ev)ev.stopPropagation();if(bulkSelected.has(id))bulkSelected.delete(id);else bulkSelected.add(id);rInbox();}
+function bulkSelectAll(){var list=document.querySelectorAll('.cv[data-id]');list.forEach(function(el){bulkSelected.add(el.getAttribute('data-id'));});rInbox();}
+function bulkDeselectAll(){bulkSelected.clear();rInbox();}
+function openBulkAssign(){
+  var h='<div class="bs-title">Assign '+bulkSelected.size+' chats to</div>';
+  AGENTS.forEach(function(a){
+    h+='<div class="bs-item" onclick="doBulkAssign(\''+a.name+'\')">'
+      +'<div class="bs-ico" style="background:'+((AGC[a.name]||'#253748')+'18')+';color:'+(AGC[a.name]||'#253748')+'">'+a.name[0]+'</div>'
+      +'<div class="bs-info"><h4>'+a.name+'</h4><p>'+a.role+(a.online?' · Online':' · Offline')+'</p></div></div>';
+  });
+  h+='<button class="bs-cancel" onclick="hideBS()">Cancel</button>';
+  showBS(h);
+}
+function doBulkAssign(agent){
+  bulkSelected.forEach(function(id){var c=ALL_CONVS().find(function(x){return x.id===id;});if(c){c.agentAssigned=agent;c.handler='human';}});
+  hideBS();bulkMode=false;bulkSelected.clear();rInbox();
+  showToast(bulkSelected.size>0?'Assigned':'Chats assigned to '+agent);
+}
+function openBulkReply(){
+  var canned=[
+    {id:'cr1',title:'Greeting',text:'Hi there! How can I help you today?'},
+    {id:'cr2',title:'Order Status',text:'Let me check the status of your order right away.'},
+    {id:'cr3',title:'Return Policy',text:'Our return policy allows returns within 14 days of delivery.'},
+    {id:'cr4',title:'Escalation',text:'I am escalating your issue to a senior agent for better assistance.'},
+    {id:'cr5',title:'Closing',text:'Thank you for contacting us! Is there anything else I can help with?'}
+  ];
+  var h='<div class="bs-title">Quick reply to '+bulkSelected.size+' chats</div>';
+  canned.forEach(function(cr){
+    h+='<div class="bs-item" onclick="doBulkReply(\''+cr.id+'\')">'
+      +'<div class="bs-ico" style="background:var(--offwhite-60)">💬</div>'
+      +'<div class="bs-info"><h4>'+cr.title+'</h4><p>'+cr.text+'</p></div></div>';
+  });
+  h+='<button class="bs-cancel" onclick="hideBS()">Cancel</button>';
+  showBS(h);
+}
+function doBulkReply(crId){
+  hideBS();bulkMode=false;bulkSelected.clear();rInbox();
+  showToast('Reply sent to selected chats');
+}
+function openBulkTransfer(){
+  var h='<div class="bs-title">Transfer '+bulkSelected.size+' chats</div>'
+    +'<div style="padding:0 16px 12px"><label style="font-size:12px;font-weight:600;color:var(--foreground);display:block;margin-bottom:4px">Reason</label>'
+    +'<input id="bulk-transfer-reason" placeholder="Enter transfer reason" style="width:100%;height:38px;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);padding:0 10px;font-size:13px;font-family:inherit;color:var(--foreground);outline:none;box-sizing:border-box"></div>'
+    +'<div class="bs-title" style="font-size:13px;padding-top:4px">Select agent</div>';
+  AGENTS.forEach(function(a){
+    h+='<div class="bs-item" onclick="selectBulkTransferAgent(\''+a.name+'\')">'
+      +'<div class="bs-ico" style="background:'+((AGC[a.name]||'#253748')+'18')+';color:'+(AGC[a.name]||'#253748')+'">'+a.name[0]+'</div>'
+      +'<div class="bs-info"><h4>'+a.name+'</h4><p>'+a.role+(a.online?' · Online':' · Offline')+'</p></div></div>';
+  });
+  h+='<button class="bs-cancel" onclick="hideBS()">Cancel</button>';
+  showBS(h);
+}
+function selectBulkTransferAgent(agent){
+  var reason=document.getElementById('bulk-transfer-reason');
+  var r=reason?reason.value:'';
+  bulkSelected.forEach(function(id){var c=ALL_CONVS().find(function(x){return x.id===id;});if(c){c.agentAssigned=agent;c.handler='human';}});
+  hideBS();bulkMode=false;bulkSelected.clear();rInbox();
+  showToast('Transferred to '+agent+(r?' ('+r+')':''));
+}
+function openBulkClose(){
+  var tags=['Resolved','Spam','Duplicate','No response','Wrong department','Customer request'];
+  var h='<div class="bs-title">Close '+bulkSelected.size+' chats</div>'
+    +'<div style="padding:0 16px 12px"><label style="font-size:12px;font-weight:600;color:var(--foreground);display:block;margin-bottom:4px">Tag <span style="color:var(--destructive)">*</span></label>'
+    +'<select id="bulk-close-tag" style="width:100%;height:38px;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);padding:0 10px;font-size:13px;font-family:inherit;color:var(--foreground);outline:none;background:var(--background);-webkit-appearance:menulist;appearance:menulist">'
+    +'<option value="">Select a tag</option>';
+  tags.forEach(function(t){h+='<option value="'+t+'">'+t+'</option>';});
+  h+='</select></div>'
+    +'<div style="padding:0 16px 12px"><label style="font-size:12px;font-weight:600;color:var(--foreground);display:block;margin-bottom:4px">Reason</label>'
+    +'<textarea id="bulk-close-reason" placeholder="Enter closing reason (optional)" rows="3" style="width:100%;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);padding:10px;font-size:13px;font-family:inherit;color:var(--foreground);outline:none;resize:none;box-sizing:border-box"></textarea></div>'
+    +'<div style="padding:0 16px 16px;display:flex;gap:10px">'
+    +'<button onclick="doBulkClose()" style="flex:1;height:40px;background:var(--destructive);color:#fff;border:none;border-radius:var(--r-md);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Close chats</button>'
+    +'<button onclick="hideBS()" style="height:40px;padding:0 16px;background:var(--offwhite-60);color:var(--gray-100);border:none;border-radius:var(--r-md);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit">Cancel</button></div>';
+  showBS(h);
+}
+function doBulkClose(){
+  var tag=document.getElementById('bulk-close-tag');
+  if(!tag||!tag.value){tag.style.borderColor='var(--destructive)';return;}
+  var reason=document.getElementById('bulk-close-reason');
+  var cnt=bulkSelected.size;
+  bulkSelected.forEach(function(id){var c=ALL_CONVS().find(function(x){return x.id===id;});if(c){c.closed=true;c.closeTag=tag.value;c.closeReason=reason?reason.value:'';}});
+  hideBS();bulkMode=false;bulkSelected.clear();rInbox();
+  showToast(cnt+' chat'+(cnt>1?'s':'')+' closed as '+tag.value);
+}
+
 /* INBOX */
 function rInbox(){
   const all=ALL_CONVS();
@@ -1220,19 +1322,47 @@ function rInbox(){
     const slaH=c.sla==='breach'?'<span class="sla-tag sla-breach">SLA Breach</span>':c.sla==='warn'?'<span class="sla-tag sla-warn">SLA Warning</span>':'';
     const sentH=c.sentiment?`<span class="sent-tag">${c.sentiment.icon} ${c.sentiment.label}</span>`:'';
     const snzH=c.snoozed?`<span class="snooze-badge">💤 ${c.snoozeUntil||'Snoozed'}</span>`:'';
-    return `<div class="cv" onclick="openChat('${c.id}')">
-      ${avH(c.name,c.ch,38)}
-      <div class="cv-b">
-        <div class="cv-r1"><span class="cv-nm ${c.unread?'bd':''}">${c.name}</span>${chIcon(c.ch)}<span class="cv-tm ${c.unread?'hl':''}">${c.time}</span></div>
-        <div class="cv-r2">${agTag}${snzH}<span class="cv-pv ${c.unread?'bd':''}">${c.preview}</span>${c.unread?`<span class="ub">${c.unread}</span>`:''}</div>
-        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
-      </div>
-    </div>`;
+    var cbH=bulkMode?('<div class="bulk-cb'+(bulkSelected.has(c.id)?' checked':'')+'" onclick="toggleBulkSelect(\''+c.id+'\',event)">'+(bulkSelected.has(c.id)?'✓':'')+'</div>'):'';
+    return '<div class="cv" data-id="'+c.id+'" onclick="'+(bulkMode?'toggleBulkSelect(\''+c.id+'\',event)':'openChat(\''+c.id+'\')')+'">'
+      +cbH+avH(c.name,c.ch,38)
+      +'<div class="cv-b">'
+      +'<div class="cv-r1"><span class="cv-nm '+(c.unread?'bd':'')+'">'+c.name+'</span>'+chIcon(c.ch)+'<span class="cv-tm '+(c.unread?'hl':'')+'">'+c.time+'</span></div>'
+      +'<div class="cv-r2">'+agTag+snzH+'<span class="cv-pv '+(c.unread?'bd':'')+'">'+c.preview+'</span>'+(c.unread?'<span class="ub">'+c.unread+'</span>':'')+'</div>'
+      +'<div class="cv-r3">'+slaH+sentH+(c.needsHuman?'<span class="sla-tag sla-breach">⚠ '+c.hoReason+'</span>':'')+(role==='admin'&&c.custTags?c.custTags.slice(0,2).map(function(t){return '<span class="sent-tag">'+t+'</span>';}).join(''):'')+'</div>'
+      +'</div></div>';
   }).join('');
 
   convHTML+=`<div style="padding:2px 16px 0;font-size:10px;color:var(--gray-60);font-weight:500;text-align:center">Showing ${list.length} of ${totalAll} conversations</div>`;
   convHTML+=`<div id="skel-zone"><div class="skel-card"><div class="skel-av"></div><div class="skel-lines"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div></div></div><div class="skel-card"><div class="skel-av"></div><div class="skel-lines"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div></div></div><div class="skel-end" id="skel-text">Loading...</div></div>`;
   document.getElementById('conv-list').innerHTML=convHTML;
+
+  /* Bulk selection bar */
+  var bsb=document.getElementById('bulk-sel-bar');
+  if(bsb){
+    if(bulkMode){
+      bsb.hidden=false;
+      bsb.className='bulk-sel-bar';
+      bsb.innerHTML='<span class="bsc">'+bulkSelected.size+' selected</span>'
+        +'<button onclick="bulkSelectAll()">Select all</button>'
+        +'<button onclick="bulkDeselectAll()">Deselect</button>'
+        +'<button onclick="toggleBulkMode()" style="color:var(--destructive)">Cancel</button>';
+    } else { bsb.hidden=true;bsb.innerHTML=''; }
+  }
+  /* Bulk action bar */
+  var bab=document.getElementById('bulk-action-bar');
+  if(bab){
+    if(bulkMode&&bulkSelected.size>0){
+      bab.hidden=false;
+      bab.className='bulk-bar';
+      bab.innerHTML='<button class="bulk-btn" onclick="openBulkAssign()"><span class="b-ico">👤</span>Assign</button>'
+        +'<button class="bulk-btn" onclick="openBulkReply()"><span class="b-ico">💬</span>Reply</button>'
+        +'<button class="bulk-btn" onclick="openBulkTransfer()"><span class="b-ico">↗</span>Transfer</button>'
+        +'<button class="bulk-btn destructive" onclick="openBulkClose()"><span class="b-ico">✕</span>Close</button>';
+    } else { bab.hidden=true;bab.innerHTML=''; }
+  }
+  /* Bulk toggle highlight */
+  var btb=document.getElementById('bulk-toggle-btn');
+  if(btb)btb.style.color=bulkMode?'var(--primary)':'';
 
   setTimeout(()=>{const z=document.getElementById('skel-zone');if(z)z.innerHTML='<div class="skel-end" style="padding:14px;color:var(--success)">✓ You\'re all caught up</div>';},800);
 }
@@ -1408,6 +1538,7 @@ function showBS(html){
   el.onclick=function(e){if(e.target===el)hideBS();};
 }
 function hideBS(){document.getElementById('bs-container').style.display='none';}
+function showToast(msg){var t=document.createElement('div');t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--foreground);color:#fff;padding:10px 20px;border-radius:var(--r-md);font-size:13px;font-weight:500;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.15);font-family:inherit;white-space:nowrap';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
 
 /* SNOOZE */
 function openSnooze(){
@@ -2326,4 +2457,5 @@ function editContact(ref){const c=ref?findContact(ref):null;const commit=()=>{co
 contactDetail=function(ref){const c=findContact(ref);if(!c)return;showBS(`<div class="bs-title">Contact details</div><div class="contact-detail-body"><div class="contact-identity">${avH(c.name,c.ch,48)}<div><h2>${c.name}</h2><p>${channelBrand[c.ch]?.name||'Live chat'}</p></div></div><dl class="contact-detail-fields"><div><dt>Phone</dt><dd>${c.phone}</dd></div>${c.email?`<div><dt>Email</dt><dd>${c.email}</dd></div>`:''}<div><dt>Customer type</dt><dd>${esc(c.label)}</dd></div><div><dt>Segment</dt><dd>${esc(c.seg)}</dd></div><div><dt>Last contacted</dt><dd>${esc(c.last||'Not contacted')}</dd></div></dl><p class="muted">Review this contact before starting a conversation.</p><div class="contact-detail-actions"><button class="btn-p" id="contact-open-conversation">Open conversation</button><button class="secondary" id="contact-edit-action">Edit contact</button><button class="contact-close-action" id="contact-close-detail">Close</button></div></div>`);$('contact-open-conversation').onclick=()=>openContactConversation(c.id);$('contact-edit-action').onclick=()=>editContact(c.id);$('contact-close-detail').onclick=hideBS};
 function openContactConversation(ref){const c=findContact(ref);if(!c)return;hideBS();let v=ALL_CONVS().find(v=>v.contactId===c.id||v.custInfo?.phone===c.phone||v.name===c.name);if(!v){v={id:'local-'+Date.now(),contactId:c.id,name:c.name,ch:c.ch,unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:99,queuedAt:Date.now(),updatedAt:Date.now(),custTags:[...c.tags],custLabel:c.label,custSeg:c.seg,custInfo:{phone:c.phone,email:c.email||''},notes:[],msgs:[],preview:'New conversation',time:'Now',sla:'ok'};CONVS.push(v);c.chats=(c.chats||0)+1}else v.contactId=c.id;openChat(v.id);save()}
 ensureContactIds();setupContactsShell();rCt();boldContextIcons();save();
-</script></body></html>
+</script>
+</body></html>
