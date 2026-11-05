@@ -348,6 +348,43 @@ body {
 .tk-st.closed { background:var(--offwhite-60); color:var(--gray-60); }
 .tk-ait { font-size:9px; font-weight:600; color:var(--purple-100); background:var(--purple-10); padding:1px 5px; border-radius:3px; }
 
+/* Ticket Detail */
+.tk-detail { position:absolute; top:0; left:0; right:0; bottom:0; background:var(--background); z-index:80; display:flex; flex-direction:column; }
+.tk-detail .td-header { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--offwhite-100); }
+.tk-detail .td-tabs { display:flex; border-bottom:1px solid var(--offwhite-100); }
+.tk-detail .td-tab { flex:1; text-align:center; padding:10px; font-size:13px; font-weight:600; color:var(--gray-60); cursor:pointer; border-bottom:2px solid transparent; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; }
+.tk-detail .td-tab.on { color:var(--primary); border-bottom-color:var(--primary); }
+.tk-detail .td-body { flex:1; overflow-y:auto; padding:12px 16px; }
+.td-section { background:var(--background); border:1px solid var(--offwhite-100); border-radius:var(--r-md); margin-bottom:12px; }
+.td-sec-hdr { display:flex; align-items:center; gap:8px; padding:12px; cursor:pointer; font-size:13px; font-weight:600; color:var(--foreground); }
+.td-sec-hdr span:first-child { font-size:14px; }
+.td-sec-hdr .td-chevron { margin-left:auto; font-size:11px; color:var(--gray-60); transition:transform 0.2s; }
+.td-sec-body { padding:0 12px 12px; }
+.td-row { display:flex; align-items:center; padding:8px 0; border-bottom:1px solid var(--offwhite-60); font-size:12px; }
+.td-row:last-child { border-bottom:none; }
+.td-row .td-label { width:90px; color:var(--gray-60); font-weight:500; flex-shrink:0; }
+.td-row .td-val { flex:1; color:var(--foreground); font-weight:500; display:flex; align-items:center; gap:6px; }
+
+/* Ticket Create */
+.tk-create { position:absolute; top:0; left:0; right:0; bottom:0; background:var(--background); z-index:80; display:flex; flex-direction:column; }
+.tk-create .tc-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--offwhite-100); }
+.tk-create .tc-header h2 { font-size:16px; font-weight:700; }
+.tk-create .tc-body { flex:1; overflow-y:auto; padding:16px; }
+.tk-create .tc-label { font-size:12px; font-weight:600; color:var(--foreground); margin-bottom:4px; display:block; }
+.tk-create .tc-label .req { color:var(--destructive); }
+.tk-create .tc-input { width:100%; height:38px; border:1.5px solid var(--offwhite-100); border-radius:var(--r-sm); padding:0 10px; font-size:13px; font-family:inherit; color:var(--foreground); outline:none; background:var(--background); margin-bottom:12px; }
+.tk-create .tc-input:focus { border-color:var(--primary); }
+.tk-create textarea.tc-input { height:100px; padding:10px; resize:none; }
+.tk-create select.tc-input { -webkit-appearance:menulist; appearance:menulist; }
+.tk-create .tc-row { display:flex; gap:10px; }
+.tk-create .tc-row > div { flex:1; }
+.tk-create .tc-footer { display:flex; gap:10px; padding:12px 16px; border-top:1px solid var(--offwhite-100); }
+.tk-create .tc-char { font-size:10px; color:var(--gray-60); text-align:right; margin-top:-10px; margin-bottom:8px; }
+.td-note { padding:10px; border-bottom:1px solid var(--offwhite-60); }
+.td-note:last-child { border-bottom:none; }
+.td-note-meta { font-size:10px; color:var(--gray-60); margin-bottom:2px; }
+.td-note-text { font-size:12px; color:var(--foreground); }
+
 /* Contacts */
 .sb { margin:6px 16px; position:relative; }
 .sb input { width:100%; height:38px; background:var(--offwhite-40); border:1.5px solid var(--offwhite-100); border-radius:var(--r-md); padding:0 12px 0 34px; font-size:12px; font-family:inherit; color:var(--foreground); outline:none; }
@@ -625,9 +662,11 @@ body {
 
   <!-- TICKETS -->
   <div class="scr" id="tickets">
-    <div class="tb"><h1 style="font-size:17px">Tickets</h1><button class="tb-btn">＋</button></div>
+    <div class="tb"><h1 style="font-size:17px">Tickets</h1><button class="tb-btn" onclick="openCreateTicket()">＋</button></div>
     <div class="chips" id="tk-fl"></div>
     <div class="scroll" id="tk-list"></div>
+    <div id="tk-detail-overlay" hidden></div>
+    <div id="tk-create-overlay" hidden></div>
   </div>
 
   <!-- CONTACTS -->
@@ -881,13 +920,14 @@ const BOT_CONVS=[
 const ALL_CONVS=()=>[...CONVS,...BOT_CONVS];
 
 const TICKETS=[
-  {id:'TK-1001',subj:'Refund not received — ORD-5678',cust:'Nadia Islam',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'livechat'},
-  {id:'TK-1002',subj:'Wrong item delivered',cust:'Fatima Akter',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'whatsapp'},
-  {id:'TK-1003',subj:'bKash payment error',cust:'Rafi Ahmed',pri:'med',st:'pending',aiF:true,date:'Nov 4',ch:'livechat'},
-  {id:'TK-1004',subj:'Size exchange — Polo Shirt',cust:'Kamal Hossain',pri:'low',st:'open',aiF:false,date:'Nov 2',ch:'whatsapp'},
-  {id:'TK-1005',subj:'Delivery delayed 5 days',cust:'Rahim Uddin',pri:'med',st:'pending',aiF:true,date:'Nov 1',ch:'messenger'},
-  {id:'TK-1006',subj:'Product quality — Saree',cust:'Sumaiya Rahman',pri:'low',st:'closed',aiF:false,date:'Oct 29',ch:'instagram'},
+  {id:'TK-1001',subj:'Refund not received — ORD-5678',cust:'Nadia Islam',email:'nadia@email.com',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'livechat',desc:'Customer reports refund for order ORD-5678 not received after 7 business days.',assignee:'Anika Rahman',tags:['refund','urgent'],form:'Returns',dueDate:'2024-11-10',source:'livechat',sentiment:'negative',created:'3 Nov 2024, 02:15 PM',notes:[{text:'Escalated to finance team',by:'Anika Rahman',time:'Nov 3, 3:00 PM'},{text:'Refund processing confirmed by bKash',by:'AI Sara',time:'Nov 4, 10:30 AM'}]},
+  {id:'TK-1002',subj:'Wrong item delivered',cust:'Fatima Akter',email:'fatima@email.com',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'whatsapp',desc:'Received blue polo instead of red saree. Order #ORD-5901.',assignee:null,tags:['wrong-item','exchange'],form:'Returns',dueDate:'2024-11-08',source:'whatsapp',sentiment:'negative',created:'3 Nov 2024, 11:45 AM',notes:[{text:'Return pickup scheduled for Nov 5',by:'AI Sara',time:'Nov 3, 12:00 PM'}]},
+  {id:'TK-1003',subj:'bKash payment error',cust:'Rafi Ahmed',email:'rafi@email.com',pri:'med',st:'pending',aiF:true,date:'Nov 4',ch:'livechat',desc:'bKash payment deducted but order not confirmed. Transaction ID: TXN88291.',assignee:'Anika Rahman',tags:['payment','bkash'],form:'Payment Issue',dueDate:'2024-11-06',source:'livechat',sentiment:'neutral',created:'4 Nov 2024, 09:20 AM',notes:[]},
+  {id:'TK-1004',subj:'Size exchange — Polo Shirt',cust:'Kamal Hossain',email:'kamal@email.com',pri:'low',st:'open',aiF:false,date:'Nov 2',ch:'whatsapp',desc:'Wants to exchange L size polo for XL.',assignee:null,tags:['exchange','size'],form:'Returns',dueDate:'2024-11-12',source:'whatsapp',sentiment:'neutral',created:'2 Nov 2024, 04:30 PM',notes:[]},
+  {id:'TK-1005',subj:'Delivery delayed 5 days',cust:'Rahim Uddin',email:'rahim@email.com',pri:'med',st:'pending',aiF:true,date:'Nov 1',ch:'messenger',desc:'Order shipped 5 days ago but tracking shows no movement since Nov 1.',assignee:null,tags:['delivery','delayed'],form:'General Inquiry',dueDate:'2024-11-05',source:'messenger',sentiment:'negative',created:'1 Nov 2024, 10:00 AM',notes:[{text:'Courier contacted, delivery rescheduled',by:'Anika Rahman',time:'Nov 2, 2:00 PM'}]},
+  {id:'TK-1006',subj:'Product quality — Saree',cust:'Sumaiya Rahman',email:'sumaiya@email.com',pri:'low',st:'closed',aiF:false,date:'Oct 29',ch:'instagram',desc:'Color fading after first wash on premium silk saree.',assignee:'Anika Rahman',tags:['quality','product'],form:'General Inquiry',dueDate:'2024-11-01',source:'instagram',sentiment:'negative',created:'29 Oct 2024, 01:10 PM',notes:[{text:'Full refund issued, case closed',by:'Anika Rahman',time:'Oct 31, 11:00 AM'}]},
 ];
+let tkNextId=1007;
 
 const CONTACTS=[
   {name:'Fatima Akter',phone:'+8801711111111',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['refund','repeat'],last:'2h ago',chats:5},
@@ -1376,13 +1416,259 @@ function insertCanned(id){
 }
 
 /* TICKETS */
+let tkDetailTab='overview';
+let tkDetailSections={info:true,assignee:true,tag:true};
 function rTk(){
   const lb={all:'All',open:'Open',pending:'Pending',closed:'Closed'};
   const cts={all:TICKETS.length,open:TICKETS.filter(t=>t.st==='open').length,pending:TICKETS.filter(t=>t.st==='pending').length,closed:TICKETS.filter(t=>t.st==='closed').length};
   document.getElementById('tk-fl').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${tkF===f?'on':''}" onclick="tkF='${f}';rTk()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
   let list=TICKETS;if(tkF!=='all')list=list.filter(t=>t.st===tkF);
   if(inboxSearchQuery){const q=inboxSearchQuery.toLowerCase();list=list.filter(t=>t.subj.toLowerCase().includes(q)||t.cust.toLowerCase().includes(q));}
-  document.getElementById('tk-list').innerHTML=list.map(t=>`<div class="tkc"><div class="tk-r1"><span class="tk-id">${t.id}</span><span class="tk-pri ${t.pri}">${t.pri}</span></div><div class="tk-subj">${t.subj}</div><div class="tk-meta"><span>${t.cust}</span><span>·</span><span>${t.date}</span><span>·</span><span style="color:${CH[t.ch]||'inherit'}">${t.ch}</span><span class="tk-st ${t.st}">${t.st}</span>${t.aiF?'<span class="tk-ait">✦ AI Following</span>':''}</div></div>`).join('');
+  document.getElementById('tk-list').innerHTML=list.map(t=>`<div class="tkc" onclick="openTicketDetail('${t.id}')"><div class="tk-r1"><span class="tk-id">${t.id}</span><span class="tk-pri ${t.pri}">${t.pri}</span></div><div class="tk-subj">${t.subj}</div><div class="tk-meta"><span>${t.cust}</span><span>·</span><span>${t.date}</span><span>·</span><span style="color:${CH[t.ch]||'inherit'}">${t.ch}</span><span class="tk-st ${t.st}">${t.st}</span>${t.aiF?'<span class="tk-ait">✦ AI Following</span>':''}</div></div>`).join('');
+}
+
+/* CREATE TICKET */
+function openCreateTicket(){
+  var el=document.getElementById('tk-create-overlay');
+  el.hidden=false;
+  el.innerHTML=createTicketHTML();
+}
+function closeCreateTicket(){
+  document.getElementById('tk-create-overlay').hidden=true;
+}
+function createTicketHTML(){
+  return '<div class="tk-create">'
+    +'<div class="tc-header"><h2>Create Ticket</h2><button style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--gray-100);font-family:inherit" onclick="closeCreateTicket()">✕</button></div>'
+    +'<div class="tc-body">'
+    +'<label class="tc-label">Select Form</label>'
+    +'<select class="tc-input" id="tc-form"><option>General Inquiry</option><option>Returns</option><option>Payment Issue</option><option>Bug Report</option></select>'
+    +'<div class="tc-row">'
+    +'<div><label class="tc-label">Recipient Name <span class="req">*</span></label><input class="tc-input" id="tc-name" placeholder="Write here"></div>'
+    +'<div><label class="tc-label">Recipient Email <span class="req">*</span></label><input class="tc-input" id="tc-email" placeholder="Write email here" type="email"></div>'
+    +'</div>'
+    +'<label class="tc-label">Subject <span class="req">*</span></label>'
+    +'<input class="tc-input" id="tc-subj" placeholder="Write ticket subject..." maxlength="250" oninput="document.getElementById(\'tc-char\').textContent=this.value.length+\' / 250\'">'
+    +'<div class="tc-char" id="tc-char">0 / 250</div>'
+    +'<label class="tc-label">Description <span class="req">*</span></label>'
+    +'<textarea class="tc-input" id="tc-desc" placeholder="Type here"></textarea>'
+    +'<div class="tc-row">'
+    +'<div><label class="tc-label">Ticket Assignee</label><div class="tc-input" style="display:flex;align-items:center;gap:6px;color:var(--gray-60);cursor:default"><span style="width:20px;height:20px;border-radius:50%;background:var(--offwhite-60);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gray-60)">U</span> Add Assignee</div></div>'
+    +'<div><label class="tc-label">Due Date</label><input class="tc-input" id="tc-due" type="date"></div>'
+    +'</div>'
+    +'<label class="tc-label">Ticket Priority</label>'
+    +'<select class="tc-input" id="tc-pri"><option value="low">Low</option><option value="med" selected>Medium</option><option value="high">High</option></select>'
+    +'<label class="tc-label">Ticket Tags</label>'
+    +'<input class="tc-input" id="tc-tags" placeholder="Add tags...">'
+    +'</div>'
+    +'<div class="tc-footer">'
+    +'<button onclick="submitTicket()" style="flex:1;padding:10px;border:none;border-radius:var(--r-sm);background:var(--primary);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Create Ticket</button>'
+    +'<button onclick="closeCreateTicket()" style="padding:10px 16px;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);background:var(--background);color:var(--gray-100);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Discard</button>'
+    +'</div>'
+    +'</div>';
+}
+function submitTicket(){
+  var name=document.getElementById('tc-name').value.trim();
+  var email=document.getElementById('tc-email').value.trim();
+  var subj=document.getElementById('tc-subj').value.trim();
+  var desc=document.getElementById('tc-desc').value.trim();
+  if(!name||!email||!subj||!desc){
+    var missing=[];
+    if(!name)missing.push('Name');if(!email)missing.push('Email');if(!subj)missing.push('Subject');if(!desc)missing.push('Description');
+    showBS('<div class="bs-handle"></div><div class="bs-title" style="color:var(--destructive)">Required fields missing</div><div style="padding:0 16px 16px;font-size:12px;color:var(--gray-100)">Please fill in: '+missing.join(', ')+'</div>');
+    return;
+  }
+  var tk={
+    id:'TK-'+tkNextId++,
+    subj:subj,
+    cust:name,
+    email:email,
+    pri:document.getElementById('tc-pri').value,
+    st:'open',
+    aiF:false,
+    date:'Nov 5',
+    ch:'livechat',
+    desc:desc,
+    assignee:null,
+    tags:document.getElementById('tc-tags').value?document.getElementById('tc-tags').value.split(',').map(function(s){return s.trim()}):[],
+    form:document.getElementById('tc-form').value,
+    dueDate:document.getElementById('tc-due').value||null,
+    source:'Created manually',
+    sentiment:'--',
+    created:'5 Nov 2024, '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),
+    notes:[]
+  };
+  TICKETS.unshift(tk);
+  closeCreateTicket();
+  rTk();
+}
+
+/* TICKET DETAIL */
+function openTicketDetail(id){
+  tkDetailTab='overview';
+  tkDetailSections={info:true,assignee:true,tag:true};
+  renderTicketDetail(id);
+}
+function closeTicketDetail(){
+  document.getElementById('tk-detail-overlay').hidden=true;
+}
+function toggleTkSection(id,tkId){
+  tkDetailSections[id]=!tkDetailSections[id];
+  renderTicketDetail(tkId);
+}
+function cycleTkStatus(id){
+  var tk=TICKETS.find(function(t){return t.id===id});
+  if(!tk)return;
+  var cycle=['open','pending','closed'];
+  var idx=cycle.indexOf(tk.st);
+  tk.st=cycle[(idx+1)%cycle.length];
+  renderTicketDetail(id);
+  rTk();
+}
+function cycleTkPri(id){
+  var tk=TICKETS.find(function(t){return t.id===id});
+  if(!tk)return;
+  var cycle=['low','med','high'];
+  var idx=cycle.indexOf(tk.pri);
+  tk.pri=cycle[(idx+1)%cycle.length];
+  renderTicketDetail(id);
+  rTk();
+}
+function addTkNote(id){
+  var input=document.getElementById('tk-note-input');
+  if(!input||!input.value.trim())return;
+  var tk=TICKETS.find(function(t){return t.id===id});
+  if(!tk)return;
+  if(!tk.notes)tk.notes=[];
+  tk.notes.push({text:input.value.trim(),by:currentUser==='admin'?'Admin':'Agent',time:'Nov 5, '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})});
+  renderTicketDetail(id);
+}
+function renderTicketDetail(id){
+  var tk=TICKETS.find(function(t){return t.id===id});
+  if(!tk)return;
+  var el=document.getElementById('tk-detail-overlay');
+  el.hidden=false;
+  var stColors={open:'background:var(--success-lt);color:var(--success)',pending:'background:var(--warning-lt);color:#996B00',closed:'background:var(--offwhite-60);color:var(--gray-60)'};
+  var stLabel={open:'OPEN',pending:'IN PROGRESS',closed:'CLOSED'};
+  var priColors={high:'var(--destructive)',med:'var(--warning)',low:'var(--success)'};
+  var priIco={high:'H',med:'M',low:'L'};
+
+  var header='<div class="td-header">'
+    +'<button onclick="closeTicketDetail()" style="background:none;border:none;font-size:16px;cursor:pointer;color:var(--gray-100);padding:4px">←</button>'
+    +'<span style="font-size:15px;font-weight:700;flex:1">'+tk.id+'</span>'
+    +'<span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;'+stColors[tk.st]+';cursor:pointer" onclick="cycleTkStatus(\''+tk.id+'\')">'+stLabel[tk.st]+'</span>'
+    +'</div>';
+
+  var tabs='<div class="td-tabs">'
+    +'<button class="td-tab'+(tkDetailTab==='overview'?' on':'')+'" onclick="tkDetailTab=\'overview\';renderTicketDetail(\''+tk.id+'\')">Overview</button>'
+    +'<button class="td-tab'+(tkDetailTab==='profile'?' on':'')+'" onclick="tkDetailTab=\'profile\';renderTicketDetail(\''+tk.id+'\')">Profile</button>'
+    +'<button class="td-tab'+(tkDetailTab==='notes'?' on':'')+'" onclick="tkDetailTab=\'notes\';renderTicketDetail(\''+tk.id+'\')">Notes</button>'
+    +'</div>';
+
+  var body='';
+  if(tkDetailTab==='overview'){
+    body=overviewTabHTML(tk);
+  } else if(tkDetailTab==='profile'){
+    body=profileTabHTML(tk);
+  } else {
+    body=notesTabHTML(tk);
+  }
+
+  el.innerHTML='<div class="tk-detail">'+header+tabs+'<div class="td-body">'+body+'</div></div>';
+}
+
+function overviewTabHTML(tk){
+  var stColors={open:'background:var(--success-lt);color:var(--success)',pending:'background:var(--warning-lt);color:#996B00',closed:'background:var(--offwhite-60);color:var(--gray-60)'};
+  var stLabel={open:'OPEN',pending:'IN PROGRESS',closed:'CLOSED'};
+  var priColors={high:'var(--destructive)',med:'var(--warning)',low:'var(--success)'};
+  var priLabel={high:'High',med:'Medium',low:'Low'};
+  var chevronD=tkDetailSections.info?'▾':'▸';
+  var chevronA=tkDetailSections.assignee?'▾':'▸';
+  var chevronT=tkDetailSections.tag?'▾':'▸';
+
+  var infoSection='<div class="td-section">'
+    +'<div class="td-sec-hdr" onclick="toggleTkSection(\'info\',\''+tk.id+'\')">'
+    +'<span style="font-size:13px">&#9783;</span> Ticket Info <span class="td-chevron">'+chevronD+'</span></div>';
+  if(tkDetailSections.info){
+    infoSection+='<div class="td-sec-body">'
+      +'<div class="td-row"><div class="td-label">Ticket ID</div><div class="td-val">'+tk.id+' <span style="font-size:10px;color:var(--gray-60);cursor:pointer" title="Copy">&#9112;</span></div></div>'
+      +'<div class="td-row"><div class="td-label">Created on</div><div class="td-val">'+(tk.created||tk.date)+'</div></div>'
+      +'<div class="td-row"><div class="td-label">Status</div><div class="td-val"><span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;cursor:pointer;'+stColors[tk.st]+'" onclick="cycleTkStatus(\''+tk.id+'\')">'+stLabel[tk.st]+'</span></div></div>'
+      +'<div class="td-row"><div class="td-label">Priority</div><div class="td-val"><span style="width:16px;height:16px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;background:'+priColors[tk.pri]+'">'+tk.pri.charAt(0).toUpperCase()+'</span> <span style="cursor:pointer" onclick="cycleTkPri(\''+tk.id+'\')">'+priLabel[tk.pri]+'</span></div></div>'
+      +'<div class="td-row"><div class="td-label">Due Date</div><div class="td-val">'+(tk.dueDate||'Set')+'</div></div>'
+      +'<div class="td-row"><div class="td-label">Sentiment</div><div class="td-val">'+(tk.sentiment||'--')+'</div></div>'
+      +'<div class="td-row"><div class="td-label">Source</div><div class="td-val">'+(tk.source||tk.ch)+'</div></div>'
+      +'</div>';
+  }
+  infoSection+='</div>';
+
+  var assigneeSection='<div class="td-section">'
+    +'<div class="td-sec-hdr" onclick="toggleTkSection(\'assignee\',\''+tk.id+'\')">'
+    +'<span style="font-size:13px">&#9775;</span> Assignee <span class="td-chevron">'+chevronA+'</span></div>';
+  if(tkDetailSections.assignee){
+    var assigneeContent=tk.assignee
+      ?'<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="width:28px;height:28px;border-radius:50%;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">'+tk.assignee.charAt(0)+'</span><span style="font-size:12px;font-weight:500">'+tk.assignee+'</span></div>'
+      :'<div style="display:flex;align-items:center;gap:8px;padding:4px 0;color:var(--gray-60);font-size:12px"><span style="width:28px;height:28px;border-radius:50%;background:var(--offwhite-60);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray-60)">U</span> Add Assignee</div>';
+    assigneeSection+='<div class="td-sec-body">'+assigneeContent+'</div>';
+  }
+  assigneeSection+='</div>';
+
+  var tagSection='<div class="td-section">'
+    +'<div class="td-sec-hdr" onclick="toggleTkSection(\'tag\',\''+tk.id+'\')">'
+    +'<span style="font-size:13px">&#9872;</span> Tag <span class="td-chevron">'+chevronT+'</span></div>';
+  if(tkDetailSections.tag){
+    var tagsContent='';
+    if(tk.tags&&tk.tags.length>0){
+      tagsContent=tk.tags.map(function(tg){
+        return '<span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:500;background:var(--offwhite-60);color:var(--gray-100);margin:0 4px 4px 0">'+tg+'</span>';
+      }).join('');
+    } else {
+      tagsContent='<div style="font-size:12px;color:var(--gray-60)">Add tag</div>';
+    }
+    tagSection+='<div class="td-sec-body">'+tagsContent+'</div>';
+  }
+  tagSection+='</div>';
+
+  return infoSection+assigneeSection+tagSection;
+}
+
+function profileTabHTML(tk){
+  var contact=CONTACTS.find(function(c){return c.name===tk.cust});
+  if(!contact){
+    return '<div class="td-section"><div style="padding:16px;text-align:center">'
+      +'<div style="width:48px;height:48px;border-radius:50%;background:var(--offwhite-60);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--gray-100);margin:0 auto 8px">'+tk.cust.charAt(0)+'</div>'
+      +'<div style="font-size:14px;font-weight:600;color:var(--foreground)">'+tk.cust+'</div>'
+      +'<div style="font-size:12px;color:var(--gray-60);margin-top:2px">'+(tk.email||'No email')+'</div>'
+      +'</div></div>';
+  }
+  return '<div class="td-section"><div style="padding:16px;text-align:center">'
+    +'<div style="width:48px;height:48px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--primary);margin:0 auto 8px">'+contact.name.charAt(0)+'</div>'
+    +'<div style="font-size:14px;font-weight:600;color:var(--foreground)">'+contact.name+'</div>'
+    +'<div style="font-size:12px;color:var(--gray-60);margin-top:2px">'+(tk.email||'')+'</div>'
+    +'</div></div>'
+    +'<div class="td-section"><div class="td-sec-body" style="padding-top:12px">'
+    +'<div class="td-row"><div class="td-label">Phone</div><div class="td-val">'+contact.phone+'</div></div>'
+    +'<div class="td-row"><div class="td-label">Channel</div><div class="td-val" style="text-transform:capitalize">'+contact.ch+'</div></div>'
+    +'<div class="td-row"><div class="td-label">Segment</div><div class="td-val">'+contact.seg+'</div></div>'
+    +'<div class="td-row"><div class="td-label">Label</div><div class="td-val">'+contact.label+'</div></div>'
+    +'<div class="td-row"><div class="td-label">Total Chats</div><div class="td-val">'+contact.chats+'</div></div>'
+    +'<div class="td-row"><div class="td-label">Last Active</div><div class="td-val">'+contact.last+'</div></div>'
+    +'</div></div>';
+}
+
+function notesTabHTML(tk){
+  var notesList='';
+  if(tk.notes&&tk.notes.length>0){
+    notesList=tk.notes.map(function(n){
+      return '<div class="td-note"><div class="td-note-meta">'+n.by+' · '+n.time+'</div><div class="td-note-text">'+n.text+'</div></div>';
+    }).join('');
+  } else {
+    notesList='<div style="padding:20px;text-align:center;font-size:12px;color:var(--gray-60)">No notes yet</div>';
+  }
+  return '<div class="td-section" style="margin-bottom:12px">'+notesList+'</div>'
+    +'<div style="display:flex;gap:8px">'
+    +'<input id="tk-note-input" style="flex:1;height:36px;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);padding:0 10px;font-size:12px;font-family:inherit;color:var(--foreground);outline:none;background:var(--background)" placeholder="Add a note...">'
+    +'<button onclick="addTkNote(\''+tk.id+'\')" style="padding:0 14px;height:36px;border:none;border-radius:var(--r-sm);background:var(--primary);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Add</button>'
+    +'</div>';
 }
 
 /* CONTACTS */
