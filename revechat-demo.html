@@ -116,24 +116,24 @@ body {
 .queue-badge { font-size:9px; font-weight:700; color:var(--primary-dark); background:var(--primary-light); padding:2px 6px; border-radius:var(--r-md); margin-left:auto; }
 
 /* Conv card */
-.cv { display:flex; gap:10px; padding:10px 16px; cursor:pointer; border-bottom:1px solid var(--offwhite-100); transition:background 0.1s; }
+.cv { display:flex; gap:8px; padding:5px 12px; cursor:pointer; border-bottom:1px solid var(--offwhite-100); transition:background 0.1s; }
 .cv:hover { background:var(--offwhite-40); }
-.av { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; position:relative; }
-.av .cb { position:absolute; bottom:-1px; right:-1px; width:14px; height:14px; border-radius:50%; border:2px solid var(--background); display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; }
+.av { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; flex-shrink:0; position:relative; }
+.av .cb { position:absolute; bottom:-1px; right:-1px; width:12px; height:12px; border-radius:50%; border:1.5px solid var(--background); display:flex; align-items:center; justify-content:center; font-size:6px; color:#fff; }
 .cv-b { flex:1; min-width:0; }
-.cv-r1 { display:flex; align-items:center; gap:4px; }
-.cv-nm { font-size:13px; font-weight:600; color:var(--foreground); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-r1 { display:flex; align-items:center; gap:3px; }
+.cv-nm { font-size:12px; font-weight:600; color:var(--foreground); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .cv-nm.bd { font-weight:700; }
-.cv-tm { font-size:10px; color:var(--gray-60); }
+.cv-tm { font-size:9px; color:var(--gray-60); }
 .cv-tm.hl { color:var(--primary-dark); font-weight:600; }
-.cv-r2 { display:flex; align-items:center; gap:4px; margin-top:0; }
-.tg-ai { font-size:8px; font-weight:700; color:var(--purple-100); background:var(--purple-10); padding:1px 4px; border-radius:3px; }
-.tg-ag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
-.cv-pv { font-size:12px; color:var(--gray-100); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-r2 { display:flex; align-items:center; gap:3px; margin-top:0; }
+.tg-ai { font-size:7px; font-weight:700; color:var(--purple-100); background:var(--purple-10); padding:0 3px; border-radius:2px; line-height:14px; }
+.tg-ag { font-size:7px; font-weight:700; padding:0 3px; border-radius:2px; line-height:14px; }
+.cv-pv { font-size:11px; color:var(--gray-100); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .cv-pv.bd { color:var(--foreground); font-weight:500; }
-.ub { min-width:16px; height:16px; border-radius:8px; background:var(--primary); color:var(--primary-fg); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; }
-.nd { width:7px; height:7px; border-radius:50%; background:var(--destructive); flex-shrink:0; }
-.cv-r3 { font-size:10px; color:var(--gray-60); margin-top:0; display:flex; align-items:center; gap:4px; }
+.ub { min-width:14px; height:14px; border-radius:7px; background:var(--primary); color:var(--primary-fg); font-size:8px; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 3px; }
+.nd { width:6px; height:6px; border-radius:50%; background:var(--destructive); flex-shrink:0; }
+.cv-r3 { font-size:9px; color:var(--gray-60); margin-top:0; display:flex; align-items:center; gap:3px; }
 .sla-tag { font-size:8px; font-weight:700; padding:1px 4px; border-radius:3px; }
 .sla-ok { background:var(--success-lt); color:var(--success); }
 .sla-warn { background:var(--warning-lt); color:#996B00; }
@@ -438,11 +438,11 @@ body {
 .fp-chip.on { background:var(--foreground); color:#fff; border-color:var(--foreground); }
 .fp-chip.seg-on { background:var(--primary); color:var(--primary-fg); border-color:var(--primary); }
 .fp-range select { height:28px; border:1px solid var(--offwhite-100); border-radius:var(--r-sm); font-size:10px; font-family:inherit; color:var(--foreground); padding:0 6px; background:var(--background); outline:none; width:100%; }
-.ct-item { display:flex; align-items:center; gap:10px; padding:8px 16px; border-bottom:1px solid var(--offwhite-100); cursor:pointer; }
+.ct-item { display:flex; align-items:center; gap:6px; padding:3px 12px; border-bottom:1px solid var(--offwhite-100); cursor:pointer; }
 .ct-item:hover { background:var(--offwhite-40); }
-.ct-i { flex:1; }
-.ct-i h4 { font-size:13px; font-weight:600; color:var(--foreground); }
-.ct-i p { font-size:10px; color:var(--gray-100); }
+.ct-i { flex:1; min-width:0; display:flex; align-items:center; gap:6px; }
+.ct-i h4 { font-size:11px; font-weight:600; color:var(--foreground); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ct-i p { font-size:10px; color:var(--gray-100); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0; }
 .ct-tags { display:flex; gap:3px; flex-wrap:wrap; margin-top:2px; }
 .ct-tag { font-size:8px; padding:1px 4px; border-radius:3px; font-weight:500; }
 
@@ -475,12 +475,12 @@ body {
 .collapse-body.open { display:block; }
 
 /* Segment folders */
-.seg-folder { margin:0 16px 8px; border:1px solid var(--offwhite-100); border-radius:var(--r-lg); overflow:hidden; background:var(--background); }
-.seg-head { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; }
-.seg-head .sf-icon { font-size:16px; }
-.seg-head .sf-name { flex:1; font-size:13px; font-weight:700; color:var(--foreground); }
-.seg-head .sf-count { font-size:11px; font-weight:600; color:var(--gray-60); background:var(--offwhite-60); padding:2px 8px; border-radius:10px; }
-.seg-head .sf-arrow { font-size:10px; color:var(--gray-60); transition:transform 0.2s; }
+.seg-folder { margin:0 12px 4px; border:1px solid var(--offwhite-100); border-radius:var(--r-md); overflow:hidden; background:var(--background); }
+.seg-head { display:flex; align-items:center; gap:6px; padding:6px 10px; cursor:pointer; }
+.seg-head .sf-icon { font-size:13px; }
+.seg-head .sf-name { flex:1; font-size:11px; font-weight:700; color:var(--foreground); }
+.seg-head .sf-count { font-size:10px; font-weight:600; color:var(--gray-60); background:var(--offwhite-60); padding:1px 6px; border-radius:8px; }
+.seg-head .sf-arrow { font-size:9px; color:var(--gray-60); transition:transform 0.2s; }
 .seg-head.open .sf-arrow { transform:rotate(90deg); }
 .seg-contacts { display:none; border-top:1px solid var(--offwhite-100); }
 .seg-contacts.open { display:block; }
@@ -553,7 +553,7 @@ body {
 .bulk-sel-bar { display:flex; align-items:center; gap:8px; padding:0 16px; height:44px; background:var(--primary-light); border-bottom:1px solid var(--offwhite-100); flex-shrink:0; }
 .bulk-sel-bar .bsc { font-size:13px; font-weight:600; color:var(--primary-dark); flex:1; }
 .bulk-sel-bar button { background:none; border:none; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; color:var(--primary); padding:4px 8px; }
-.bulk-av { width:38px; height:38px; border-radius:var(--r-sm); border:2px solid var(--offwhite-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; background:var(--offwhite-40); transition:all 0.12s; }
+.bulk-av { width:32px; height:32px; border-radius:var(--r-sm); border:2px solid var(--offwhite-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; background:var(--offwhite-40); transition:all 0.12s; }
 .bulk-av:hover { border-color:var(--gray-40); background:var(--offwhite-60); }
 .bulk-av.checked { background:var(--primary); border-color:var(--primary); }
 .bulk-av .bk-ico { font-size:16px; color:var(--primary-fg); display:none; }
@@ -935,6 +935,28 @@ const CONVS=[
      {t:'text',s:'human',text:'তাসনিম, winter collection আসছে next week!',time:'10:45',agent:'Rahat',status:'read'},
      {t:'text',s:'customer',text:'নতুন collection কবে আসবে?',time:'11:30'},
    ]},
+  {id:'9',name:'Anika Sultana',ch:'instagram',unread:1,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:13,queuedAt:Date.now()-240000,snoozed:false,snoozeUntil:null,custTags:['fashion'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340001',email:'anika.s@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'English',source:'Instagram'},sentiment:{score:72,label:'Interested',icon:'🤔'},notes:[],preview:'Do you ship internationally?',time:'4m',sla:'ok',msgs:[{t:'text',s:'customer',text:'Do you ship internationally?',time:'12:01'},{t:'text',s:'ai',text:'Yes, we ship to 15+ countries!',time:'12:01',conf:94}]},
+  {id:'10',name:'Shahid Hasan',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Mim',agentAssigned:'Mim',queuePos:14,queuedAt:Date.now()-420000,snoozed:false,snoozeUntil:null,custTags:['loyal'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340002',email:'shahid.h@yahoo.com',location:'Rangpur',ltv:'৳5,400',orders:3,lastOrder:'Oct 28',lang:'Bangla',source:'WhatsApp'},sentiment:{score:65,label:'Neutral',icon:'😐'},notes:[],preview:'ট্র্যাকিং নম্বর দেন',time:'7m',sla:'ok',msgs:[{t:'text',s:'customer',text:'ট্র্যাকিং নম্বর দেন',time:'11:58'},{t:'text',s:'human',text:'পাঠাচ্ছি ভাই',time:'11:59',agent:'Mim',status:'delivered'}]},
+  {id:'11',name:'Meher Jahan',ch:'livechat',unread:3,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Billing Dispute',assigned:null,agentAssigned:null,queuePos:15,queuedAt:Date.now()-180000,snoozed:false,snoozeUntil:null,custTags:['payment-issue'],custLabel:'Complainant',custSeg:'At Risk',custInfo:{phone:'+8801712340003',email:'meher.j@outlook.com',location:'Dhaka',ltv:'৳7,200',orders:3,lastOrder:'Oct 20',lang:'English',source:'Website'},sentiment:{score:20,label:'Frustrated',icon:'😤'},notes:[],preview:'I was double charged!',time:'3m',sla:'breach',msgs:[{t:'text',s:'customer',text:'I was double charged on my card!',time:'12:02'},{t:'text',s:'ai',text:'Let me check your billing immediately.',time:'12:02',conf:75},{t:'text',s:'customer',text:'I was double charged!',time:'12:03'}]},
+  {id:'12',name:'Jubayer Alam',ch:'messenger',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:16,queuedAt:Date.now()-900000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801712340004',email:'jubayer@gmail.com',location:'Barisal',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Messenger Ad'},sentiment:{score:70,label:'Curious',icon:'🤔'},notes:[],preview:'কালার option আছে?',time:'15m',sla:'ok',msgs:[{t:'text',s:'customer',text:'এই শার্টের কালার option আছে?',time:'11:50'},{t:'text',s:'ai',text:'হ্যাঁ! Blue, Black, White আছে।',time:'11:50',conf:92}]},
+  {id:'13',name:'Parveen Nahar',ch:'whatsapp',unread:2,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:17,queuedAt:Date.now()-720000,snoozed:false,snoozeUntil:null,custTags:['repeat'],custLabel:'Buyer',custSeg:'VIP',custInfo:{phone:'+8801712340005',email:'parveen@gmail.com',location:'Mymensingh',ltv:'৳15,800',orders:8,lastOrder:'Nov 1',lang:'Bangla',source:'WhatsApp'},sentiment:{score:85,label:'Happy',icon:'😊'},notes:[],preview:'আগামীকাল ডেলিভারি হবে?',time:'12m',sla:'ok',msgs:[{t:'text',s:'customer',text:'আমার অর্ডার কবে আসবে?',time:'11:50'},{t:'text',s:'human',text:'আগামীকাল পাবেন।',time:'11:52',agent:'Rahat',status:'sent'},{t:'text',s:'customer',text:'আগামীকাল ডেলিভারি হবে?',time:'11:53'}]},
+  {id:'14',name:'Imran Sheikh',ch:'livechat',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:18,queuedAt:Date.now()-1500000,snoozed:false,snoozeUntil:null,custTags:['new'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340006',email:'imran.s@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'English',source:'Google Ad'},sentiment:{score:60,label:'Neutral',icon:'😐'},notes:[],preview:'What is your best seller?',time:'25m',sla:'ok',msgs:[{t:'text',s:'customer',text:'What is your best seller?',time:'11:40'},{t:'text',s:'ai',text:'Our Premium Cotton Polo is #1 this month!',time:'11:40',conf:95}]},
+  {id:'15',name:'Nasreen Akhter',ch:'instagram',unread:1,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:19,queuedAt:Date.now()-2400000,snoozed:false,snoozeUntil:null,custTags:['fashion','influencer'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340007',email:'nasreen@insta.com',location:'Sylhet',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Instagram DM'},sentiment:{score:78,label:'Interested',icon:'🤔'},notes:[],preview:'কোলাব করতে চাই',time:'40m',sla:'ok',msgs:[{t:'text',s:'customer',text:'আমি fashion blogger, কোলাব করতে চাই',time:'11:25'},{t:'text',s:'customer',text:'কোলাব করতে চাই',time:'11:26'}]},
+  {id:'16',name:'Faisal Rahman',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Mim',agentAssigned:'Mim',queuePos:20,queuedAt:Date.now()-3600000,snoozed:false,snoozeUntil:null,custTags:['bulk'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340008',email:'faisal.r@gmail.com',location:'Rajshahi',ltv:'৳22,000',orders:5,lastOrder:'Oct 30',lang:'Bangla',source:'Referral'},sentiment:{score:70,label:'Content',icon:'🙂'},notes:[],preview:'Wholesale rate কত?',time:'1h',sla:'ok',msgs:[{t:'text',s:'customer',text:'Wholesale rate কত?',time:'11:05'},{t:'text',s:'human',text:'৫০+ পিসে 15% ডিসকাউন্ট',time:'11:10',agent:'Mim',status:'read'}]},
+  {id:'17',name:'Sabina Yeasmin',ch:'messenger',unread:4,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Exchange Request',assigned:null,agentAssigned:null,queuePos:21,queuedAt:Date.now()-480000,snoozed:false,snoozeUntil:null,custTags:['exchange'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340009',email:'sabina.y@gmail.com',location:'Comilla',ltv:'৳3,600',orders:2,lastOrder:'Oct 25',lang:'Bangla',source:'Messenger'},sentiment:{score:35,label:'Upset',icon:'😟'},notes:[],preview:'ভুল সাইজ পাঠিয়েছেন',time:'8m',sla:'warn',msgs:[{t:'text',s:'customer',text:'M অর্ডার দিলাম XL এসেছে!',time:'11:57'},{t:'text',s:'ai',text:'দুঃখিত! Exchange process শুরু করছি।',time:'11:57',conf:80},{t:'text',s:'customer',text:'ভুল সাইজ পাঠিয়েছেন',time:'11:58'}]},
+  {id:'18',name:'Rakib Uddin',ch:'livechat',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:22,queuedAt:Date.now()-5400000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801712340010',email:'rakib@yahoo.com',location:'Khulna',ltv:'৳1,200',orders:1,lastOrder:'Nov 3',lang:'Bangla',source:'Website'},sentiment:{score:75,label:'Content',icon:'🙂'},notes:[],preview:'পেমেন্ট কনফার্ম',time:'1.5h',sla:'ok',msgs:[{t:'text',s:'customer',text:'bKash দিয়ে পেমেন্ট দিলাম',time:'10:35'},{t:'text',s:'human',text:'কনফার্ম! ধন্যবাদ।',time:'10:40',agent:'Rahat',status:'read'}]},
+  {id:'19',name:'Tamanna Begum',ch:'whatsapp',unread:1,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:23,queuedAt:Date.now()-660000,snoozed:false,snoozeUntil:null,custTags:['new'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340011',email:'tamanna@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'WhatsApp Ad'},sentiment:{score:68,label:'Curious',icon:'🤔'},notes:[],preview:'EMI আছে?',time:'11m',sla:'ok',msgs:[{t:'text',s:'customer',text:'EMI তে কিনতে পারি?',time:'11:54'},{t:'text',s:'ai',text:'হ্যাঁ! ৳5,000+ অর্ডারে 3 মাস EMI।',time:'11:54',conf:90}]},
+  {id:'20',name:'Hafiz Molla',ch:'messenger',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:24,queuedAt:Date.now()-7200000,snoozed:true,snoozeUntil:'1:00 PM',custTags:['repeat'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340012',email:'hafiz.m@gmail.com',location:'Tangail',ltv:'৳8,900',orders:4,lastOrder:'Oct 28',lang:'Bangla',source:'Messenger'},sentiment:{score:80,label:'Happy',icon:'😊'},notes:[],preview:'ভালো প্রোডাক্ট 👍',time:'2h',sla:'ok',msgs:[{t:'text',s:'customer',text:'অনেক ভালো প্রোডাক্ট পেলাম',time:'10:05'},{t:'text',s:'human',text:'ধন্যবাদ! আবার আসবেন।',time:'10:10',agent:'Nusrat',status:'read'}]},
+  {id:'21',name:'Rashida Khatun',ch:'livechat',unread:2,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:25,queuedAt:Date.now()-360000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801712340013',email:'rashida@outlook.com',location:'Gazipur',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Website'},sentiment:{score:55,label:'Neutral',icon:'😐'},notes:[],preview:'ডেলিভারি চার্জ কত?',time:'6m',sla:'ok',msgs:[{t:'text',s:'customer',text:'ডেলিভারি চার্জ কত?',time:'11:59'},{t:'text',s:'ai',text:'ঢাকায় ৳60, ঢাকার বাইরে ৳120।',time:'11:59',conf:96}]},
+  {id:'22',name:'Mamun Chowdhury',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Mim',agentAssigned:'Mim',queuePos:26,queuedAt:Date.now()-4200000,snoozed:false,snoozeUntil:null,custTags:['loyal','bulk'],custLabel:'Buyer',custSeg:'VIP',custInfo:{phone:'+8801712340014',email:'mamun.c@gmail.com',location:'Dhaka',ltv:'৳32,000',orders:10,lastOrder:'Nov 2',lang:'Bangla',source:'Referral'},sentiment:{score:88,label:'Very Happy',icon:'😄'},notes:[],preview:'পরের অর্ডার দিচ্ছি',time:'1.2h',sla:'ok',msgs:[{t:'text',s:'customer',text:'পরের ব্যাচ আসলে জানাবেন',time:'10:50'},{t:'text',s:'human',text:'অবশ্যই! নতুন stock আসছে।',time:'10:55',agent:'Mim',status:'read'}]},
+  {id:'23',name:'Dilara Haque',ch:'instagram',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:27,queuedAt:Date.now()-6000000,snoozed:false,snoozeUntil:null,custTags:['fashion'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340015',email:'dilara@insta.com',location:'Chittagong',ltv:'৳0',orders:0,lastOrder:'—',lang:'English/Bangla',source:'Instagram'},sentiment:{score:72,label:'Interested',icon:'🤔'},notes:[],preview:'Love the aesthetic!',time:'1.5h',sla:'ok',msgs:[{t:'text',s:'customer',text:'Love your feed! Do you do custom orders?',time:'10:30'},{t:'text',s:'human',text:'Yes! DM us your requirements.',time:'10:40',agent:'Nusrat',status:'read'}]},
+  {id:'24',name:'Shohag Mia',ch:'whatsapp',unread:1,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:28,queuedAt:Date.now()-540000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801712340016',email:'shohag@gmail.com',location:'Narsingdi',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'WhatsApp'},sentiment:{score:60,label:'Neutral',icon:'😐'},notes:[],preview:'COD আছে?',time:'9m',sla:'ok',msgs:[{t:'text',s:'customer',text:'ক্যাশ অন ডেলিভারি আছে?',time:'11:56'},{t:'text',s:'ai',text:'হ্যাঁ! COD available সব জায়গায়।',time:'11:56',conf:97}]},
+  {id:'25',name:'Nargis Parvin',ch:'livechat',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:29,queuedAt:Date.now()-8400000,snoozed:false,snoozeUntil:null,custTags:['repeat'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340017',email:'nargis@yahoo.com',location:'Jessore',ltv:'৳4,800',orders:2,lastOrder:'Oct 20',lang:'Bangla',source:'Website'},sentiment:{score:70,label:'Content',icon:'🙂'},notes:[],preview:'থ্যাংকস',time:'2.5h',sla:'ok',msgs:[{t:'text',s:'customer',text:'রিটার্ন হয়ে গেছে',time:'9:40'},{t:'text',s:'human',text:'রিফান্ড 3 দিনে পাবেন।',time:'9:45',agent:'Rahat',status:'delivered'}]},
+  {id:'26',name:'Asif Iqbal',ch:'messenger',unread:3,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:30,queuedAt:Date.now()-150000,snoozed:false,snoozeUntil:null,custTags:['new'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340018',email:'asif.i@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Messenger Ad'},sentiment:{score:75,label:'Excited',icon:'😊'},notes:[],preview:'প্রোমো কোড আছে?',time:'2m',sla:'ok',msgs:[{t:'text',s:'customer',text:'নতুন কাস্টমারদের জন্য offer আছে?',time:'12:03'},{t:'text',s:'ai',text:'NEWUSER10 কোড দিয়ে ৳200 ছাড়!',time:'12:03',conf:93}]},
+  {id:'27',name:'Lubna Yasmin',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Mim',agentAssigned:'Mim',queuePos:31,queuedAt:Date.now()-3000000,snoozed:false,snoozeUntil:null,custTags:['loyal'],custLabel:'Buyer',custSeg:'VIP',custInfo:{phone:'+8801712340019',email:'lubna@gmail.com',location:'Narayanganj',ltv:'৳11,200',orders:5,lastOrder:'Nov 1',lang:'Bangla',source:'WhatsApp'},sentiment:{score:82,label:'Happy',icon:'😊'},notes:[],preview:'Next order confirm',time:'50m',sla:'ok',msgs:[{t:'text',s:'customer',text:'আগের মতো ৫টা polo দেন',time:'11:15'},{t:'text',s:'human',text:'Done! Invoice পাঠাচ্ছি।',time:'11:20',agent:'Mim',status:'read'}]},
+  {id:'28',name:'Zahid Hassan',ch:'livechat',unread:1,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:32,queuedAt:Date.now()-1020000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801712340020',email:'zahid@gmail.com',location:'Bogra',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Google Ad'},sentiment:{score:58,label:'Neutral',icon:'😐'},notes:[],preview:'জ্যাকেটের দাম?',time:'17m',sla:'ok',msgs:[{t:'text',s:'customer',text:'Winter jacket কত?',time:'11:48'},{t:'text',s:'ai',text:'৳2,100 থেকে শুরু!',time:'11:48',conf:94}]},
+  {id:'29',name:'Poly Akter',ch:'instagram',unread:2,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:33,queuedAt:Date.now()-270000,snoozed:false,snoozeUntil:null,custTags:['fashion'],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801712340021',email:'poly@insta.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Instagram DM'},sentiment:{score:80,label:'Excited',icon:'😊'},notes:[],preview:'Saree collection দেখান',time:'4m',sla:'ok',msgs:[{t:'text',s:'customer',text:'আপনাদের saree collection দেখতে চাই',time:'12:01'},{t:'text',s:'ai',text:'এই সিজনের best sellers দেখুন!',time:'12:01',conf:91}]},
+  {id:'30',name:'Milon Sarker',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:34,queuedAt:Date.now()-9600000,snoozed:false,snoozeUntil:null,custTags:['repeat'],custLabel:'Buyer',custSeg:'Regular',custInfo:{phone:'+8801712340022',email:'milon@gmail.com',location:'Faridpur',ltv:'৳6,500',orders:3,lastOrder:'Oct 25',lang:'Bangla',source:'WhatsApp'},sentiment:{score:72,label:'Content',icon:'🙂'},notes:[],preview:'Thanks vai 🙏',time:'2.5h',sla:'ok',msgs:[{t:'text',s:'customer',text:'ডেলিভারি পেয়েছি, ধন্যবাদ',time:'9:30'},{t:'text',s:'human',text:'স্বাগতম! আবার আসবেন।',time:'9:35',agent:'Nusrat',status:'read'}]},
 ];
 
 /* BOT CONVERSATIONS */
@@ -975,6 +997,8 @@ const BOT_CONVS=[
      {t:'text',s:'customer',text:'WINTER20 কোড দিলাম কিন্তু কাজ করছে না',time:'11:57'},
      {t:'text',s:'customer',text:'ডিসকাউন্ট কোড কাজ করছে না',time:'11:58'},
    ]},
+  {id:'b4',name:'Sumi Akter',ch:'livechat',unread:1,handler:'bot',botName:'Size Bot',aiOn:false,needsHuman:false,assigned:'Size Bot',agentAssigned:null,queuePos:35,queuedAt:Date.now()-400000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'',custSeg:'New',custInfo:{phone:'+8801756009988',email:'sumi@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Website'},sentiment:{score:65,label:'Neutral',icon:'😐'},notes:[],preview:'আমার সাইজ কত হবে?',time:'7m',sla:'ok',msgs:[{t:'text',s:'customer',text:'আমার height 5\'4", সাইজ কত?',time:'11:58'},{t:'text',s:'bot',text:'আপনার জন্য M সাইজ recommend করছি!',time:'11:58'}]},
+  {id:'b5',name:'Rony Das',ch:'whatsapp',unread:0,handler:'bot',botName:'Order Bot',aiOn:false,needsHuman:false,assigned:'Order Bot',agentAssigned:null,queuePos:36,queuedAt:Date.now()-1200000,snoozed:false,snoozeUntil:null,custTags:[],custLabel:'Lead',custSeg:'New',custInfo:{phone:'+8801756112233',email:'rony@gmail.com',location:'Gazipur',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'WhatsApp'},sentiment:{score:70,label:'Content',icon:'🙂'},notes:[],preview:'ORD-2345 track',time:'20m',sla:'ok',msgs:[{t:'text',s:'customer',text:'ORD-2345',time:'11:45'},{t:'text',s:'bot',text:'আপনার অর্ডার Shipped — আগামীকাল ডেলিভারি।',time:'11:45'}]},
 ];
 
 const ALL_CONVS=()=>[...CONVS,...BOT_CONVS];
@@ -998,6 +1022,48 @@ const CONTACTS=[
   {name:'Arif Mahmud',phone:'+8801766666666',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['loyal'],last:'3h ago',chats:2},
   {name:'Tasnim Jahan',phone:'+8801799999999',ch:'messenger',seg:'VIP',label:'Buyer',tags:['repeat','fashion'],last:'30m ago',chats:6},
   {name:'Rafi Ahmed',phone:'+8801788888888',ch:'livechat',seg:'New',label:'Lead',tags:['payment-issue'],last:'10m ago',chats:1},
+  {name:'Maliha Chowdhury',phone:'+8801712345678',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['repeat','fashion'],last:'8m ago',chats:9},
+  {name:'Tanvir Hasan',phone:'+8801723456789',ch:'messenger',seg:'Regular',label:'Buyer',tags:['loyal'],last:'20m ago',chats:4},
+  {name:'Sadia Afrin',phone:'+8801734567890',ch:'instagram',seg:'New',label:'Lead',tags:['fashion','influencer'],last:'1h ago',chats:1},
+  {name:'Imran Khan',phone:'+8801745678901',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['repeat'],last:'35m ago',chats:3},
+  {name:'Lamia Sultana',phone:'+8801756789012',ch:'livechat',seg:'VIP',label:'Buyer',tags:['bulk','loyal'],last:'12m ago',chats:8},
+  {name:'Rakib Hossain',phone:'+8801767890123',ch:'messenger',seg:'New',label:'Lead',tags:['new'],last:'2h ago',chats:1},
+  {name:'Jannatul Ferdous',phone:'+8801778901234',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['fashion'],last:'50m ago',chats:2},
+  {name:'Mehedi Hasan',phone:'+8801789012345',ch:'instagram',seg:'At Risk',label:'Complainant',tags:['escalated','refund'],last:'3m ago',chats:6},
+  {name:'Sharmin Akter',phone:'+8801710123456',ch:'livechat',seg:'VIP',label:'Buyer',tags:['repeat','bulk'],last:'1h ago',chats:11},
+  {name:'Zahid Islam',phone:'+8801721234567',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['loyal'],last:'4h ago',chats:2},
+  {name:'Taslima Begum',phone:'+8801732345678',ch:'messenger',seg:'New',label:'Lead',tags:['new'],last:'25m ago',chats:1},
+  {name:'Farhan Chowdhury',phone:'+8801743456789',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['fashion','repeat'],last:'7m ago',chats:5},
+  {name:'Rubina Khatun',phone:'+8801754567890',ch:'instagram',seg:'Regular',label:'Buyer',tags:['fashion'],last:'40m ago',chats:3},
+  {name:'Sabbir Rahman',phone:'+8801765678901',ch:'livechat',seg:'At Risk',label:'Complainant',tags:['payment-issue','escalated'],last:'15m ago',chats:4},
+  {name:'Afsana Mim',phone:'+8801776789012',ch:'whatsapp',seg:'New',label:'Lead',tags:['influencer'],last:'1h ago',chats:1},
+  {name:'Nazmul Haque',phone:'+8801787890123',ch:'messenger',seg:'Regular',label:'Buyer',tags:['loyal','repeat'],last:'55m ago',chats:5},
+  {name:'Farhana Yasmin',phone:'+8801718901234',ch:'instagram',seg:'VIP',label:'Buyer',tags:['fashion','bulk'],last:'18m ago',chats:7},
+  {name:'Ashraful Alam',phone:'+8801729012345',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['repeat'],last:'3h ago',chats:2},
+  {name:'Nusrat Jahan',phone:'+8801730123456',ch:'livechat',seg:'New',label:'Lead',tags:['new'],last:'32m ago',chats:1},
+  {name:'Shafiq Ahmed',phone:'+8801741234567',ch:'messenger',seg:'At Risk',label:'Complainant',tags:['refund'],last:'6m ago',chats:3},
+  {name:'Ayesha Siddika',phone:'+8801752345678',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['loyal','repeat'],last:'22m ago',chats:10},
+  {name:'Mizanur Rahman',phone:'+8801763456789',ch:'instagram',seg:'Regular',label:'Buyer',tags:['fashion'],last:'2h ago',chats:2},
+  {name:'Rabeya Khatun',phone:'+8801774567890',ch:'livechat',seg:'New',label:'Lead',tags:['new'],last:'48m ago',chats:1},
+  {name:'Sajjad Hossain',phone:'+8801785678901',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['loyal'],last:'1h ago',chats:4},
+  {name:'Tamanna Akter',phone:'+8801716789012',ch:'messenger',seg:'VIP',label:'Buyer',tags:['bulk','fashion'],last:'9m ago',chats:6},
+  {name:'Liton Das',phone:'+8801727890123',ch:'whatsapp',seg:'At Risk',label:'Complainant',tags:['escalated','payment-issue'],last:'14m ago',chats:5},
+  {name:'Papia Sultana',phone:'+8801738901234',ch:'instagram',seg:'New',label:'Lead',tags:['influencer','fashion'],last:'1h ago',chats:1},
+  {name:'Jubayer Hossain',phone:'+8801749012345',ch:'livechat',seg:'Regular',label:'Buyer',tags:['repeat'],last:'38m ago',chats:3},
+  {name:'Meher Afroz',phone:'+8801750123456',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['loyal','repeat'],last:'5m ago',chats:12},
+  {name:'Rafiqul Islam',phone:'+8801761234567',ch:'messenger',seg:'Regular',label:'Buyer',tags:['loyal'],last:'2h ago',chats:2},
+  {name:'Lovely Begum',phone:'+8801772345678',ch:'instagram',seg:'New',label:'Lead',tags:['new','fashion'],last:'42m ago',chats:1},
+  {name:'Hasan Ali',phone:'+8801783456789',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['repeat'],last:'1h ago',chats:3},
+  {name:'Roksana Akter',phone:'+8801714567890',ch:'livechat',seg:'At Risk',label:'Complainant',tags:['refund','escalated'],last:'11m ago',chats:4},
+  {name:'Delwar Hossain',phone:'+8801725678901',ch:'whatsapp',seg:'VIP',label:'Buyer',tags:['bulk'],last:'28m ago',chats:8},
+  {name:'Umme Habiba',phone:'+8801736789012',ch:'messenger',seg:'New',label:'Lead',tags:['new'],last:'1h ago',chats:1},
+  {name:'Badhon Mia',phone:'+8801747890123',ch:'instagram',seg:'Regular',label:'Buyer',tags:['fashion','loyal'],last:'52m ago',chats:2},
+  {name:'Sonia Khatun',phone:'+8801758901234',ch:'whatsapp',seg:'Regular',label:'Buyer',tags:['repeat'],last:'3h ago',chats:3},
+  {name:'Mamun Rashid',phone:'+8801769012345',ch:'livechat',seg:'VIP',label:'Buyer',tags:['loyal','bulk'],last:'16m ago',chats:9},
+  {name:'Jannat Ara',phone:'+8801770123456',ch:'messenger',seg:'New',label:'Lead',tags:['fashion'],last:'36m ago',chats:1},
+  {name:'Shohel Rana',phone:'+8801781234567',ch:'whatsapp',seg:'At Risk',label:'Complainant',tags:['payment-issue'],last:'7m ago',chats:5},
+  {name:'Nasrin Akter',phone:'+8801712340001',ch:'instagram',seg:'Regular',label:'Buyer',tags:['fashion','influencer'],last:'1h ago',chats:2},
+  {name:'Iqbal Hasan',phone:'+8801723450002',ch:'livechat',seg:'Regular',label:'Buyer',tags:['loyal'],last:'44m ago',chats:3},
 ];
 
 const QR=['ধন্যবাদ! 😊','অর্ডার প্রসেস হচ্ছে','ডেলিভারি ২-৩ দিনে','চেক করে জানাচ্ছি','COD available','Refund ৩ দিনে'];
@@ -1382,18 +1448,15 @@ function rInbox(){
     if(c.handler==='ai') agTag='<span class="tg-ai">✦ AI Sara</span>';
     else if(c.handler==='bot') agTag=`<span class="tg-bot">🤖 ${c.botName||'Bot'}</span>`;
     else agTag=`<span class="tg-ag" style="background:${(AGC[c.agentAssigned]||'#253748')}18;color:${AGC[c.agentAssigned]||'#253748'}">👤 ${c.agentAssigned||'Unassigned'}</span>`;
-    const slaH=c.sla==='breach'?'<span class="sla-tag sla-breach">SLA Breach</span>':c.sla==='warn'?'<span class="sla-tag sla-warn">SLA Warning</span>':'';
-    const sentH=c.sentiment?`<span class="sent-tag">${c.sentiment.icon} ${c.sentiment.label}</span>`:'';
     const snzH=c.snoozed?`<span class="snooze-badge">💤 ${c.snoozeUntil||'Snoozed'}</span>`:'';
     var avArea=bulkMode
       ?'<div class="bulk-av'+(bulkSelected.has(c.id)?' checked':'')+'" onclick="toggleBulkSelect(\''+c.id+'\',event)"><span class="bk-ico">✓</span></div>'
-      :avH(c.name,c.ch,38);
+      :avH(c.name,c.ch,32);
     return '<div class="cv" data-id="'+c.id+'" onclick="'+(bulkMode?'toggleBulkSelect(\''+c.id+'\',event)':'openChat(\''+c.id+'\')')+'">'
       +avArea
       +'<div class="cv-b">'
       +'<div class="cv-r1"><span class="cv-nm '+(c.unread?'bd':'')+'">'+c.name+'</span>'+chIcon(c.ch)+'<span class="cv-tm '+(c.unread?'hl':'')+'">'+c.time+'</span></div>'
-      +'<div class="cv-r2">'+agTag+snzH+'<span class="cv-pv '+(c.unread?'bd':'')+'">'+c.preview+'</span>'+(c.unread?'<span class="ub">'+c.unread+'</span>':'')+'</div>'
-      +'<div class="cv-r3">'+slaH+sentH+(c.needsHuman?'<span class="sla-tag sla-breach">⚠ '+c.hoReason+'</span>':'')+(role==='admin'&&c.custTags?c.custTags.slice(0,2).map(function(t){return '<span class="sent-tag">'+t+'</span>';}).join(''):'')+'</div>'
+      +'<div class="cv-r2">'+agTag+snzH+'<span class="cv-pv '+(c.unread?'bd':'')+'">'+c.preview+'</span>'+(c.unread?'<span class="ub">'+c.unread+'</span>':'')+(c.sla==='breach'?'<span class="nd"></span>':'')+'</div>'
       +'</div></div>';
   }).join('');
 
@@ -2088,7 +2151,7 @@ function rCt(q){
     if(ctFlt.time!=='all'&&Date.now()-(c.lastAt||0)>({'1h':3600000,'24h':86400000,'7d':604800000,'30d':2592000000}[ctFlt.time]))return false;
     return true;
   });}
-  function ctHTML(list){return list.map(c=>`<div class="ct-item">${avH(c.name,c.ch,36)}<div class="ct-i"><h4>${c.name} ${chIcon(c.ch)}</h4><p>${chEmoji(c.ch)}${c.phone} · ${c.chats} chats · ${c.last}</p><div class="ct-tags"><span class="ct-tag" style="${segC[c.seg]||''}">${c.seg}</span><span class="ct-tag" style="${labC[c.label]||''}">${c.label}</span>${c.tags.map(t=>`<span class="ct-tag" style="background:var(--offwhite-60);color:var(--gray-60)">${t}</span>`).join('')}</div></div></div>`).join('');}
+  function ctHTML(list){return list.map(c=>`<div class="ct-item">${avH(c.name,c.ch,22)}<div class="ct-i"><h4>${c.name}${chIcon(c.ch)}</h4><p>${c.phone} · ${c.chats} · ${c.last}</p></div></div>`).join('');}
 
   if(ctView==='segments'){
     document.getElementById('ct-list').innerHTML=SEGS.map(sg=>{
