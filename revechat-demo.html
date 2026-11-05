@@ -443,6 +443,111 @@ body {
 .lo h4 { color:var(--destructive) !important; }
 .lo .sic { color:var(--destructive) !important; }
 .vr { text-align:center; font-size:10px; color:var(--gray-60); padding:12px; }
+
+/* === NEW FEATURES CSS === */
+
+/* Bot tag */
+.tg-bot { font-size:8px; font-weight:700; color:#996B00; background:var(--warning-lt); padding:1px 4px; border-radius:3px; }
+
+/* Snooze badge */
+.snooze-badge { font-size:8px; font-weight:700; color:var(--gray-80); background:var(--offwhite-80); padding:1px 4px; border-radius:3px; }
+
+/* Delivery ticks */
+.d-tick { font-size:10px; font-weight:600; margin-left:2px; }
+.d-tick.sent { color:var(--gray-40); }
+.d-tick.delivered { color:var(--gray-60); }
+.d-tick.read { color:var(--primary); }
+
+/* Bottom sheet */
+.bs-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(37,55,72,0.45); z-index:90; display:flex; align-items:flex-end; }
+.bs-sheet { width:100%; background:var(--background); border-radius:var(--r-xl) var(--r-xl) 0 0; box-shadow:var(--shadow-lg); max-height:70%; overflow-y:auto; }
+.bs-sheet::-webkit-scrollbar { display:none; }
+.bs-handle { width:36px; height:4px; background:var(--gray-20); border-radius:2px; margin:10px auto 6px; }
+.bs-title { font-size:15px; font-weight:700; color:var(--foreground); padding:0 16px 10px; }
+.bs-item { display:flex; align-items:center; gap:10px; padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--offwhite-100); }
+.bs-item:hover { background:var(--offwhite-40); }
+.bs-item:last-child { border-bottom:none; }
+.bs-item .bs-ico { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.bs-item .bs-info { flex:1; }
+.bs-item .bs-info h4 { font-size:13px; font-weight:600; color:var(--foreground); }
+.bs-item .bs-info p { font-size:10px; color:var(--gray-100); }
+.bs-cancel { width:calc(100% - 32px); margin:8px 16px 16px; padding:12px; background:var(--offwhite-60); border:none; border-radius:var(--r-md); font-size:14px; font-weight:600; color:var(--gray-100); cursor:pointer; font-family:inherit; text-align:center; }
+
+/* Inbox search bar */
+.inbox-search { padding:6px 16px; flex-shrink:0; display:none; }
+.inbox-search.open { display:block; }
+.inbox-search input { width:100%; height:36px; background:var(--offwhite-40); border:1.5px solid var(--offwhite-100); border-radius:var(--r-md); padding:0 12px 0 34px; font-size:12px; font-family:inherit; color:var(--foreground); outline:none; }
+.inbox-search input:focus { border-color:var(--primary); }
+.inbox-search .is-icon { position:absolute; left:26px; top:50%; transform:translateY(-50%); color:var(--gray-60); font-size:14px; pointer-events:none; }
+
+/* Canned response picker */
+.cr-list { padding:0; }
+.cr-item { display:flex; flex-direction:column; gap:2px; padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--offwhite-100); }
+.cr-item:hover { background:var(--offwhite-40); }
+.cr-item h4 { font-size:13px; font-weight:600; color:var(--foreground); }
+.cr-item p { font-size:11px; color:var(--gray-100); line-height:1.3; }
+.cr-item .cr-cat { font-size:9px; font-weight:600; color:var(--gray-60); background:var(--offwhite-60); padding:1px 5px; border-radius:3px; align-self:flex-start; margin-top:2px; }
+
+/* Canned responses management */
+.cr-mgmt-item { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--offwhite-100); }
+.cr-mgmt-item .cr-mgmt-info { flex:1; }
+.cr-mgmt-item .cr-mgmt-info h4 { font-size:13px; font-weight:600; color:var(--foreground); }
+.cr-mgmt-item .cr-mgmt-info p { font-size:11px; color:var(--gray-100); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:220px; }
+.cr-mgmt-actions { display:flex; gap:4px; }
+.cr-mgmt-actions button { background:none; border:none; font-size:14px; cursor:pointer; padding:4px; color:var(--gray-60); }
+.cr-mgmt-actions button:hover { color:var(--foreground); }
+
+/* Routing policy section */
+.rp-row { display:flex; align-items:center; gap:8px; padding:8px 16px; }
+.rp-row label { font-size:12px; font-weight:600; color:var(--foreground); flex:1; }
+.rp-row select, .rp-row input[type="number"], .rp-row input[type="text"] {
+  height:32px; border:1.5px solid var(--offwhite-100); border-radius:var(--r-sm); font-size:12px; font-family:inherit; color:var(--foreground); padding:0 8px; background:var(--background); outline:none; width:120px;
+}
+.rp-row .rp-tg { width:36px; height:20px; border-radius:10px; position:relative; cursor:pointer; border:none; }
+.rp-row .rp-tg.on { background:var(--primary); }
+.rp-row .rp-tg.off { background:var(--gray-40); }
+.rp-row .rp-tg::after { content:''; width:16px; height:16px; border-radius:50%; background:#fff; position:absolute; top:2px; transition:left 0.15s; }
+.rp-row .rp-tg.on::after { left:18px; }
+.rp-row .rp-tg.off::after { left:2px; }
+
+/* Bot takeover bar */
+.bot-hbar { padding:8px 14px; background:var(--warning-lt); border-top:1px solid var(--warning); display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.bot-hbar span { flex:1; font-size:11px; font-weight:500; color:#996B00; }
+.bot-hbar .b-take { padding:4px 10px; border:1px solid rgba(153,107,0,0.15); background:none; color:#996B00; border-radius:var(--r-sm); font-size:10px; font-weight:600; cursor:pointer; font-family:inherit; }
+
+/* Shimmer / skeleton loading */
+@keyframes shimmer { 0%{opacity:0.4} 50%{opacity:0.7} 100%{opacity:0.4} }
+.skel-card { display:flex; gap:10px; padding:10px 16px; border-bottom:1px solid var(--offwhite-100); }
+.skel-av { width:38px; height:38px; border-radius:50%; background:var(--offwhite-80); animation:shimmer 1.4s ease-in-out infinite; flex-shrink:0; }
+.skel-lines { flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center; }
+.skel-line { height:10px; border-radius:4px; background:var(--offwhite-80); animation:shimmer 1.4s ease-in-out infinite; }
+.skel-line.w60 { width:60%; }
+.skel-line.w80 { width:80%; }
+.skel-line.w40 { width:40%; animation-delay:0.2s; }
+.skel-end { text-align:center; padding:10px; font-size:11px; color:var(--gray-60); font-weight:500; }
+
+/* Scroll fade at bottom of conv-list */
+.conv-list-wrap { flex:1; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+.conv-list-wrap::after { content:''; position:absolute; bottom:0; left:0; right:0; height:28px; background:linear-gradient(transparent,var(--offwhite-40)); pointer-events:none; z-index:1; }
+
+/* Enhanced search area */
+.search-filters { padding:4px 16px 6px; flex-shrink:0; display:none; }
+.search-filters.open { display:block; }
+.sf-date { display:flex; gap:4px; margin-bottom:6px; }
+.sf-date-btn { padding:4px 8px; border-radius:12px; font-size:10px; font-weight:500; border:1px solid var(--offwhite-100); background:var(--background); color:var(--gray-100); cursor:pointer; font-family:inherit; }
+.sf-date-btn.on { background:var(--foreground); color:#fff; border-color:var(--foreground); }
+.sf-ch-row { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:4px; }
+.sf-ch-btn { padding:4px 8px; border-radius:12px; font-size:10px; font-weight:500; border:1px solid var(--offwhite-100); background:var(--background); color:var(--gray-100); cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:3px; }
+.sf-ch-btn.on { background:var(--foreground); color:#fff; border-color:var(--foreground); }
+.sf-ch-btn .ch-ct { font-weight:700; opacity:0.7; }
+.sf-results { font-size:10px; font-weight:600; color:var(--primary-dark); padding:2px 0; }
+
+/* Channel icon badge in conv card */
+.ch-icon { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; font-size:7px; font-weight:800; color:#fff; flex-shrink:0; }
+.ch-icon.wa { background:#25D366; }
+.ch-icon.ms { background:#0084FF; }
+.ch-icon.ig { background:#E1306C; }
+.ch-icon.lc { background:#253748; }
 </style>
 
 <div class="phone" id="app">
@@ -459,7 +564,7 @@ body {
       <div style="height:16px"></div>
       <button class="btn-p" onclick="nav('dashboard')">Login as Nusrat (Demo)</button>
       <div style="text-align:center;margin-top:12px"><span style="font-size:12px;color:var(--primary);cursor:pointer;font-weight:500">Forgot Password?</span></div>
-      <div style="text-align:center;margin-top:36px;font-size:10px;color:var(--gray-40)">v3.3.0 · ReveChat Fashion Store</div>
+      <div style="text-align:center;margin-top:36px;font-size:10px;color:var(--gray-40)">v3.4.0 · ReveChat Fashion Store</div>
     </div>
   </div>
 
@@ -484,11 +589,17 @@ body {
   <div class="scr" id="inbox">
     <div class="tb">
       <div style="flex:1"><h1 style="font-size:17px">Inbox</h1><span class="tb-sub" id="inbox-sub"></span></div>
+      <button class="tb-btn" onclick="toggleInboxSearch()">🔍</button>
       <button class="tb-btn">⚙</button>
     </div>
+    <div class="inbox-search" id="inbox-search" style="position:relative">
+      <span class="is-icon">🔍</span>
+      <input placeholder="Search conversations..." oninput="inboxSearchQuery=this.value;rInbox()" id="inbox-search-input">
+    </div>
+    <div class="search-filters" id="search-filters"></div>
     <div class="chips" id="filters"></div>
     <div class="sort-bar" id="sort-bar"></div>
-    <div class="scroll" id="conv-list"></div>
+    <div class="conv-list-wrap"><div class="scroll" id="conv-list"></div></div>
   </div>
 
   <!-- CHAT -->
@@ -498,7 +609,9 @@ body {
       <div class="av" id="chat-av" style="width:30px;height:30px;font-size:11px"></div>
       <div class="ct-inf"><h3 id="chat-nm"></h3><div class="st" id="chat-st"></div></div>
       <button class="ai-tog on" id="ai-tog" onclick="togAi()"><span style="font-size:8px">✦</span>AI<div class="trk"><div class="thb"></div></div></button>
+      <button class="tb-btn" id="snooze-btn" onclick="openSnooze()" title="Snooze">💤</button>
       <button class="tb-btn" id="whisper-btn" onclick="toggleWhisper()" title="Whisper" style="display:none">💬</button>
+      <button class="tb-btn" id="more-btn" onclick="openMoreMenu()" title="More">⋯</button>
       <button class="tb-btn" id="info-btn" onclick="toggleInfo()">ⓘ</button>
     </div>
     <div id="ho-zone"></div>
@@ -531,7 +644,9 @@ body {
 
   <!-- SETTINGS (unified) -->
   <div class="scr" id="settings">
-    <div class="tb"><h1 style="font-size:17px">Settings</h1></div>
+    <div class="tb"><h1 style="font-size:17px" id="settings-title">Settings</h1>
+      <button class="tb-btn" id="settings-back" style="display:none" onclick="closeCannedMgmt()">←</button>
+    </div>
     <div class="scroll" id="settings-body"></div>
   </div>
 
@@ -558,6 +673,9 @@ body {
     </div>
   </div>
 
+  <!-- BOTTOM SHEET -->
+  <div id="bs-container" style="display:none"></div>
+
   <!-- NAV -->
   <nav class="nav hide" id="bnav"></nav>
 </div>
@@ -568,6 +686,8 @@ const CL={whatsapp:'W',messenger:'M',instagram:'I',livechat:'L'};
 const AGC={Nusrat:'#1A59A4',Rahat:'#18A326',Mim:'#D92020'};
 let cur=null,flt='all',tkF='all',role='admin',whisperMode=false,fpOpen=false,infoOpen=false,
     ctFlt={ch:'all',seg:'all',label:'all',time:'all'},inboxSort='fifo',inboxChFlt='all',isOnline=true;
+let inboxSearchOpen=false, inboxSearchQuery='', searchDateFlt='all', searchChFlt='all';
+let cannedMgmtOpen=false;
 
 const AGENTS=[
   {name:'Nusrat',role:'Senior Agent',active:8,resolved:12,rating:4.8,online:true},
@@ -576,7 +696,7 @@ const AGENTS=[
 ];
 
 const CONVS=[
-  {id:'1',name:'Fatima Akter',ch:'whatsapp',unread:3,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Refund Request',assigned:null,agentAssigned:null,queuePos:1,queuedAt:Date.now()-120000,
+  {id:'1',name:'Fatima Akter',ch:'whatsapp',unread:3,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Refund Request',assigned:null,agentAssigned:null,queuePos:1,queuedAt:Date.now()-120000,snoozed:false,snoozeUntil:null,
    custTags:['refund','repeat'],custLabel:'Buyer',custSeg:'VIP',
    custInfo:{phone:'+8801711111111',email:'fatima@gmail.com',location:'Dhaka',ltv:'৳12,400',orders:5,lastOrder:'Oct 28',lang:'Bangla',source:'WhatsApp Ad'},
    sentiment:{score:25,label:'Frustrated',icon:'😤'},
@@ -599,7 +719,7 @@ const CONVS=[
      {ev:'Damage complaint started',time:'Nov 4',ai:true},
      {ev:'AI escalated → Refund review',time:'Nov 4',ai:true},
    ]},
-  {id:'2',name:'Rahim Uddin',ch:'messenger',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:4,queuedAt:Date.now()-900000,
+  {id:'2',name:'Rahim Uddin',ch:'messenger',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:4,queuedAt:Date.now()-900000,snoozed:false,snoozeUntil:null,
    custTags:['loyal'],custLabel:'Buyer',custSeg:'Regular',
    custInfo:{phone:'+8801722222222',email:'rahim.u@yahoo.com',location:'Chittagong',ltv:'৳6,200',orders:3,lastOrder:'Nov 1',lang:'Bangla',source:'Messenger Organic'},
    sentiment:{score:80,label:'Happy',icon:'😊'},
@@ -616,7 +736,7 @@ const CONVS=[
      ]},
      {t:'btn',s:'ai',text:'এই প্রোডাক্টগুলো আপনার পছন্দ হতে পারে! কোনটা দেখতে চান?',btns:['View Polo','View Chinos','View Sneakers','Browse All'],time:'11:11',conf:90},
    ]},
-  {id:'3',name:'Sumaiya Rahman',ch:'instagram',unread:1,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:3,queuedAt:Date.now()-2700000,
+  {id:'3',name:'Sumaiya Rahman',ch:'instagram',unread:1,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:3,queuedAt:Date.now()-2700000,snoozed:false,snoozeUntil:null,
    custTags:['fashion','influencer'],custLabel:'Lead',custSeg:'New',
    custInfo:{phone:'+8801733333333',email:'sumaiya.r@insta.com',location:'Sylhet',ltv:'৳0',orders:0,lastOrder:'—',lang:'English/Bangla',source:'Instagram DM'},
    sentiment:{score:70,label:'Interested',icon:'🤔'},
@@ -624,12 +744,12 @@ const CONVS=[
    preview:'এই শাড়িটার price কত?',time:'45m',sla:'warn',
    msgs:[
      {t:'text',s:'customer',text:'Hi! I love your new collection 😍',time:'10:00'},
-     {t:'text',s:'human',text:'Thank you Sumaiya! Which collection?',time:'10:10',agent:'Nusrat'},
+     {t:'text',s:'human',text:'Thank you Sumaiya! Which collection?',time:'10:10',agent:'Nusrat',status:'read'},
      {t:'img_cap',s:'customer',img:'https://picsum.photos/seed/saree1/400/500',cap:'Red Saree Collection',time:'11:15'},
      {t:'text',s:'customer',text:'এই শাড়িটার price কত?',time:'11:16'},
      {t:'whisper',s:'admin',text:'Sumaiya is a VIP influencer — offer 10% discount',time:'11:17',from:'Admin'},
    ]},
-  {id:'4',name:'Kamal Hossain',ch:'whatsapp',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:5,queuedAt:Date.now()-3600000,
+  {id:'4',name:'Kamal Hossain',ch:'whatsapp',unread:0,handler:'ai',aiOn:true,needsHuman:false,assigned:'AI Sara',agentAssigned:null,queuePos:5,queuedAt:Date.now()-3600000,snoozed:false,snoozeUntil:null,
    custTags:['bulk','repeat'],custLabel:'Buyer',custSeg:'VIP',
    custInfo:{phone:'+8801744444444',email:'kamal.h@gmail.com',location:'Rajshahi',ltv:'৳28,600',orders:7,lastOrder:'Oct 30',lang:'Bangla',source:'Referral'},
    sentiment:{score:65,label:'Neutral',icon:'😐'},
@@ -652,7 +772,7 @@ const CONVS=[
      {ev:'Repeat order (৳8,600)',time:'Sep 20',ai:true},
      {ev:'Size inquiry today',time:'Nov 4',ai:true},
    ]},
-  {id:'5',name:'Nadia Islam',ch:'livechat',unread:5,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Pacify Angry Customer',assigned:null,agentAssigned:null,queuePos:0,queuedAt:Date.now()-60000,
+  {id:'5',name:'Nadia Islam',ch:'livechat',unread:5,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Pacify Angry Customer',assigned:null,agentAssigned:null,queuePos:0,queuedAt:Date.now()-60000,snoozed:false,snoozeUntil:null,
    custTags:['refund','escalated'],custLabel:'Complainant',custSeg:'At Risk',
    custInfo:{phone:'+8801755555555',email:'nadia.i@outlook.com',location:'Dhaka',ltv:'৳9,800',orders:4,lastOrder:'Oct 22',lang:'English',source:'Website'},
    sentiment:{score:10,label:'Angry',icon:'😡'},
@@ -674,7 +794,7 @@ const CONVS=[
      {ev:'2nd follow-up (escalated)',time:'Nov 2',ai:true},
      {ev:'3rd follow-up — ANGRY',time:'Nov 4',ai:true},
    ]},
-  {id:'6',name:'Arif Mahmud',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:6,queuedAt:Date.now()-10800000,
+  {id:'6',name:'Arif Mahmud',ch:'whatsapp',unread:0,handler:'human',aiOn:false,needsHuman:false,assigned:'Nusrat',agentAssigned:'Nusrat',queuePos:6,queuedAt:Date.now()-10800000,snoozed:true,snoozeUntil:'12:30 PM',
    custTags:['loyal'],custLabel:'Buyer',custSeg:'Regular',
    custInfo:{phone:'+8801766666666',email:'arif.m@gmail.com',location:'Khulna',ltv:'৳4,200',orders:2,lastOrder:'Nov 3',lang:'Bangla',source:'WhatsApp'},
    sentiment:{score:90,label:'Very Happy',icon:'😄'},
@@ -683,10 +803,10 @@ const CONVS=[
    msgs:[
      {t:'text',s:'customer',text:'পেমেন্ট করেছি bKash এ',time:'9:00'},
      {t:'img_cap',s:'customer',img:'https://picsum.photos/seed/bkash/400/600',cap:'bKash payment screenshot',time:'9:05'},
-     {t:'text',s:'human',text:'কনফার্ম! ২-৩ দিনে ডেলিভারি পাবেন।',time:'9:30',agent:'Nusrat'},
+     {t:'text',s:'human',text:'কনফার্ম! ২-৩ দিনে ডেলিভারি পাবেন।',time:'9:30',agent:'Nusrat',status:'delivered'},
      {t:'text',s:'customer',text:'ধন্যবাদ! ভালো সার্ভিস 👍',time:'9:45'},
    ]},
-  {id:'7',name:'Rafi Ahmed',ch:'livechat',unread:1,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Get Online Payment',assigned:null,agentAssigned:null,queuePos:2,queuedAt:Date.now()-600000,
+  {id:'7',name:'Rafi Ahmed',ch:'livechat',unread:1,handler:'ai',aiOn:true,needsHuman:true,hoReason:'Get Online Payment',assigned:null,agentAssigned:null,queuePos:2,queuedAt:Date.now()-600000,snoozed:false,snoozeUntil:null,
    custTags:['payment-issue'],custLabel:'Lead',custSeg:'New',
    custInfo:{phone:'+8801788888888',email:'rafi.a@gmail.com',location:'Comilla',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'Google Ad'},
    sentiment:{score:40,label:'Anxious',icon:'😟'},
@@ -704,7 +824,7 @@ const CONVS=[
      {ev:'Added to cart (Jacket ৳2,100)',time:'Nov 4',ai:true},
      {ev:'Payment failed — bKash',time:'Nov 4',ai:true},
    ]},
-  {id:'8',name:'Tasnim Jahan',ch:'messenger',unread:2,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:7,queuedAt:Date.now()-1800000,
+  {id:'8',name:'Tasnim Jahan',ch:'messenger',unread:2,handler:'human',aiOn:false,needsHuman:false,assigned:'Rahat',agentAssigned:'Rahat',queuePos:7,queuedAt:Date.now()-1800000,snoozed:false,snoozeUntil:null,
    custTags:['repeat','fashion'],custLabel:'Buyer',custSeg:'VIP',
    custInfo:{phone:'+8801799999999',email:'tasnim.j@gmail.com',location:'Dhaka',ltv:'৳18,500',orders:6,lastOrder:'Nov 2',lang:'Bangla',source:'Messenger Ad'},
    sentiment:{score:75,label:'Content',icon:'🙂'},
@@ -712,10 +832,52 @@ const CONVS=[
    preview:'নতুন collection কবে আসবে?',time:'30m',sla:'ok',
    msgs:[
      {t:'text',s:'customer',text:'আপনাদের winter collection?',time:'10:30'},
-     {t:'text',s:'human',text:'তাসনিম, winter collection আসছে next week!',time:'10:45',agent:'Rahat'},
+     {t:'text',s:'human',text:'তাসনিম, winter collection আসছে next week!',time:'10:45',agent:'Rahat',status:'read'},
      {t:'text',s:'customer',text:'নতুন collection কবে আসবে?',time:'11:30'},
    ]},
 ];
+
+/* BOT CONVERSATIONS */
+const BOT_CONVS=[
+  {id:'b1',name:'Maruf Khan',ch:'whatsapp',unread:1,handler:'bot',botName:'Order Bot',aiOn:false,needsHuman:false,assigned:'Order Bot',agentAssigned:null,queuePos:10,queuedAt:Date.now()-300000,snoozed:false,snoozeUntil:null,
+   custTags:['new'],custLabel:'Lead',custSeg:'New',
+   custInfo:{phone:'+8801712345678',email:'maruf.k@gmail.com',location:'Dhaka',ltv:'৳0',orders:0,lastOrder:'—',lang:'Bangla',source:'WhatsApp'},
+   sentiment:{score:60,label:'Neutral',icon:'😐'},
+   notes:[],
+   preview:'অর্ডার ট্র্যাক করতে চাই',time:'5m',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'হ্যালো',time:'11:50'},
+     {t:'btn',s:'bot',text:'স্বাগতম! আমি Order Bot। আপনি কি করতে চান?',btns:['Track Order','Place Order','Return/Exchange','Talk to Agent'],time:'11:50'},
+     {t:'text',s:'customer',text:'অর্ডার ট্র্যাক করতে চাই',time:'11:52'},
+     {t:'text',s:'bot',text:'অনুগ্রহ করে আপনার Order ID দিন (যেমন: ORD-1234)',time:'11:52'},
+   ]},
+  {id:'b2',name:'Sabrina Alam',ch:'livechat',unread:0,handler:'bot',botName:'FAQ Bot',aiOn:false,needsHuman:false,assigned:'FAQ Bot',agentAssigned:null,queuePos:11,queuedAt:Date.now()-600000,snoozed:false,snoozeUntil:null,
+   custTags:[],custLabel:'',custSeg:'New',
+   custInfo:{phone:'+8801798765432',email:'sabrina@yahoo.com',location:'Sylhet',ltv:'৳0',orders:0,lastOrder:'—',lang:'English',source:'Website'},
+   sentiment:{score:70,label:'Curious',icon:'🤔'},
+   notes:[],
+   preview:'What are your return policies?',time:'10m',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'Hi, I have some questions',time:'11:45'},
+     {t:'btn',s:'bot',text:'Hello! I\'m the FAQ Bot. How can I help?',btns:['Shipping Info','Return Policy','Payment Methods','Store Hours'],time:'11:45'},
+     {t:'text',s:'customer',text:'What are your return policies?',time:'11:46'},
+     {t:'text',s:'bot',text:'You can return items within 7 days of delivery. Items must be unused and in original packaging. Refunds are processed within 3-5 business days.',time:'11:46'},
+   ]},
+  {id:'b3',name:'Tanvir Hasan',ch:'messenger',unread:2,handler:'bot',botName:'Promo Bot',aiOn:false,needsHuman:false,assigned:'Promo Bot',agentAssigned:null,queuePos:12,queuedAt:Date.now()-180000,snoozed:false,snoozeUntil:null,
+   custTags:['fashion'],custLabel:'Lead',custSeg:'Regular',
+   custInfo:{phone:'+8801756781234',email:'tanvir.h@gmail.com',location:'Chittagong',ltv:'৳2,100',orders:1,lastOrder:'Oct 15',lang:'Bangla',source:'Messenger Ad'},
+   sentiment:{score:80,label:'Excited',icon:'😊'},
+   notes:[],
+   preview:'ডিসকাউন্ট কোড কাজ করছে না',time:'3m',sla:'ok',
+   msgs:[
+     {t:'text',s:'customer',text:'আপনাদের প্রোমো কোড আছে?',time:'11:55'},
+     {t:'btn',s:'bot',text:'হ্যাঁ! এই মুহূর্তে চলমান অফারগুলো:',btns:['WINTER20 — 20% off','NEWUSER10 — ৳200 off','Free Shipping over ৳2000'],time:'11:55'},
+     {t:'text',s:'customer',text:'WINTER20 কোড দিলাম কিন্তু কাজ করছে না',time:'11:57'},
+     {t:'text',s:'customer',text:'ডিসকাউন্ট কোড কাজ করছে না',time:'11:58'},
+   ]},
+];
+
+const ALL_CONVS=()=>[...CONVS,...BOT_CONVS];
 
 const TICKETS=[
   {id:'TK-1001',subj:'Refund not received — ORD-5678',cust:'Nadia Islam',pri:'high',st:'open',aiF:true,date:'Nov 3',ch:'livechat'},
@@ -739,21 +901,39 @@ const CONTACTS=[
 
 const QR=['ধন্যবাদ! 😊','অর্ডার প্রসেস হচ্ছে','ডেলিভারি ২-৩ দিনে','চেক করে জানাচ্ছি','COD available','Refund ৩ দিনে'];
 
+const CANNED_RESPONSES=[
+  {id:'cr1',title:'Welcome Greeting',text:'আসসালামু আলাইকুম! ReveChat Fashion Store এ স্বাগতম। আমি কিভাবে সাহায্য করতে পারি?',category:'greeting'},
+  {id:'cr2',title:'Thank You & Closing',text:'ধন্যবাদ আমাদের সাথে কথা বলার জন্য! আর কিছু জানার থাকলে জানাবেন। শুভকামনা! 😊',category:'closing'},
+  {id:'cr3',title:'Order Confirmation',text:'আপনার অর্ডার কনফার্ম হয়েছে! ২-৩ কর্মদিবসের মধ্যে ডেলিভারি পাবেন। ট্র্যাকিং লিঙ্ক SMS এ পাঠানো হবে।',category:'shipping'},
+  {id:'cr4',title:'Shipping Status',text:'আপনার অর্ডার শিপ হয়েছে এবং ডেলিভারি এজেন্ট এর কাছে আছে। আগামীকালের মধ্যে পৌঁছে যাবে ইনশাআল্লাহ।',category:'shipping'},
+  {id:'cr5',title:'Refund Processing',text:'আপনার refund প্রসেস করা হয়েছে। ৳{amount} আপনার {method} একাউন্টে ৩-৫ কর্মদিবসের মধ্যে পৌঁছাবে।',category:'refund'},
+  {id:'cr6',title:'Payment Help - bKash',text:'bKash পেমেন্টের জন্য: Merchant Number 01XXXXXXXXX এ Send Money করুন। Reference এ আপনার Order ID দিন।',category:'payment'},
+  {id:'cr7',title:'Size Guide',text:'সাইজ চার্ট: S(36"), M(38"), L(40"), XL(42"), XXL(44")। আপনার উচ্চতা ও ওজন জানালে সঠিক সাইজ suggest করতে পারব।',category:'product'},
+  {id:'cr8',title:'Return Policy',text:'৭ দিনের মধ্যে রিটার্ন করতে পারবেন। পণ্য অব্যবহৃত ও original packaging এ থাকতে হবে। পিকআপ আমরাই করব।',category:'refund'},
+  {id:'cr9',title:'COD Available',text:'হ্যাঁ, Cash on Delivery available আছে! ডেলিভারি চার্জ ঢাকায় ৳60, ঢাকার বাইরে ৳120।',category:'payment'},
+  {id:'cr10',title:'Hold On',text:'একটু অপেক্ষা করুন, আমি আপনার বিষয়টি চেক করছি। কিছুক্ষণের মধ্যে জানাচ্ছি।',category:'greeting'},
+];
+
+let routingPolicy={mode:'round-robin',maxChats:10,autoAssign:true,businessHours:true,autoCloseHours:24,slaResponse:5,slaResolution:24};
+
 function nav(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');if(id==='login'||id==='chat')hn();else sn();}
 function sn(){document.getElementById('bnav').classList.remove('hide');}
 function hn(){document.getElementById('bnav').classList.add('hide');}
 function buildNav(){
   const tabs=[{id:'dashboard',icon:'📊',label:'Dashboard'},{id:'inbox',icon:'💬',label:'Inbox',badge:true},{id:'tickets',icon:'🎫',label:'Tickets'},{id:'contacts',icon:'👥',label:'Contacts'},{id:'settings',icon:'⚙',label:'Settings'}];
-  const ur=CONVS.reduce((a,c)=>a+c.unread,0);
+  const ur=ALL_CONVS().reduce((a,c)=>a+c.unread,0);
   document.getElementById('bnav').innerHTML=tabs.map((t,i)=>`<button class="ni ${i===0?'on':''}" onclick="tab('${t.id}')">${t.badge?`<span class="bg" id="ib-bg">${ur}</span>`:''}${t.icon}<span style="margin-top:1px">${t.label}</span></button>`).join('');
 }
 function tab(t){nav(t);sn();document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
   const btns=document.querySelectorAll('.ni');
   const tabs=['dashboard','inbox','tickets','contacts','settings'];
   const idx=tabs.indexOf(t);if(idx>=0&&btns[idx])btns[idx].classList.add('on');
-  if(t==='dashboard')rDash();if(t==='inbox')rInbox();if(t==='tickets')rTk();if(t==='contacts')rCt();if(t==='settings')rSettings();}
+  if(t==='dashboard')rDash();if(t==='inbox')rInbox();if(t==='tickets')rTk();if(t==='contacts')rCt();if(t==='settings'){cannedMgmtOpen=false;rSettings();}}
 function avH(n,c,s=40){const cl=CH[c]||'#253748';return `<div class="av" style="width:${s}px;height:${s}px;font-size:${s*.35}px;background:${cl}12;color:${cl}">${n[0]}<div class="cb" style="background:${cl};font-size:${s*.17}px;width:${s*.35}px;height:${s*.35}px">${CL[c]||'C'}</div></div>`;}
 function cf(c){return c>=85?'cf-h':c>=75?'cf-m':'cf-l';}
+const CHI={whatsapp:{cls:'wa',lbl:'💬',name:'WhatsApp'},messenger:{cls:'ms',lbl:'💬',name:'Messenger'},instagram:{cls:'ig',lbl:'📸',name:'Instagram'},livechat:{cls:'lc',lbl:'🌐',name:'LiveChat'}};
+function chIcon(ch){const c=CHI[ch];return c?`<span class="ch-icon ${c.cls}">${CL[ch]}</span>`:'';}
+function chEmoji(ch){const c=CHI[ch];return c?c.lbl+' ':'';}
 
 function setRole(r){
   role=r;
@@ -763,11 +943,13 @@ function setRole(r){
 
 /* DASHBOARD */
 function rDash(){
-  const total=CONVS.length,aiH=CONVS.filter(c=>c.handler==='ai').length,huH=CONVS.filter(c=>c.handler==='human').length,pend=CONVS.filter(c=>c.needsHuman).length,q=CONVS.filter(c=>c.needsHuman).length;
+  const all=ALL_CONVS();
+  const total=all.length,aiH=all.filter(c=>c.handler==='ai').length,huH=all.filter(c=>c.handler==='human').length,botH=all.filter(c=>c.handler==='bot').length,q=all.filter(c=>c.needsHuman).length;
   document.getElementById('dash-stats').innerHTML=`
     <div class="ds"><div class="dv">${total}</div><div class="dl">Total</div></div>
     <div class="ds"><div class="dv">${aiH}</div><div class="dl">AI</div></div>
     <div class="ds"><div class="dv">${huH}</div><div class="dl">Human</div></div>
+    <div class="ds"><div class="dv" style="color:#996B00">${botH}</div><div class="dl">Bot</div></div>
     <div class="ds"><div class="dv" style="color:var(--primary)">${q}</div><div class="dl">Queue</div></div>`;
   let h=`<div class="sg" style="margin-top:12px">
     <div class="sc"><div class="sv">156</div><div class="sl">Messages Today</div><div class="sd up">↑ 12%</div></div>
@@ -817,13 +999,23 @@ function goOnBreak(){
 }
 function comeOnline(){isOnline=true;rDash();}
 
+/* INBOX SEARCH */
+function toggleInboxSearch(){
+  inboxSearchOpen=!inboxSearchOpen;
+  const el=document.getElementById('inbox-search');
+  const sf=document.getElementById('search-filters');
+  if(inboxSearchOpen){el.classList.add('open');sf.classList.add('open');document.getElementById('inbox-search-input').focus();}
+  else{el.classList.remove('open');sf.classList.remove('open');inboxSearchQuery='';searchDateFlt='all';searchChFlt='all';document.getElementById('inbox-search-input').value='';rInbox();}
+}
+
 /* INBOX */
 function rInbox(){
-  const cts={all:CONVS.length,ai:CONVS.filter(c=>c.handler==='ai').length,human:CONVS.filter(c=>c.handler==='human').length,pending:CONVS.filter(c=>c.needsHuman).length};
-  const ur=CONVS.reduce((a,c)=>a+c.unread,0);
+  const all=ALL_CONVS();
+  const cts={all:all.filter(c=>!c.snoozed).length,ai:all.filter(c=>c.handler==='ai').length,human:all.filter(c=>c.handler==='human').length,pending:all.filter(c=>c.needsHuman).length,bot:all.filter(c=>c.handler==='bot').length,snoozed:all.filter(c=>c.snoozed).length};
+  const ur=all.reduce((a,c)=>a+c.unread,0);
   document.getElementById('inbox-sub').textContent=ur+' unread · FIFO Queue';
   try{document.getElementById('ib-bg').textContent=ur;}catch(e){}
-  const lb={all:'All',ai:'AI',human:'Human',pending:'Review'};
+  const lb={all:'All',ai:'AI',human:'Human',bot:'Bot',pending:'Review',snoozed:'Snoozed'};
   document.getElementById('filters').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${flt===f?'on':''}" onclick="flt='${f}';rInbox()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
 
   document.getElementById('sort-bar').innerHTML=`
@@ -836,19 +1028,41 @@ function rInbox(){
     </select>
     <select onchange="inboxChFlt=this.value;rInbox()">
       <option value="all" ${inboxChFlt==='all'?'selected':''}>All channels</option>
-      <option value="whatsapp" ${inboxChFlt==='whatsapp'?'selected':''}>WhatsApp</option>
-      <option value="messenger" ${inboxChFlt==='messenger'?'selected':''}>Messenger</option>
-      <option value="instagram" ${inboxChFlt==='instagram'?'selected':''}>Instagram</option>
-      <option value="livechat" ${inboxChFlt==='livechat'?'selected':''}>LiveChat</option>
+      <option value="whatsapp" ${inboxChFlt==='whatsapp'?'selected':''}>💬 WhatsApp</option>
+      <option value="messenger" ${inboxChFlt==='messenger'?'selected':''}>💬 Messenger</option>
+      <option value="instagram" ${inboxChFlt==='instagram'?'selected':''}>📸 Instagram</option>
+      <option value="livechat" ${inboxChFlt==='livechat'?'selected':''}>🌐 LiveChat</option>
     </select>
-    <span class="queue-badge">Q: ${CONVS.filter(c=>c.needsHuman).length} waiting</span>`;
+    <span class="queue-badge">Q: ${all.filter(c=>c.needsHuman).length} waiting</span>`;
 
-  let list=[...CONVS];
+  let list=[...all];
   if(flt==='ai')list=list.filter(c=>c.handler==='ai');
-  if(flt==='human')list=list.filter(c=>c.handler==='human');
-  if(flt==='pending')list=list.filter(c=>c.needsHuman);
+  else if(flt==='human')list=list.filter(c=>c.handler==='human');
+  else if(flt==='pending')list=list.filter(c=>c.needsHuman);
+  else if(flt==='bot')list=list.filter(c=>c.handler==='bot');
+  else if(flt==='snoozed')list=list.filter(c=>c.snoozed);
+  else list=list.filter(c=>!c.snoozed);
   if(inboxChFlt!=='all')list=list.filter(c=>c.ch===inboxChFlt);
-  if(role==='agent')list=list.filter(c=>c.agentAssigned==='Nusrat'||c.handler==='ai');
+  if(role==='agent')list=list.filter(c=>c.agentAssigned==='Nusrat'||c.handler==='ai'||c.handler==='bot');
+
+  if(inboxSearchQuery){
+    const q=inboxSearchQuery.toLowerCase();
+    list=list.filter(c=>c.name.toLowerCase().includes(q)||c.preview.toLowerCase().includes(q));
+  }
+  if(searchChFlt!=='all'&&inboxSearchOpen)list=list.filter(c=>c.ch===searchChFlt);
+
+  /* Search filters panel */
+  if(inboxSearchOpen){
+    const dateLbs={all:'All Time',today:'Today','7d':'7 Days','30d':'30 Days'};
+    const chans=['all','whatsapp','messenger','instagram','livechat'];
+    const chCounts={};chans.forEach(ch=>{chCounts[ch]=ch==='all'?list.length:list.filter(c=>c.ch===ch).length;});
+    document.getElementById('search-filters').innerHTML=`
+      <div class="sf-date">${Object.keys(dateLbs).map(d=>`<button class="sf-date-btn ${searchDateFlt===d?'on':''}" onclick="searchDateFlt='${d}';rInbox()">${dateLbs[d]}</button>`).join('')}</div>
+      <div class="sf-ch-row">${chans.map(ch=>`<button class="sf-ch-btn ${searchChFlt===ch?'on':''}" onclick="searchChFlt='${ch}';rInbox()">${ch==='all'?'All':chEmoji(ch)+(CHI[ch]?CHI[ch].name:'')} <span class="ch-ct">(${chCounts[ch]})</span></button>`).join('')}</div>
+      <div class="sf-results">${list.length} conversation${list.length!==1?'s':''} found</div>`;
+  } else {
+    document.getElementById('search-filters').innerHTML='';
+  }
 
   const slaPri={breach:0,warn:1,ok:2};
   if(inboxSort==='fifo')list.sort((a,b)=>a.queuePos-b.queuePos);
@@ -856,33 +1070,47 @@ function rInbox(){
   else if(inboxSort==='newest')list.sort((a,b)=>b.queuedAt-a.queuedAt);
   else if(inboxSort==='sla')list.sort((a,b)=>(slaPri[a.sla]||2)-(slaPri[b.sla]||2));
 
-  document.getElementById('conv-list').innerHTML=list.map(c=>{
-    const agTag=c.handler==='ai'?'<span class="tg-ai">✦ AI Sara</span>':`<span class="tg-ag" style="background:${(AGC[c.agentAssigned]||'#253748')}18;color:${AGC[c.agentAssigned]||'#253748'}">👤 ${c.agentAssigned||'Unassigned'}</span>`;
+  const totalAll=ALL_CONVS().length;
+  let convHTML=list.map(c=>{
+    let agTag;
+    if(c.handler==='ai') agTag='<span class="tg-ai">✦ AI Sara</span>';
+    else if(c.handler==='bot') agTag=`<span class="tg-bot">🤖 ${c.botName||'Bot'}</span>`;
+    else agTag=`<span class="tg-ag" style="background:${(AGC[c.agentAssigned]||'#253748')}18;color:${AGC[c.agentAssigned]||'#253748'}">👤 ${c.agentAssigned||'Unassigned'}</span>`;
     const slaH=c.sla==='breach'?'<span class="sla-tag sla-breach">SLA Breach</span>':c.sla==='warn'?'<span class="sla-tag sla-warn">SLA Warning</span>':'';
     const sentH=c.sentiment?`<span class="sent-tag">${c.sentiment.icon} ${c.sentiment.label}</span>`:'';
+    const snzH=c.snoozed?`<span class="snooze-badge">💤 ${c.snoozeUntil||'Snoozed'}</span>`:'';
     return `<div class="cv" onclick="openChat('${c.id}')">
       ${avH(c.name,c.ch,38)}
       <div class="cv-b">
-        <div class="cv-r1"><span class="cv-nm ${c.unread?'bd':''}">${c.name}</span><span class="cv-tm ${c.unread?'hl':''}">${c.time}</span></div>
-        <div class="cv-r2">${agTag}<span class="cv-pv ${c.unread?'bd':''}">${c.preview}</span>${c.unread?`<span class="ub">${c.unread}</span>`:''}</div>
-        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
+        <div class="cv-r1"><span class="cv-nm ${c.unread?'bd':''}">${c.name}</span>${chIcon(c.ch)}<span class="cv-tm ${c.unread?'hl':''}">${c.time}</span></div>
+        <div class="cv-r2">${agTag}${snzH}<span class="cv-pv ${c.unread?'bd':''}">${c.preview}</span>${c.unread?`<span class="ub">${c.unread}</span>`:''}</div>
+        <div class="cv-r3">${slaH}${sentH}${c.needsHuman?`<span class="sla-tag sla-breach">⚠ ${c.hoReason}</span>`:''}${chIcon(c.ch)}<span class="sent-tag">${chEmoji(c.ch)}${CHI[c.ch]?CHI[c.ch].name:c.ch}</span>${role==='admin'&&c.custTags?c.custTags.slice(0,2).map(t=>`<span class="sent-tag">${t}</span>`).join(''):''}</div>
       </div>
     </div>`;
   }).join('');
+
+  convHTML+=`<div style="padding:2px 16px 0;font-size:10px;color:var(--gray-60);font-weight:500;text-align:center">Showing ${list.length} of ${totalAll} conversations</div>`;
+  convHTML+=`<div id="skel-zone"><div class="skel-card"><div class="skel-av"></div><div class="skel-lines"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div></div></div><div class="skel-card"><div class="skel-av"></div><div class="skel-lines"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div></div></div><div class="skel-end" id="skel-text">Loading...</div></div>`;
+  document.getElementById('conv-list').innerHTML=convHTML;
+
+  setTimeout(()=>{const z=document.getElementById('skel-zone');if(z)z.innerHTML='<div class="skel-end" style="padding:14px;color:var(--success)">✓ You\'re all caught up</div>';},800);
 }
 
 /* CHAT */
 function openChat(id){
-  cur=CONVS.find(c=>c.id===id);if(!cur)return;whisperMode=false;infoOpen=false;
+  cur=ALL_CONVS().find(c=>c.id===id);if(!cur)return;whisperMode=false;infoOpen=false;
   document.getElementById('info-panel').classList.remove('open');
   hn();nav('chat');
   const ca=document.getElementById('chat-av');ca.style.background=(CH[cur.ch]||'#253748')+'12';ca.style.color=CH[cur.ch]||'#253748';ca.textContent=cur.name[0];
   document.getElementById('chat-nm').textContent=cur.name;
   const st=document.getElementById('chat-st');
-  if(cur.handler==='ai'&&cur.aiOn)st.innerHTML=`<span class="st-dot" style="background:var(--purple-100)"></span><span style="color:var(--purple-100)">AI handling</span>`;
-  else st.innerHTML=`<span class="st-dot" style="background:var(--success)"></span><span>${cur.ch}</span>`;
+  if(cur.handler==='bot')st.innerHTML=`${chIcon(cur.ch)}<span class="st-dot" style="background:var(--warning)"></span><span style="color:#996B00">${cur.botName} handling</span>`;
+  else if(cur.handler==='ai'&&cur.aiOn)st.innerHTML=`${chIcon(cur.ch)}<span class="st-dot" style="background:var(--purple-100)"></span><span style="color:var(--purple-100)">AI handling</span>`;
+  else st.innerHTML=`${chIcon(cur.ch)}<span class="st-dot" style="background:var(--success)"></span><span>${chEmoji(cur.ch)}${CHI[cur.ch]?CHI[cur.ch].name:cur.ch}</span>`;
   document.getElementById('ai-tog').className='ai-tog '+(cur.aiOn?'on':'off');
-  document.getElementById('whisper-btn').style.display=role==='admin'?'block':'none';
+  document.getElementById('ai-tog').style.display=cur.handler==='bot'?'none':'flex';
+  document.getElementById('whisper-btn').style.display=role==='admin'&&cur.handler!=='bot'?'block':'none';
+  document.getElementById('snooze-btn').style.display=cur.handler==='bot'?'none':'inline-block';
   rMsgs();
 }
 function closeCht(){infoOpen=false;document.getElementById('info-panel').classList.remove('open');nav('inbox');sn();rInbox();}
@@ -961,40 +1189,57 @@ function rInfoPanel(){
   document.getElementById('info-panel').innerHTML=h;
 }
 
+function tickMark(status){
+  if(!status)return '';
+  if(status==='sent')return '<span class="d-tick sent">✓</span>';
+  if(status==='delivered')return '<span class="d-tick delivered">✓✓</span>';
+  if(status==='read')return '<span class="d-tick read">✓✓</span>';
+  return '';
+}
+
 function rMsgs(){
   const m=document.getElementById('msgs');
   m.innerHTML=cur.msgs.map(msg=>{
     if(msg.t==='sys')return `<div class="mr sys"><div class="bb s-bb">${msg.text}</div></div>`;
     if(msg.t==='whisper')return `<div class="mr whisper"><div class="w-label">💬 Whisper from ${msg.from}</div><div class="bb w-bb">${msg.text}</div><span class="mt">${msg.time||''}</span></div>`;
-    if(msg.s==='ai'){
+    if(msg.s==='ai'||msg.s==='bot'){
       let c='';
+      const label=msg.s==='bot'?(cur.botName||'Bot'):'AI Sara';
+      const dotColor=msg.s==='bot'?'var(--warning)':'var(--purple-100)';
       if(msg.t==='text')c=`<div class="bb a-bb">${msg.text}</div>`;
       else if(msg.t==='btn')c=`<div class="btn-msg"><div class="bm-text">${msg.text}</div><div class="bm-btns">${msg.btns.map(b=>`<button class="bm-btn">${b}</button>`).join('')}</div></div>`;
       else if(msg.t==='carousel')c=`<div class="carousel-wrap"><div class="carousel">${msg.products.map(p=>`<div class="p-card"><img src="${p.img}"><div class="pc-info"><div class="pc-nm">${p.name}</div><div class="pc-pr">${p.price}</div><button class="pc-btn">View Details</button></div></div>`).join('')}</div></div>`;
       else if(msg.t==='order')c=`<div class="ob"><div class="oi">📋 ${msg.oid}</div><span class="os">${msg.ost}</span><div class="ol">${msg.items.map(i=>'• '+i).join('<br>')}</div><div class="otl"><span>Total</span><strong>${msg.total}</strong></div></div>`;
-      return `<div class="mr ai"><div class="ai-line"><span class="aidot"></span><span>AI Sara</span>${msg.conf?`<span class="cf ${cf(msg.conf)}">${msg.conf}%</span>`:''}</div>${c}<span class="mt">${msg.time||''}</span></div>`;
+      return `<div class="mr ai"><div class="ai-line"><span class="aidot" style="background:${dotColor}"></span><span style="color:${dotColor}">${label}</span>${msg.conf?`<span class="cf ${cf(msg.conf)}">${msg.conf}%</span>`:''}</div>${c}<span class="mt">${msg.time||''}</span></div>`;
     }
     const isCust=msg.s==='customer';const side=isCust?'cust':'human';
     let c='';
     if(msg.t==='text')c=`<div class="bb ${isCust?'c':'h'}-bb">${msg.text}</div>`;
     else if(msg.t==='img_cap')c=`<div class="bb-img ${isCust?'ci':''}"><img src="${msg.img}"><div class="icp" style="${isCust?'color:var(--foreground)':'color:#fff'}">${msg.cap}</div></div>`;
     const agLabel=!isCust&&msg.agent?`<div style="font-size:10px;font-weight:600;color:var(--foreground);padding:0 3px;margin-bottom:1px">${msg.agent}</div>`:'';
-    return `<div class="mr ${side}">${agLabel}${c}<span class="mt">${msg.time||''}</span></div>`;
+    const tick=!isCust?tickMark(msg.status):'';
+    return `<div class="mr ${side}">${agLabel}${c}<span class="mt">${msg.time||''}${tick}</span></div>`;
   }).join('');
 
+  /* Handover zone */
   document.getElementById('ho-zone').innerHTML=cur.needsHuman?`<div class="ho"><div class="ho-i">✋</div><div class="ho-t"><h4>Human Review Required</h4><p>${cur.hoReason}</p></div><button class="btn-tk" onclick="takeOver()">Take Over</button></div>`:'';
 
+  /* Draft zone */
   const d=cur.draft;
   document.getElementById('drf-zone').innerHTML=d&&cur.aiOn?`<div class="drf"><div class="drf-h"><span>✦ AI Draft</span><span class="drf-c">${d.conf}%</span></div><p>${d.text}</p><div class="drf-a"><button class="rj">✕</button><button class="ed">✏</button><button class="sd" onclick="sDrf()">➤ Send</button></div></div>`:'';
 
-  document.getElementById('qr-zone').innerHTML=!cur.aiOn&&!whisperMode?`<div class="qr">${QR.map(q=>`<button class="qrc" onclick="sMsg('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('')}</div>`:'';
+  /* Quick replies */
+  document.getElementById('qr-zone').innerHTML=!cur.aiOn&&!whisperMode&&cur.handler!=='bot'?`<div class="qr">${QR.map(q=>`<button class="qrc" onclick="sMsg('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('')}</div>`:'';
 
+  /* Input zone */
   if(whisperMode&&role==='admin'){
     document.getElementById('in-zone').innerHTML=`<div style="font-size:10px;font-weight:700;color:#996B00;padding:6px 14px 0;text-transform:uppercase;letter-spacing:0.04em;background:var(--warning-lt)">💬 Whisper to Agent</div><div class="whisper-in"><input class="c-inp" placeholder="Type whisper..." id="wi" onkeydown="if(event.key==='Enter'){sWhisper(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('wi');sWhisper(i.value);i.value=''">➤</button></div>`;
+  } else if(cur.handler==='bot'){
+    document.getElementById('in-zone').innerHTML=`<div class="bot-hbar"><span>🤖 ${cur.botName} is handling this chat</span><button class="b-take" onclick="takeOverBot()">Take Over</button></div>`;
   } else if(cur.aiOn){
     document.getElementById('in-zone').innerHTML=`<div class="ai-hbar"><span>✦</span><span>AI Sara is handling this chat</span><button class="boff" onclick="togAi()">Turn OFF</button></div>`;
   } else {
-    document.getElementById('in-zone').innerHTML=`<div class="c-in"><button class="ab">＋</button><input class="c-inp" placeholder="Reply as ${role==='admin'?'Admin':'Nusrat'}..." id="mi" onkeydown="if(event.key==='Enter'){sMsg(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('mi');sMsg(i.value);i.value=''">➤</button></div>`;
+    document.getElementById('in-zone').innerHTML=`<div class="c-in"><button class="ab" onclick="openAttachMenu()">＋</button><input class="c-inp" placeholder="Reply as ${role==='admin'?'Admin':'Nusrat'}..." id="mi" onkeydown="if(event.key==='Enter'){sMsg(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('mi');sMsg(i.value);i.value=''">➤</button></div>`;
   }
   m.scrollTop=m.scrollHeight;
 }
@@ -1004,9 +1249,127 @@ function takeOver(){
   cur.msgs.push({t:'sys',text:'Nusrat took over — '+cur.hoReason});
   openChat(cur.id);
 }
-function sMsg(t){if(!t||!t.trim())return;cur.msgs.push({t:'text',s:'human',text:t.trim(),time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),agent:role==='admin'?'Admin':'Nusrat'});cur.preview=t.trim();rMsgs();}
+function takeOverBot(){
+  cur.handler='human';cur.aiOn=false;cur.assigned='Nusrat';cur.agentAssigned='Nusrat';
+  cur.msgs.push({t:'sys',text:'Nusrat took over from '+(cur.botName||'Bot')});
+  openChat(cur.id);
+}
+function sMsg(t){if(!t||!t.trim())return;cur.msgs.push({t:'text',s:'human',text:t.trim(),time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),agent:role==='admin'?'Admin':'Nusrat',status:'sent'});cur.preview=t.trim();rMsgs();}
 function sDrf(){if(!cur.draft)return;cur.msgs.push({t:'text',s:'ai',text:cur.draft.text,time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),conf:cur.draft.conf});cur.draft=null;rMsgs();}
 function sWhisper(t){if(!t||!t.trim())return;cur.msgs.push({t:'whisper',s:'admin',text:t.trim(),time:new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),from:'Admin'});whisperMode=false;rMsgs();}
+
+/* BOTTOM SHEET HELPERS */
+function showBS(html){
+  const el=document.getElementById('bs-container');
+  el.style.display='flex';
+  el.className='bs-overlay';
+  el.innerHTML=`<div class="bs-sheet">${html}</div>`;
+  el.onclick=function(e){if(e.target===el)hideBS();};
+}
+function hideBS(){document.getElementById('bs-container').style.display='none';}
+
+/* SNOOZE */
+function openSnooze(){
+  if(!cur)return;
+  if(cur.snoozed){
+    cur.snoozed=false;cur.snoozeUntil=null;
+    cur.msgs.push({t:'sys',text:'Chat resumed from snooze'});
+    openChat(cur.id);return;
+  }
+  const opts=[
+    {label:'10 minutes',val:'10m'},{label:'30 minutes',val:'30m'},{label:'1 hour',val:'1h'},
+    {label:'2 hours',val:'2h'},{label:'4 hours',val:'4h'},{label:'Tomorrow 9 AM',val:'24h'}
+  ];
+  showBS(`<div class="bs-handle"></div><div class="bs-title">💤 Snooze Chat</div>
+    ${opts.map(o=>`<div class="bs-item" onclick="doSnooze('${o.val}','${o.label}')"><div class="bs-ico" style="background:var(--offwhite-60)">⏰</div><div class="bs-info"><h4>${o.label}</h4></div></div>`).join('')}
+    <button class="bs-cancel" onclick="hideBS()">Cancel</button>`);
+}
+function doSnooze(val,label){
+  hideBS();if(!cur)return;
+  cur.snoozed=true;cur.snoozeUntil=label;
+  cur.msgs.push({t:'sys',text:'💤 Chat snoozed for '+label});
+  openChat(cur.id);
+}
+
+/* MORE MENU (Transfer, Assign, Close) */
+function openMoreMenu(){
+  if(!cur)return;
+  showBS(`<div class="bs-handle"></div><div class="bs-title">Actions</div>
+    <div class="bs-item" onclick="openTransfer()"><div class="bs-ico" style="background:var(--primary-light);color:var(--primary)">↗</div><div class="bs-info"><h4>Transfer Chat</h4><p>Send to another agent</p></div></div>
+    <div class="bs-item" onclick="openAssign()"><div class="bs-ico" style="background:var(--success-lt);color:var(--success)">👤</div><div class="bs-info"><h4>Assign Chat</h4><p>Assign to a specific agent</p></div></div>
+    <div class="bs-item" onclick="openCloseChat()"><div class="bs-ico" style="background:var(--destructive-lt);color:var(--destructive)">✕</div><div class="bs-info"><h4>Close Chat</h4><p>End this conversation</p></div></div>
+    <button class="bs-cancel" onclick="hideBS()">Cancel</button>`);
+}
+function openTransfer(){
+  const agents=AGENTS.filter(a=>a.name!==(role==='admin'?'Admin':(cur.agentAssigned||'Nusrat')));
+  showBS(`<div class="bs-handle"></div><div class="bs-title">↗ Transfer to Agent</div>
+    ${agents.map(a=>`<div class="bs-item" onclick="doTransfer('${a.name}')"><div class="bs-ico" style="background:var(--offwhite-60);color:var(--foreground);font-weight:700">${a.name[0]}</div><div class="bs-info"><h4>${a.name}</h4><p>${a.role} · ${a.online?a.active+' active':'On break'}</p></div><span style="font-size:10px;font-weight:600;color:${a.online?'var(--success)':'var(--gray-60)'}">${a.online?'Online':'Offline'}</span></div>`).join('')}
+    <button class="bs-cancel" onclick="hideBS()">Cancel</button>`);
+}
+function doTransfer(agent){
+  hideBS();if(!cur)return;
+  cur.handler='human';cur.aiOn=false;cur.assigned=agent;cur.agentAssigned=agent;
+  cur.msgs.push({t:'sys',text:'Chat transferred to '+agent});
+  openChat(cur.id);
+}
+function openAssign(){
+  showBS(`<div class="bs-handle"></div><div class="bs-title">👤 Assign to Agent</div>
+    ${AGENTS.map(a=>`<div class="bs-item" onclick="doAssign('${a.name}')"><div class="bs-ico" style="background:var(--offwhite-60);color:var(--foreground);font-weight:700">${a.name[0]}</div><div class="bs-info"><h4>${a.name}</h4><p>${a.role} · ${a.online?a.active+' active':'On break'}</p></div></div>`).join('')}
+    <button class="bs-cancel" onclick="hideBS()">Cancel</button>`);
+}
+function doAssign(agent){
+  hideBS();if(!cur)return;
+  cur.handler='human';cur.aiOn=false;cur.assigned=agent;cur.agentAssigned=agent;cur.needsHuman=false;
+  cur.msgs.push({t:'sys',text:'Chat assigned to '+agent});
+  openChat(cur.id);
+}
+function openCloseChat(){
+  showBS(`<div class="bs-handle"></div><div class="bs-title">✕ Close Chat</div>
+    <div style="padding:0 16px 12px">
+      <div style="font-size:11px;font-weight:600;color:var(--gray-100);margin-bottom:4px">Closing remarks (optional)</div>
+      <textarea id="close-remarks" style="width:100%;height:60px;border:1.5px solid var(--offwhite-100);border-radius:var(--r-md);padding:8px 10px;font-size:12px;font-family:inherit;color:var(--foreground);resize:none;outline:none" placeholder="Add closing notes..."></textarea>
+    </div>
+    <div style="display:flex;gap:8px;padding:0 16px 16px">
+      <button class="bs-cancel" onclick="hideBS()" style="flex:1">Cancel</button>
+      <button style="flex:1;padding:12px;background:var(--destructive);color:#fff;border:none;border-radius:var(--r-md);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit" onclick="doCloseChat()">Close Chat</button>
+    </div>`);
+}
+function doCloseChat(){
+  const remarks=document.getElementById('close-remarks');
+  const txt=remarks?remarks.value.trim():'';
+  hideBS();if(!cur)return;
+  cur.msgs.push({t:'sys',text:'Chat closed'+(txt?' — '+txt:'')});
+  cur.handler='closed';cur.aiOn=false;
+  closeCht();
+}
+
+/* ATTACHMENT MENU & CANNED RESPONSES */
+function openAttachMenu(){
+  showBS(`<div class="bs-handle"></div><div class="bs-title">Attach</div>
+    <div class="bs-item" onclick="openCannedPicker()"><div class="bs-ico" style="background:var(--primary-light);color:var(--primary)">📝</div><div class="bs-info"><h4>Canned Response</h4><p>Insert a saved reply</p></div></div>
+    <div class="bs-item" onclick="hideBS()"><div class="bs-ico" style="background:var(--success-lt);color:var(--success)">🖼</div><div class="bs-info"><h4>Image</h4><p>Send a photo</p></div></div>
+    <div class="bs-item" onclick="hideBS()"><div class="bs-ico" style="background:var(--warning-lt);color:#996B00">📎</div><div class="bs-info"><h4>File</h4><p>Send a document</p></div></div>
+    <button class="bs-cancel" onclick="hideBS()">Cancel</button>`);
+}
+function openCannedPicker(){
+  let h=`<div class="bs-handle"></div><div class="bs-title">📝 Canned Responses</div>
+    <div style="padding:0 16px 8px;position:relative"><span style="position:absolute;left:26px;top:50%;transform:translateY(-50%);color:var(--gray-60);font-size:14px;pointer-events:none">🔍</span><input id="cr-search" placeholder="Search responses..." oninput="filterCanned(this.value)" style="width:100%;height:36px;background:var(--offwhite-40);border:1.5px solid var(--offwhite-100);border-radius:var(--r-md);padding:0 12px 0 34px;font-size:12px;font-family:inherit;color:var(--foreground);outline:none"></div>
+    <div class="cr-list" id="cr-picker-list">`;
+  CANNED_RESPONSES.forEach(cr=>{
+    h+=`<div class="cr-item" onclick="insertCanned('${cr.id}')"><h4>${cr.title}</h4><p>${cr.text.substring(0,80)}${cr.text.length>80?'...':''}</p><span class="cr-cat">${cr.category}</span></div>`;
+  });
+  h+=`</div><button class="bs-cancel" onclick="hideBS()">Cancel</button>`;
+  showBS(h);
+}
+function filterCanned(q){
+  const list=document.getElementById('cr-picker-list');if(!list)return;
+  const filtered=CANNED_RESPONSES.filter(cr=>cr.title.toLowerCase().includes(q.toLowerCase())||cr.text.toLowerCase().includes(q.toLowerCase())||cr.category.toLowerCase().includes(q.toLowerCase()));
+  list.innerHTML=filtered.map(cr=>`<div class="cr-item" onclick="insertCanned('${cr.id}')"><h4>${cr.title}</h4><p>${cr.text.substring(0,80)}${cr.text.length>80?'...':''}</p><span class="cr-cat">${cr.category}</span></div>`).join('');
+}
+function insertCanned(id){
+  const cr=CANNED_RESPONSES.find(r=>r.id===id);if(!cr)return;
+  hideBS();sMsg(cr.text);
+}
 
 /* TICKETS */
 function rTk(){
@@ -1014,6 +1377,7 @@ function rTk(){
   const cts={all:TICKETS.length,open:TICKETS.filter(t=>t.st==='open').length,pending:TICKETS.filter(t=>t.st==='pending').length,closed:TICKETS.filter(t=>t.st==='closed').length};
   document.getElementById('tk-fl').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${tkF===f?'on':''}" onclick="tkF='${f}';rTk()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
   let list=TICKETS;if(tkF!=='all')list=list.filter(t=>t.st===tkF);
+  if(inboxSearchQuery){const q=inboxSearchQuery.toLowerCase();list=list.filter(t=>t.subj.toLowerCase().includes(q)||t.cust.toLowerCase().includes(q));}
   document.getElementById('tk-list').innerHTML=list.map(t=>`<div class="tkc"><div class="tk-r1"><span class="tk-id">${t.id}</span><span class="tk-pri ${t.pri}">${t.pri}</span></div><div class="tk-subj">${t.subj}</div><div class="tk-meta"><span>${t.cust}</span><span>·</span><span>${t.date}</span><span>·</span><span style="color:${CH[t.ch]||'inherit'}">${t.ch}</span><span class="tk-st ${t.st}">${t.st}</span>${t.aiF?'<span class="tk-ait">✦ AI Following</span>':''}</div></div>`).join('');
 }
 
@@ -1054,7 +1418,7 @@ function rCt(q){
     if(ctFlt.label!=='all'&&c.label!==ctFlt.label)return false;
     return true;
   });}
-  function ctHTML(list){return list.map(c=>`<div class="ct-item">${avH(c.name,c.ch,36)}<div class="ct-i"><h4>${c.name}</h4><p>${c.phone} · ${c.chats} chats · ${c.last}</p><div class="ct-tags"><span class="ct-tag" style="${segC[c.seg]||''}">${c.seg}</span><span class="ct-tag" style="${labC[c.label]||''}">${c.label}</span>${c.tags.map(t=>`<span class="ct-tag" style="background:var(--offwhite-60);color:var(--gray-60)">${t}</span>`).join('')}</div></div></div>`).join('');}
+  function ctHTML(list){return list.map(c=>`<div class="ct-item">${avH(c.name,c.ch,36)}<div class="ct-i"><h4>${c.name} ${chIcon(c.ch)}</h4><p>${chEmoji(c.ch)}${c.phone} · ${c.chats} chats · ${c.last}</p><div class="ct-tags"><span class="ct-tag" style="${segC[c.seg]||''}">${c.seg}</span><span class="ct-tag" style="${labC[c.label]||''}">${c.label}</span>${c.tags.map(t=>`<span class="ct-tag" style="background:var(--offwhite-60);color:var(--gray-60)">${t}</span>`).join('')}</div></div></div>`).join('');}
 
   if(ctView==='segments'){
     document.getElementById('ct-list').innerHTML=SEGS.map(sg=>{
@@ -1078,8 +1442,8 @@ function rCt(q){
 }
 function fltCt(q){rCt(q);}
 
-/* SETTINGS — unified profile + integration + preferences */
-let settingsOpen={profile:true,integrations:false,preferences:false};
+/* SETTINGS */
+let settingsOpen={profile:true,integrations:false,routing:false,preferences:false};
 let metaConnected={whatsapp:true,messenger:true,instagram:false};
 let reveApiKey='';
 let intStatus={revesms:false,payment:false,phone:false,kloudtalk:false};
@@ -1087,9 +1451,49 @@ function toggleSection(s){settingsOpen[s]=!settingsOpen[s];rSettings();}
 function metaOneClick(){metaConnected={whatsapp:true,messenger:true,instagram:true};rSettings();}
 function saveReveKey(){var v=document.getElementById('reve-key-input');if(v&&v.value.trim()){reveApiKey=v.value.trim();rSettings();}}
 function toggleInt(k){intStatus[k]=!intStatus[k];rSettings();}
+
+function openCannedMgmt(){
+  cannedMgmtOpen=true;
+  document.getElementById('settings-title').textContent='Canned Responses';
+  document.getElementById('settings-back').style.display='inline-block';
+  rSettings();
+}
+function closeCannedMgmt(){
+  cannedMgmtOpen=false;
+  document.getElementById('settings-title').textContent='Settings';
+  document.getElementById('settings-back').style.display='none';
+  rSettings();
+}
+function deleteCanned(id){
+  const idx=CANNED_RESPONSES.findIndex(r=>r.id===id);
+  if(idx>=0)CANNED_RESPONSES.splice(idx,1);
+  rSettings();
+}
+function addCanned(){
+  const newId='cr'+Date.now();
+  CANNED_RESPONSES.push({id:newId,title:'New Response',text:'Type your response text here...',category:'greeting'});
+  rSettings();
+}
+
 function rSettings(){
+  if(cannedMgmtOpen&&role==='admin'){
+    let h=`<div style="padding:12px 16px;display:flex;align-items:center;gap:8px">
+      <h3 style="flex:1;font-size:14px;font-weight:700;color:var(--foreground)">Manage Responses</h3>
+      <button style="padding:6px 12px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit" onclick="addCanned()">+ Add New</button>
+    </div>`;
+    CANNED_RESPONSES.forEach(cr=>{
+      h+=`<div class="cr-mgmt-item">
+        <div class="cr-mgmt-info"><h4>${cr.title}</h4><p>${cr.text}</p><span style="font-size:9px;font-weight:600;color:var(--gray-60);background:var(--offwhite-60);padding:1px 5px;border-radius:3px;margin-top:2px;display:inline-block">${cr.category}</span></div>
+        <div class="cr-mgmt-actions"><button onclick="deleteCanned('${cr.id}')" title="Delete">🗑</button></div>
+      </div>`;
+    });
+    h+=`<div style="height:20px"></div>`;
+    document.getElementById('settings-body').innerHTML=h;
+    return;
+  }
+
   let h='';
-  // Profile section
+  /* Profile section */
   h+=`<div class="collapse-header ${settingsOpen.profile?'open':''}" onclick="toggleSection('profile')">
     <span style="font-size:18px">👤</span><h3>Profile</h3>
     <span style="font-size:10px;color:var(--success);font-weight:600">${isOnline?'Online':'On Break'}</span>
@@ -1100,7 +1504,7 @@ function rSettings(){
     ${role==='agent'?`<div style="padding:0 16px 12px"><button class="btn-p" style="background:${isOnline?'var(--destructive)':'var(--success)'}" onclick="${isOnline?'showBreak()':'comeOnline()'}">☕ ${isOnline?'Go on Break':'Come Online'}</button></div>`:''}
   </div>`;
 
-  // Integrations section — admin only
+  /* Integrations section — admin only */
   if(role==='admin'){
     const allMeta=metaConnected.whatsapp&&metaConnected.messenger&&metaConnected.instagram;
     const reveCount=Object.values(intStatus).filter(Boolean).length;
@@ -1218,9 +1622,32 @@ function rSettings(){
       </div>
 
     </div>`;
+
+    /* Routing Policy section — admin only */
+    h+=`<div class="collapse-header ${settingsOpen.routing?'open':''}" onclick="toggleSection('routing')">
+      <span style="font-size:18px">🔀</span><h3>Routing Policy</h3>
+      <span class="c-badge" style="background:var(--primary-light);color:var(--primary-dark)">${routingPolicy.mode}</span>
+      <span class="c-icon">▶</span>
+    </div>
+    <div class="collapse-body ${settingsOpen.routing?'open':''}">
+      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Assignment</div>
+      <div class="rp-row"><label>Routing Mode</label><select onchange="routingPolicy.mode=this.value;rSettings()">
+        <option value="round-robin" ${routingPolicy.mode==='round-robin'?'selected':''}>Round Robin</option>
+        <option value="least-active" ${routingPolicy.mode==='least-active'?'selected':''}>Least Active</option>
+        <option value="manual" ${routingPolicy.mode==='manual'?'selected':''}>Manual</option>
+      </select></div>
+      <div class="rp-row"><label>Max Concurrent Chats</label><input type="number" value="${routingPolicy.maxChats}" min="1" max="50" onchange="routingPolicy.maxChats=+this.value" style="width:70px"></div>
+      <div class="rp-row"><label>Auto-assign new chats</label><button class="rp-tg ${routingPolicy.autoAssign?'on':'off'}" onclick="routingPolicy.autoAssign=!routingPolicy.autoAssign;rSettings()"></button></div>
+      <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Hours & SLA</div>
+      <div class="rp-row"><label>Business Hours Only</label><button class="rp-tg ${routingPolicy.businessHours?'on':'off'}" onclick="routingPolicy.businessHours=!routingPolicy.businessHours;rSettings()"></button></div>
+      <div class="rp-row"><label>Auto-close idle (hours)</label><input type="number" value="${routingPolicy.autoCloseHours}" min="1" max="168" onchange="routingPolicy.autoCloseHours=+this.value" style="width:70px"></div>
+      <div class="rp-row"><label>SLA Response (min)</label><input type="number" value="${routingPolicy.slaResponse}" min="1" max="60" onchange="routingPolicy.slaResponse=+this.value" style="width:70px"></div>
+      <div class="rp-row"><label>SLA Resolution (hours)</label><input type="number" value="${routingPolicy.slaResolution}" min="1" max="72" onchange="routingPolicy.slaResolution=+this.value" style="width:70px"></div>
+      <div style="height:8px"></div>
+    </div>`;
   }
 
-  // Preferences section
+  /* Preferences section */
   h+=`<div class="collapse-header ${settingsOpen.preferences?'open':''}" onclick="toggleSection('preferences')">
     <span style="font-size:18px">⚙</span><h3>Preferences</h3>
     <span class="c-icon">▶</span>
@@ -1232,15 +1659,15 @@ function rSettings(){
       <div class="si"><span class="sic">🔊</span><div class="sit"><h4>Sounds</h4></div><button class="tg off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
     </div>
     <div class="stg" style="margin:0 16px 12px">
-      <div class="si"><span class="sic">📝</span><div class="sit"><h4>Canned Responses</h4><p>Manage quick replies</p></div><span class="tl">6 saved ›</span></div>
+      ${role==='admin'?`<div class="si" onclick="openCannedMgmt()"><span class="sic">📝</span><div class="sit"><h4>Canned Responses</h4><p>Manage quick replies</p></div><span class="tl">${CANNED_RESPONSES.length} saved ›</span></div>`:''}
       <div class="si"><span class="sic">🌐</span><div class="sit"><h4>Language</h4></div><span class="tl">English ›</span></div>
       <div class="si"><span class="sic">❓</span><div class="sit"><h4>Help</h4></div><span class="tl">›</span></div>
     </div>
   </div>`;
 
-  // Logout
+  /* Logout */
   h+=`<div style="padding:12px 16px"><button class="btn-p" style="background:var(--destructive)" onclick="nav('login')">↪ Log Out</button></div>
-  <div class="vr">ReveChat v3.3.0</div>`;
+  <div class="vr">ReveChat v3.4.0</div>`;
   document.getElementById('settings-body').innerHTML=h;
 }
 
