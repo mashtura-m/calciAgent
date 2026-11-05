@@ -169,7 +169,7 @@ body {
 
 .bb { max-width:80%; padding:9px 12px; font-size:13px; line-height:1.42; word-wrap:break-word; }
 .bb.c-bb { background:var(--offwhite-60); border:none; border-radius:3px 12px 12px 12px; color:var(--foreground); }
-.bb.h-bb { background:var(--primary); color:var(--primary-fg); border-radius:12px 3px 12px 12px; }
+.bb.h-bb { background:#1B8C2A; color:#fff; border-radius:12px 3px 12px 12px; }
 .bb.a-bb { background:var(--background); border:1px solid var(--offwhite-100); border-radius:3px 12px 12px 12px; color:var(--foreground); }
 .bb.s-bb { background:var(--offwhite-60); color:var(--gray-100); font-size:10px; font-weight:500; border-radius:14px; padding:3px 12px; max-width:85%; }
 .bb.w-bb { background:var(--warning-lt); border:1px dashed var(--warning); border-radius:12px 3px 12px 12px; color:var(--foreground); font-style:italic; }
@@ -183,6 +183,16 @@ body {
 .cf-m { color:#996B00; }
 .cf-l { color:var(--destructive); }
 .mt { font-size:9px; color:var(--gray-60); margin-top:1px; padding:0 3px; }
+.mt-read { display:flex; align-items:center; gap:2px; font-size:10px; color:var(--success); margin-top:2px; padding:0 3px; font-weight:500; }
+.mt-read .tick { font-size:11px; font-weight:700; }
+.msg-name { font-size:11px; font-weight:600; color:var(--foreground); margin-bottom:1px; padding:0 2px; display:flex; align-items:center; gap:4px; }
+.msg-name .msg-time { font-size:10px; font-weight:400; color:var(--gray-60); }
+.role-badge { font-size:9px; font-weight:600; color:var(--gray-80); background:var(--offwhite-60); border:1px solid var(--offwhite-100); border-radius:3px; padding:1px 5px; }
+.sla-msg { padding:8px 14px; display:flex; align-items:center; justify-content:center; }
+.sla-msg .sla-inner { display:flex; align-items:center; gap:4px; font-size:11px; color:var(--destructive); font-weight:500; line-height:1.4; text-align:center; }
+.sla-msg .sla-ico { font-size:13px; flex-shrink:0; }
+.sys-ev { display:flex; align-items:center; gap:4px; background:var(--offwhite-40); border:1px solid var(--offwhite-100); border-radius:16px; padding:4px 12px; font-size:10px; color:var(--gray-80); font-weight:500; max-width:90%; }
+.sys-ev .sys-ico { font-size:12px; flex-shrink:0; }
 
 .bb-img { border-radius:var(--r-md); overflow:hidden; max-width:80%; }
 .bb-img img { width:100%; display:block; height:150px; object-fit:cover; background:var(--offwhite-60); }
@@ -261,7 +271,7 @@ body {
 .ip-body::-webkit-scrollbar { display:none; }
 .ip-section { padding:12px 14px; border-bottom:1px solid var(--offwhite-100); }
 .ip-section h4 { font-size:10px; font-weight:700; color:var(--gray-60); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
-.ip-avatar { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; margin:0 auto 8px; }
+.ip-avatar { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:700; margin:0 auto 8px; }
 .ip-name { text-align:center; font-size:16px; font-weight:700; color:var(--foreground); }
 .ip-meta { text-align:center; font-size:11px; color:var(--gray-100); margin-top:2px; }
 .ip-row { display:flex; align-items:flex-start; padding:5px 0; gap:8px; }
@@ -272,6 +282,28 @@ body {
 .ip-note { padding:8px 10px; background:var(--offwhite-40); border-radius:var(--r-sm); font-size:11px; color:var(--gray-100); line-height:1.4; margin-top:6px; }
 .ip-note .note-by { font-size:9px; font-weight:600; color:var(--gray-60); margin-top:3px; }
 .ip-add-note { width:100%; padding:7px; background:none; border:1.5px dashed var(--offwhite-100); border-radius:var(--r-sm); font-size:11px; color:var(--gray-80); cursor:pointer; font-family:inherit; margin-top:6px; text-align:center; }
+.ip-call-btns { display:flex; gap:12px; justify-content:center; margin:12px 0 4px; }
+.ip-call-btn { display:flex; flex-direction:column; align-items:center; gap:4px; width:100px; padding:10px 8px; background:var(--background); border:1.5px solid var(--offwhite-100); border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:11px; font-weight:500; color:var(--foreground); }
+.ip-call-btn .ic { font-size:20px; }
+.ip-action-row { display:flex; align-items:center; gap:10px; padding:14px 14px; border-bottom:1px solid var(--offwhite-100); cursor:pointer; }
+.ip-action-row .ar-ico { width:28px; height:28px; border-radius:50%; background:var(--offwhite-40); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.ip-action-row .ar-lbl { flex:1; font-size:13px; font-weight:500; color:var(--foreground); }
+.ip-action-row .ar-val { font-size:13px; color:var(--gray-80); font-weight:500; display:flex; align-items:center; gap:2px; }
+.ip-action-row .ar-chev { font-size:14px; color:var(--gray-40); }
+.ip-action-row.destructive .ar-lbl { color:var(--destructive); }
+.ip-action-row.destructive .ar-ico { background:var(--destructive-lt); }
+.ip-session-pill { display:inline-block; background:var(--offwhite-40); border:1px solid var(--offwhite-100); border-radius:16px; padding:4px 14px; font-size:10px; font-weight:500; color:var(--gray-80); margin:8px auto; text-align:center; }
+.ip-label-btn { display:inline-flex; align-items:center; gap:2px; padding:4px 12px; border:1.5px dashed var(--offwhite-100); border-radius:16px; font-size:11px; font-weight:600; color:var(--gray-60); cursor:pointer; background:none; font-family:inherit; }
+.ip-vi-section { border-bottom:1px solid var(--offwhite-100); }
+.ip-vi-header { display:flex; align-items:center; gap:10px; padding:14px; cursor:pointer; }
+.ip-vi-header .vi-ico { width:28px; height:28px; border-radius:50%; background:var(--offwhite-40); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.ip-vi-header .vi-lbl { flex:1; font-size:13px; font-weight:500; color:var(--foreground); }
+.ip-vi-header .vi-chev { font-size:14px; color:var(--gray-40); transition:transform 0.2s; }
+.ip-vi-body { padding:0 14px 12px; display:none; }
+.ip-vi-body.open { display:block; }
+.ip-chat-in { padding:6px 8px; background:var(--background); border-top:1px solid var(--offwhite-100); display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.ip-chat-in .ci-btn { background:none; border:none; font-size:16px; color:var(--gray-60); cursor:pointer; padding:4px; flex-shrink:0; }
+.ip-chat-in .ci-input { flex:1; background:var(--offwhite-40); border:none; border-radius:18px; padding:7px 12px; font-size:12px; font-family:inherit; color:var(--foreground); outline:none; }
 .ip-timeline { position:relative; padding-left:16px; }
 .ip-tl-item { position:relative; padding-bottom:12px; padding-left:10px; border-left:1.5px solid var(--offwhite-100); }
 .ip-tl-item:last-child { border-left:none; }
@@ -766,6 +798,7 @@ const CONVS=[
    notes:[{text:'Received damaged dress, wants full refund not exchange',by:'AI Sara',time:'11:35 AM'}],
    preview:'আমি refund চাই',time:'2m',sla:'breach',
    msgs:[
+     {t:'sys',text:'AI Sara started chat with Fatima Akter at 11:30 AM'},
      {t:'text',s:'customer',text:'হ্যালো, আমি একটা ড্রেস কিনেছিলাম',time:'11:30'},
      {t:'img_cap',s:'customer',img:'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22280%22%3E%3Crect%20width%3D%22400%22%20height%3D%22280%22%20fill%3D%22%23edf2fa%22%2F%3E%3Cpath%20d%3D%22M155%2065%20L175%2045%20L225%2045%20L245%2065%20L280%20100%20L250%20130%20L235%20115%20L235%20230%20L165%20230%20L165%20115%20L150%20130%20L120%20100Z%22%20fill%3D%22%2377a1ff%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%20fill%3D%22%23253748%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%3ESample%20product%20%C2%B7%20demo%20image%3C%2Ftext%3E%3C%2Fsvg%3E',cap:'এইটা ফেটে গেছে',time:'11:32'},
      {t:'text',s:'ai',text:'ফাতিমা, সমস্যার জন্য দুঃখিত। পণ্যটি কবে ডেলিভারি হয়েছিল?',time:'11:33',conf:92},
@@ -806,6 +839,7 @@ const CONVS=[
    notes:[{text:'Fashion influencer, potential brand collab',by:'Nusrat',time:'10:15 AM'}],
    preview:'এই শাড়িটার price কত?',time:'45m',sla:'warn',
    msgs:[
+     {t:'sys',text:'Nusrat started chat with Sumaiya Rahman at 10:00 AM'},
      {t:'text',s:'customer',text:'Hi! I love your new collection 😍',time:'10:00'},
      {t:'text',s:'human',text:'Thank you Sumaiya! Which collection?',time:'10:10',agent:'Nusrat',status:'read'},
      {t:'img_cap',s:'customer',img:'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22280%22%3E%3Crect%20width%3D%22400%22%20height%3D%22280%22%20fill%3D%22%23edf2fa%22%2F%3E%3Cpath%20d%3D%22M155%2065%20L175%2045%20L225%2045%20L245%2065%20L280%20100%20L250%20130%20L235%20115%20L235%20230%20L165%20230%20L165%20115%20L150%20130%20L120%20100Z%22%20fill%3D%22%2377a1ff%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%20fill%3D%22%23253748%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%3ESample%20product%20%C2%B7%20demo%20image%3C%2Ftext%3E%3C%2Fsvg%3E',cap:'Red Saree Collection',time:'11:15'},
@@ -842,12 +876,14 @@ const CONVS=[
    notes:[{text:'URGENT: 3rd follow-up on refund. Customer threatening social media complaint',by:'AI Sara',time:'11:45 AM'}],
    preview:'I need a manager NOW',time:'5m',sla:'breach',
    msgs:[
+     {t:'sys',text:'AI Sara started chat with Nadia Islam at 11:40 AM'},
      {t:'text',s:'customer',text:'THIRD time asking about my refund!',time:'11:40'},
      {t:'text',s:'ai',text:'I understand your frustration, Nadia. Let me check.',time:'11:41',conf:78},
      {t:'text',s:'customer',text:'10 days and no refund!',time:'11:45'},
      {t:'btn',s:'ai',text:'I apologize sincerely. Your refund ৳3,200 is processing. Would you like to:',btns:['Check Refund Status','Talk to Manager','File Complaint'],time:'11:46',conf:72},
      {t:'sys',text:'⚠ AI handover → Pacify Angry Customer'},
      {t:'text',s:'customer',text:'I need a manager NOW',time:'11:55'},
+     {t:'sla',text:'Default LiveChat SLA policy breached for Every Response Time at 12:00 PM'},
    ],
    timeline:[
      {ev:'Purchased Winter Jacket (৳3,200)',time:'Oct 15',ai:false},
@@ -864,6 +900,7 @@ const CONVS=[
    notes:[{text:'Smooth transaction, praised service quality',by:'Nusrat',time:'9:45 AM'}],
    preview:'ধন্যবাদ! ভালো সার্ভিস 👍',time:'3h',sla:'ok',
    msgs:[
+     {t:'sys',text:'Nusrat started chat with Arif Mahmud at 9:00 AM'},
      {t:'text',s:'customer',text:'পেমেন্ট করেছি bKash এ',time:'9:00'},
      {t:'img_cap',s:'customer',img:'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22280%22%3E%3Crect%20width%3D%22400%22%20height%3D%22280%22%20fill%3D%22%23edf2fa%22%2F%3E%3Cpath%20d%3D%22M155%2065%20L175%2045%20L225%2045%20L245%2065%20L280%20100%20L250%20130%20L235%20115%20L235%20230%20L165%20230%20L165%20115%20L150%20130%20L120%20100Z%22%20fill%3D%22%2377a1ff%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%20fill%3D%22%23253748%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%3ESample%20product%20%C2%B7%20demo%20image%3C%2Ftext%3E%3C%2Fsvg%3E',cap:'bKash payment screenshot',time:'9:05'},
      {t:'text',s:'human',text:'কনফার্ম! ২-৩ দিনে ডেলিভারি পাবেন।',time:'9:30',agent:'Nusrat',status:'delivered'},
@@ -1429,97 +1466,176 @@ function toggleInfo(){
 
 function rInfoPanel(){
   if(!cur)return;
-  const ci=cur.custInfo||{};
-  const s=cur.sentiment||{score:50,label:'Neutral',icon:'😐'};
-  const sColor=s.score>=70?'var(--success)':s.score>=40?'var(--warning)':'var(--destructive)';
-  let h=`<div class="ip-head"><button class="ip-close" onclick="toggleInfo()">✕</button><h3>Customer Info</h3></div><div class="ip-body">`;
+  var ci=cur.custInfo||{};
+  var s=cur.sentiment||{score:50,label:'Neutral',icon:'😐'};
+  var sColor=s.score>=70?'var(--success)':s.score>=40?'var(--warning)':'var(--destructive)';
+  var chInfo=CHI[cur.ch]||{name:cur.ch,lbl:'🌐'};
+  var assignee=cur.agentAssigned||cur.assigned||'Unassigned';
 
-  h+=`<div class="ip-section" style="text-align:center;padding-top:16px">
-    <div class="ip-avatar" style="background:${CH[cur.ch]||'#253748'}18;color:${CH[cur.ch]||'#253748'}">${cur.name[0]}</div>
-    <div class="ip-name">${cur.name}</div>
-    <div class="ip-meta">${cur.ch} · ${ci.location||'—'}</div>
-    <div class="sentiment-bar" style="margin-top:8px"><span class="sent-icon">${s.icon}</span><div class="sent-fill"><div style="width:${s.score}%;background:${sColor}"></div></div><span class="sent-label" style="color:${sColor}">${s.label}</span></div>
-  </div>`;
+  /* Header bar — matches chat bar style from screenshot 2 */
+  var h='<div class="ip-head" style="gap:4px">'
+    +'<button class="ip-close" onclick="toggleInfo()">←</button>'
+    +'<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:3px"><span style="font-size:13px;font-weight:600;color:var(--foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+cur.name+'</span><span style="font-size:10px;color:var(--gray-60)">▼</span></div>'
+    +'<div style="font-size:10px;color:var(--gray-60)">'+chInfo.lbl+' via '+chInfo.name+'</div></div>'
+    +'<button style="background:none;border:none;font-size:14px;color:var(--gray-80);cursor:pointer;padding:4px" onclick="openSnooze()">Z⁺</button>'
+    +'<button style="background:none;border:none;font-size:16px;color:var(--gray-80);cursor:pointer;padding:4px" onclick="toggleInfo()">✕</button>'
+    +'<button style="background:none;border:none;font-size:16px;color:var(--gray-80);cursor:pointer;padding:4px" onclick="openMoreMenu()">⋮</button>'
+    +'</div>';
 
-  h+=`<div class="ip-section"><h4>Details</h4>
-    <div class="ip-row"><span class="ip-lbl">Phone</span><span class="ip-val">${ci.phone||'—'}</span></div>
-    <div class="ip-row"><span class="ip-lbl">Email</span><span class="ip-val">${ci.email||'—'}</span></div>
-    <div class="ip-row"><span class="ip-lbl">Language</span><span class="ip-val">${ci.lang||'—'}</span></div>
-    <div class="ip-row"><span class="ip-lbl">Source</span><span class="ip-val">${ci.source||'—'}</span></div>
-    <div class="ip-row"><span class="ip-lbl">LTV</span><span class="ip-val" style="font-weight:700;color:var(--primary-dark)">${ci.ltv||'—'}</span></div>
-    <div class="ip-row"><span class="ip-lbl">Orders</span><span class="ip-val">${ci.orders||0} (last: ${ci.lastOrder||'—'})</span></div>
-  </div>`;
+  h+='<div class="ip-body">';
 
-  h+=`<div class="ip-section"><h4>Segment</h4><div class="ip-tags">
-    <span class="ip-tag" style="background:var(--primary-light);color:var(--primary-dark)">${cur.custSeg||'—'}</span>
-  </div></div>`;
+  /* Session info pill */
+  h+='<div style="text-align:center;padding:8px 14px 0"><div class="ip-session-pill">Session 01 : '+(new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}))+' '+(cur.msgs[0]?cur.msgs[0].time:'')+'</div></div>';
 
-  const lblOpts=['Buyer','Lead','Complainant','VIP','Partner'];
-  h+=`<div class="ip-section"><h4>Label</h4><div class="ip-tags">
-    ${cur.custLabel?`<span class="ip-tag ip-tag-edit" style="background:var(--foreground);color:#fff">${cur.custLabel}<span class="ip-tag-x" onclick="event.stopPropagation();cur.custLabel='';rInfoPanel()">✕</span></span>`:''}
-    <select style="font-size:10px;padding:2px 6px;border-radius:10px;border:1.5px dashed var(--offwhite-100);background:none;color:var(--gray-60);font-family:inherit;cursor:pointer" onchange="if(this.value){cur.custLabel=this.value;rInfoPanel()}">
-      <option value="">+ Label</option>${lblOpts.map(l=>`<option value="${l}">${l}</option>`).join('')}
-    </select>
-  </div></div>`;
+  /* Avatar + name + channel + sentiment */
+  var avColors=['#6C69F9','#E1306C','#1A59A4','#18A326','#D92020','#F4B24E','#004FFF','#25D366'];
+  var avColor=avColors[cur.name.charCodeAt(0)%avColors.length];
+  h+='<div class="ip-section" style="text-align:center;padding-top:12px;border-bottom:none">'
+    +'<div class="ip-avatar" style="background:'+avColor+';color:#fff">'+cur.name[0]+'</div>'
+    +'<div class="ip-name">'+cur.name+'</div>'
+    +'<div class="ip-meta" style="display:flex;align-items:center;justify-content:center;gap:4px;margin-top:4px">'+chInfo.lbl+' via '+chInfo.name+'</div>'
+    +'<div class="sentiment-bar" style="margin-top:8px"><span class="sent-icon">'+s.icon+'</span><div class="sent-fill"><div style="width:'+s.score+'%;background:'+sColor+'"></div></div><span class="sent-label" style="color:'+sColor+'">'+s.label+'</span></div>'
+    +'</div>';
 
-  const tagOpts=['refund','repeat','loyal','fashion','bulk','escalated','payment-issue','influencer','new'];
-  h+=`<div class="ip-section"><h4>Tags</h4><div class="ip-tags">
-    ${(cur.custTags||[]).map((t,i)=>`<span class="ip-tag ip-tag-edit" style="background:var(--offwhite-60);color:var(--gray-100)">${t}<span class="ip-tag-x" onclick="event.stopPropagation();cur.custTags.splice(${i},1);rInfoPanel()">✕</span></span>`).join('')}
-    <select style="font-size:10px;padding:2px 6px;border-radius:10px;border:1.5px dashed var(--offwhite-100);background:none;color:var(--gray-60);font-family:inherit;cursor:pointer" onchange="if(this.value){cur.custTags=cur.custTags||[];if(!cur.custTags.includes(this.value))cur.custTags.push(this.value);rInfoPanel()}">
-      <option value="">+ Tag</option>${tagOpts.map(t=>`<option value="${t}">${t}</option>`).join('')}
-    </select>
-  </div></div>`;
+  /* Audio/Video Call buttons */
+  h+='<div class="ip-call-btns">'
+    +'<button class="ip-call-btn" onclick="showToast(\'Audio call started\')"><span class="ic">📞</span>Audio Call</button>'
+    +'<button class="ip-call-btn" onclick="showToast(\'Video call started\')"><span class="ic">📹</span>Video Call</button>'
+    +'</div>';
 
-  h+=`<div class="ip-section"><h4>Notes</h4>`;
-  (cur.notes||[]).forEach(n=>{h+=`<div class="ip-note">${n.text}<div class="note-by">${n.by} · ${n.time}</div></div>`;});
-  h+=`<button class="ip-add-note">+ Add Note</button></div>`;
+  /* Label button */
+  var lblOpts=['Buyer','Lead','Complainant','VIP','Partner'];
+  h+='<div style="text-align:center;padding:4px 14px 12px;border-bottom:1px solid var(--offwhite-100)">';
+  if(cur.custLabel){
+    h+='<span class="ip-tag ip-tag-edit" style="background:var(--foreground);color:#fff;font-size:11px;padding:3px 10px;border-radius:16px">'+cur.custLabel+'<span class="ip-tag-x" onclick="event.stopPropagation();cur.custLabel=\'\';rInfoPanel()">✕</span></span> ';
+  }
+  h+='<select class="ip-label-btn" style="border:1.5px dashed var(--offwhite-100);border-radius:16px;padding:4px 12px;font-size:11px;background:none;color:var(--gray-60);font-family:inherit;cursor:pointer;-webkit-appearance:none;appearance:none" onchange="if(this.value){cur.custLabel=this.value;rInfoPanel()}">'
+    +'<option value="">+ Label</option>';
+  lblOpts.forEach(function(l){h+='<option value="'+l+'">'+l+'</option>';});
+  h+='</select></div>';
 
+  /* Assignee row */
+  h+='<div class="ip-action-row" onclick="openAssign()">'
+    +'<div class="ar-ico">👤</div>'
+    +'<div class="ar-lbl">Assignee</div>'
+    +'<div class="ar-val">'+assignee+' <span class="ar-chev">›</span></div>'
+    +'</div>';
+
+  /* Visitor Information — collapsible */
+  h+='<div class="ip-vi-section">'
+    +'<div class="ip-vi-header" onclick="var b=this.nextElementSibling;b.classList.toggle(\'open\');this.querySelector(\'.vi-chev\').style.transform=b.classList.contains(\'open\')?\'rotate(90deg)\':\'none\'">'
+    +'<div class="vi-ico">ⓘ</div>'
+    +'<div class="vi-lbl">Visitor Information</div>'
+    +'<span class="vi-chev">›</span>'
+    +'</div>'
+    +'<div class="ip-vi-body">'
+    +'<div class="ip-row"><span class="ip-lbl">Phone</span><span class="ip-val">'+(ci.phone||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">Email</span><span class="ip-val">'+(ci.email||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">Language</span><span class="ip-val">'+(ci.lang||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">Source</span><span class="ip-val">'+(ci.source||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">Location</span><span class="ip-val">'+(ci.location||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">LTV</span><span class="ip-val" style="font-weight:700;color:var(--primary-dark)">'+(ci.ltv||'—')+'</span></div>'
+    +'<div class="ip-row"><span class="ip-lbl">Orders</span><span class="ip-val">'+(ci.orders||0)+' (last: '+(ci.lastOrder||'—')+')</span></div>'
+    +'</div></div>';
+
+  /* Segment */
+  h+='<div class="ip-section"><h4>Segment</h4><div class="ip-tags">'
+    +'<span class="ip-tag" style="background:var(--primary-light);color:var(--primary-dark)">'+(cur.custSeg||'—')+'</span>'
+    +'</div></div>';
+
+  /* Tags */
+  var tagOpts=['refund','repeat','loyal','fashion','bulk','escalated','payment-issue','influencer','new'];
+  h+='<div class="ip-section"><h4>Tags</h4><div class="ip-tags">';
+  (cur.custTags||[]).forEach(function(t,i){
+    h+='<span class="ip-tag ip-tag-edit" style="background:var(--offwhite-60);color:var(--gray-100)">'+t+'<span class="ip-tag-x" onclick="event.stopPropagation();cur.custTags.splice('+i+',1);rInfoPanel()">✕</span></span>';
+  });
+  h+='<select style="font-size:10px;padding:2px 6px;border-radius:10px;border:1.5px dashed var(--offwhite-100);background:none;color:var(--gray-60);font-family:inherit;cursor:pointer" onchange="if(this.value){cur.custTags=cur.custTags||[];if(!cur.custTags.includes(this.value))cur.custTags.push(this.value);rInfoPanel()}">'
+    +'<option value="">+ Tag</option>';
+  tagOpts.forEach(function(t){h+='<option value="'+t+'">'+t+'</option>';});
+  h+='</select></div></div>';
+
+  /* Notes */
+  h+='<div class="ip-section"><h4>Notes</h4>';
+  (cur.notes||[]).forEach(function(n){h+='<div class="ip-note">'+n.text+'<div class="note-by">'+n.by+' · '+n.time+'</div></div>';});
+  h+='<button class="ip-add-note">+ Add Note</button></div>';
+
+  /* Timeline */
   if(cur.timeline){
-    h+=`<div class="ip-section"><h4>Timeline</h4><div class="ip-timeline">`;
-    cur.timeline.forEach(e=>{h+=`<div class="ip-tl-item ${e.ai?'ai-ev':''}"><h5>${e.ev}</h5><span class="tl-time">${e.time}</span></div>`;});
-    h+=`</div></div>`;
+    h+='<div class="ip-section"><h4>Timeline</h4><div class="ip-timeline">';
+    cur.timeline.forEach(function(e){h+='<div class="ip-tl-item '+(e.ai?'ai-ev':'')+'"><h5>'+e.ev+'</h5><span class="tl-time">'+e.time+'</span></div>';});
+    h+='</div></div>';
   }
 
-  h+=`<div class="ip-section"><h4>Previous Conversations</h4>
-    <div style="font-size:12px;color:var(--foreground);font-weight:600">${(ci.orders||0)+1} conversations</div>
-    <div style="font-size:10px;color:var(--gray-100);margin-top:2px">Across ${cur.ch}</div>
-  </div>`;
+  /* Previous Conversations */
+  h+='<div class="ip-section"><h4>Previous Conversations</h4>'
+    +'<div style="font-size:12px;color:var(--foreground);font-weight:600">'+((ci.orders||0)+1)+' conversations</div>'
+    +'<div style="font-size:10px;color:var(--gray-100);margin-top:2px">Across '+cur.ch+'</div>'
+    +'</div>';
 
-  h+=`</div>`;
+  /* Ban Visitor — destructive action */
+  h+='<div class="ip-action-row destructive" onclick="showToast(\'Visitor banned\')">'
+    +'<div class="ar-ico">🚫</div>'
+    +'<div class="ar-lbl">Ban Visitor</div>'
+    +'<span class="ar-chev">›</span>'
+    +'</div>';
+
+  h+='</div>';
   document.getElementById('info-panel').innerHTML=h;
 }
 
-function tickMark(status){
+function tickMark(status,full){
   if(!status)return '';
   if(status==='sent')return '<span class="d-tick sent">✓</span>';
   if(status==='delivered')return '<span class="d-tick delivered">✓✓</span>';
+  if(status==='read'&&full)return '</span><div class="mt-read">Seen <span class="tick">✓✓</span></div>';
   if(status==='read')return '<span class="d-tick read">✓✓</span>';
   return '';
 }
 
 function rMsgs(){
   const m=document.getElementById('msgs');
-  m.innerHTML=cur.msgs.map(msg=>{
-    if(msg.t==='sys')return `<div class="mr sys"><div class="bb s-bb">${msg.text}</div></div>`;
-    if(msg.t==='whisper')return `<div class="mr whisper"><div class="w-label">💬 Whisper from ${msg.from}</div><div class="bb w-bb">${msg.text}</div><span class="mt">${msg.time||''}</span></div>`;
-    if(msg.s==='ai'||msg.s==='bot'){
-      let c='';
-      const label=msg.s==='bot'?(cur.botName||'Bot'):'AI Sara';
-      const dotColor=msg.s==='bot'?'var(--warning)':'var(--purple-100)';
-      if(msg.t==='text')c=`<div class="bb a-bb">${msg.text}</div>`;
-      else if(msg.t==='btn')c=`<div class="btn-msg"><div class="bm-text">${msg.text}</div><div class="bm-btns">${msg.btns.map(b=>`<button class="bm-btn">${b}</button>`).join('')}</div></div>`;
-      else if(msg.t==='carousel')c=`<div class="carousel-wrap"><div class="carousel">${msg.products.map(p=>`<div class="p-card"><img src="${p.img}"><div class="pc-info"><div class="pc-nm">${p.name}</div><div class="pc-pr">${p.price}</div><button class="pc-btn">View Details</button></div></div>`).join('')}</div></div>`;
-      else if(msg.t==='order')c=`<div class="ob"><div class="oi">📋 ${msg.oid}</div><span class="os">${msg.ost}</span><div class="ol">${msg.items.map(i=>'• '+i).join('<br>')}</div><div class="otl"><span>Total</span><strong>${msg.total}</strong></div></div>`;
-      return `<div class="mr ai"><div class="ai-line"><span class="aidot" style="background:${dotColor}"></span><span style="color:${dotColor}">${label}</span>${msg.conf?`<span class="cf ${cf(msg.conf)}">${msg.conf}%</span>`:''}</div>${c}<span class="mt">${msg.time||''}</span></div>`;
+  var agentRole=role==='admin'?'Super Admin':'Agent';
+  m.innerHTML=cur.msgs.map(function(msg,idx){
+    if(msg.t==='sys'){
+      var isSysStart=msg.text.indexOf('started chat')>-1||msg.text.indexOf('took over')>-1||msg.text.indexOf('transferred')>-1||msg.text.indexOf('assigned')>-1;
+      if(isSysStart)return '<div class="mr sys"><div class="sys-ev"><span class="sys-ico">⟳</span>'+msg.text+'</div></div>';
+      return '<div class="mr sys"><div class="bb s-bb">'+msg.text+'</div></div>';
     }
-    const isCust=msg.s==='customer';const side=isCust?'cust':'human';
-    let c='';
-    if(msg.t==='text')c=`<div class="bb ${isCust?'c':'h'}-bb">${msg.text}</div>`;
-    else if(msg.t==='img_cap')c=`<div class="bb-img ${isCust?'ci':''}"><img src="${msg.img}"><div class="icp" style="${isCust?'color:var(--foreground)':'color:#fff'}">${msg.cap}</div></div>`;
-    const agLabel=!isCust&&msg.agent?`<div style="font-size:10px;font-weight:600;color:var(--foreground);padding:0 3px;margin-bottom:1px">${msg.agent}</div>`:'';
-    const tick=!isCust?tickMark(msg.status):'';
-    return `<div class="mr ${side}">${agLabel}${c}<span class="mt">${msg.time||''}${tick}</span></div>`;
+    if(msg.t==='sla')return '<div class="sla-msg"><div class="sla-inner"><span class="sla-ico">⏱</span>'+msg.text+'</div></div>';
+    if(msg.t==='whisper')return '<div class="mr whisper"><div class="w-label">'+'💬 Whisper from '+msg.from+'</div><div class="bb w-bb">'+msg.text+'</div><span class="mt">'+(msg.time||'')+'</span></div>';
+    if(msg.s==='ai'||msg.s==='bot'){
+      var c='';
+      var label=msg.s==='bot'?(cur.botName||'Bot'):'AI Sara';
+      var dotColor=msg.s==='bot'?'var(--warning)':'var(--purple-100)';
+      if(msg.t==='text')c='<div class="bb a-bb">'+msg.text+'</div>';
+      else if(msg.t==='btn')c='<div class="btn-msg"><div class="bm-text">'+msg.text+'</div><div class="bm-btns">'+msg.btns.map(function(b){return '<button class="bm-btn">'+b+'</button>';}).join('')+'</div></div>';
+      else if(msg.t==='carousel')c='<div class="carousel-wrap"><div class="carousel">'+msg.products.map(function(p){return '<div class="p-card"><img src="'+p.img+'"><div class="pc-info"><div class="pc-nm">'+p.name+'</div><div class="pc-pr">'+p.price+'</div><button class="pc-btn">View Details</button></div></div>';}).join('')+'</div></div>';
+      else if(msg.t==='order')c='<div class="ob"><div class="oi">📋 '+msg.oid+'</div><span class="os">'+msg.ost+'</span><div class="ol">'+msg.items.map(function(i){return '• '+i;}).join('<br>')+'</div><div class="otl"><span>Total</span><strong>'+msg.total+'</strong></div></div>';
+      return '<div class="mr ai"><div class="ai-line"><span class="aidot" style="background:'+dotColor+'"></span><span style="color:'+dotColor+'">'+label+'</span>'+(msg.conf?'<span class="cf '+cf(msg.conf)+'">'+msg.conf+'%</span>':'')+'</div>'+c+'<span class="mt">'+(msg.time||'')+'</span></div>';
+    }
+    var isCust=msg.s==='customer';var side=isCust?'cust':'human';
+    var c='';
+    if(msg.t==='text')c='<div class="bb '+(isCust?'c':'h')+'-bb">'+msg.text+'</div>';
+    else if(msg.t==='img_cap')c='<div class="bb-img '+(isCust?'ci':'')+'" style="'+(isCust?'':'background:#1B8C2A;border-radius:12px 3px 12px 12px')+'"><img src="'+msg.img+'"><div class="icp" style="'+(isCust?'color:var(--foreground)':'color:#fff')+'">'+msg.cap+'</div></div>';
+    if(isCust){
+      var custHdr='<div class="msg-name"><span style="color:'+(CH[cur.ch]||'var(--foreground)')+'">'+cur.name+'</span><span class="msg-time">'+(msg.time||'')+'</span></div>';
+      return '<div class="mr cust">'+custHdr+c+'</div>';
+    } else {
+      var agName=msg.agent||(role==='admin'?'Admin':'Nusrat');
+      var agHdr='<div class="msg-name" style="justify-content:flex-end"><span>'+agName+'</span><span class="role-badge">'+agentRole+'</span><span class="msg-time">'+(msg.time||'')+'</span></div>';
+      var isRead=msg.status==='read';
+      if(isRead){
+        return '<div class="mr human">'+agHdr+c+'<div class="mt-read">Seen <span class="tick">✓✓</span></div></div>';
+      }
+      var tick=tickMark(msg.status);
+      return '<div class="mr human">'+agHdr+c+'<span class="mt">'+(msg.time?'':'')+tick+'</span></div>';
+    }
   }).join('');
+  /* SLA breach injection */
+  if(cur.sla==='breach'){
+    var slaHtml='<div class="sla-msg"><div class="sla-inner"><span class="sla-ico">⏱</span> Default LiveChat SLA policy breached for <strong style="margin:0 2px">Every Response Time</strong></div></div>';
+    m.innerHTML+=slaHtml;
+  }
 
   /* Handover zone */
   document.getElementById('ho-zone').innerHTML=cur.needsHuman?`<div class="ho"><div class="ho-i">✋</div><div class="ho-t"><h4>Human Review Required</h4><p>${cur.hoReason}</p></div><button class="btn-tk" onclick="takeOver()">Take Over</button></div>`:'';
@@ -1539,7 +1655,13 @@ function rMsgs(){
   } else if(cur.aiOn){
     document.getElementById('in-zone').innerHTML=`<div class="ai-hbar"><span>✦</span><span>AI Sara is handling this chat</span><button class="boff" onclick="togAi()">Turn OFF</button></div>`;
   } else {
-    document.getElementById('in-zone').innerHTML=`<div class="c-in"><button class="ab" onclick="openAttachMenu()">＋</button><input class="c-inp" placeholder="Reply as ${role==='admin'?'Admin':'Nusrat'}..." id="mi" onkeydown="if(event.key==='Enter'){sMsg(this.value);this.value=''}"><button class="c-sb" onclick="var i=document.getElementById('mi');sMsg(i.value);i.value=''">➤</button></div>`;
+    document.getElementById('in-zone').innerHTML='<div class="c-in">'
+      +'<button class="ab" onclick="openAttachMenu()" style="font-size:20px;padding:4px 2px">＋</button>'
+      +'<button class="ab" onclick="showToast(\'Camera opened\')" style="font-size:18px;padding:4px 2px">📷</button>'
+      +'<input class="c-inp" placeholder="Type or # for canned..." id="mi" onkeydown="if(event.key===\'Enter\'){sMsg(this.value);this.value=\'\'}">'
+      +'<button class="ab" onclick="showToast(\'Emoji picker\')" style="font-size:17px;padding:4px 2px">😊</button>'
+      +'<button class="ab" onclick="showToast(\'Voice recording\')" style="font-size:17px;padding:4px 2px">🎤</button>'
+      +'</div>';
   }
   m.scrollTop=m.scrollHeight;
 }
