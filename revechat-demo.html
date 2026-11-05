@@ -1479,6 +1479,23 @@ function addCanned(){
   rSettings();
 }
 
+function metaChannelsHTML(){
+  const chs=[
+    {key:'whatsapp',icon:'WA',label:'WhatsApp',color:'#25D366'},
+    {key:'messenger',icon:'M',label:'Messenger',color:'#0084FF'},
+    {key:'instagram',icon:'IG',label:'Instagram',color:'#E4405F'}
+  ];
+  return chs.map(function(c,i){
+    var on=metaConnected[c.key];
+    var bdr=i>0?'border-top:1px solid var(--offwhite-100);':'';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;'+bdr+'">'
+      +'<div style="width:26px;height:26px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;letter-spacing:-0.02em;background:'+c.color+'14;color:'+c.color+';flex-shrink:0">'+c.icon+'</div>'
+      +'<div style="flex:1;font-size:11px;font-weight:600;color:var(--foreground)">'+c.label+'</div>'
+      +'<div style="font-size:10px;font-weight:600;color:'+(on?'var(--success)':'var(--gray-60)')+'">'+(on?'Connected':'Not linked')+'</div>'
+      +'<div style="width:6px;height:6px;border-radius:50%;background:'+(on?'var(--success)':'var(--offwhite-100)')+';flex-shrink:0"></div>'
+      +'</div>';
+  }).join('');
+}
 function reveServicesHTML(){
   const svcs=[
     {key:'revesms',icon:'SMS',label:'ReveSMS',desc:'Bulk SMS & OTP',color:'var(--primary-light)',tcolor:'var(--primary-dark)'},
@@ -1559,16 +1576,8 @@ function rSettings(){
           <div class="int-info"><h4>META Business</h4><p>WhatsApp, Messenger &amp; Instagram DM</p></div>
           <span class="int-status ${allMeta?'connected':'pending'}">${allMeta?'All Live':metaConnected.whatsapp?'2 of 3':'Setup'}</span>
         </div>
-        <div style="display:flex;gap:6px;margin-bottom:8px">
-          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--r-sm);background:${metaConnected.whatsapp?'var(--success-lt)':'var(--offwhite-60)'}">
-            <div style="font-size:14px">💬</div><div style="font-size:9px;font-weight:600;color:${metaConnected.whatsapp?'var(--success)':'var(--gray-60)'}">WhatsApp${metaConnected.whatsapp?' ✓':''}</div>
-          </div>
-          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--r-sm);background:${metaConnected.messenger?'var(--success-lt)':'var(--offwhite-60)'}">
-            <div style="font-size:14px">💬</div><div style="font-size:9px;font-weight:600;color:${metaConnected.messenger?'var(--success)':'var(--gray-60)'}">Messenger${metaConnected.messenger?' ✓':''}</div>
-          </div>
-          <div style="flex:1;text-align:center;padding:6px;border-radius:var(--r-sm);background:${metaConnected.instagram?'var(--success-lt)':'var(--offwhite-60)'}">
-            <div style="font-size:14px">📸</div><div style="font-size:9px;font-weight:600;color:${metaConnected.instagram?'var(--success)':'var(--gray-60)'}">Instagram${metaConnected.instagram?' ✓':''}</div>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-bottom:8px">
+          ${metaChannelsHTML()}
         </div>
         ${!allMeta?`<button class="btn-connect" onclick="metaOneClick()" style="background:linear-gradient(135deg,#1877F2,#0668E1);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px">
           <span style="font-size:16px;font-weight:800">f</span> Connect with Facebook Account
