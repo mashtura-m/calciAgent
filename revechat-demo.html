@@ -521,7 +521,7 @@ body {
 .bulk-sel-bar { display:flex; align-items:center; gap:8px; padding:0 16px; height:44px; background:var(--primary-light); border-bottom:1px solid var(--offwhite-100); flex-shrink:0; }
 .bulk-sel-bar .bsc { font-size:13px; font-weight:600; color:var(--primary-dark); flex:1; }
 .bulk-sel-bar button { background:none; border:none; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; color:var(--primary); padding:4px 8px; }
-.bulk-av { width:38px; height:38px; border-radius:50%; border:2px solid var(--offwhite-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; background:var(--offwhite-40); transition:all 0.12s; }
+.bulk-av { width:38px; height:38px; border-radius:var(--r-sm); border:2px solid var(--offwhite-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; background:var(--offwhite-40); transition:all 0.12s; }
 .bulk-av:hover { border-color:var(--gray-40); background:var(--offwhite-60); }
 .bulk-av.checked { background:var(--primary); border-color:var(--primary); }
 .bulk-av .bk-ico { font-size:16px; color:var(--primary-fg); display:none; }
@@ -1161,25 +1161,47 @@ function doBulkAssign(agent){
   showToast(bulkSelected.size>0?'Assigned':'Chats assigned to '+agent);
 }
 function openBulkReply(){
-  var canned=[
-    {id:'cr1',title:'Greeting',text:'Hi there! How can I help you today?'},
-    {id:'cr2',title:'Order Status',text:'Let me check the status of your order right away.'},
-    {id:'cr3',title:'Return Policy',text:'Our return policy allows returns within 14 days of delivery.'},
-    {id:'cr4',title:'Escalation',text:'I am escalating your issue to a senior agent for better assistance.'},
-    {id:'cr5',title:'Closing',text:'Thank you for contacting us! Is there anything else I can help with?'}
-  ];
-  var h='<div class="bs-title">Quick reply to '+bulkSelected.size+' chats</div>';
-  canned.forEach(function(cr){
+  var h='<div class="bs-handle"></div>'
+    +'<div class="bs-title">Reply to '+bulkSelected.size+' conversations</div>'
+    +'<div style="padding:0 16px 12px">'
+    +'<textarea id="bulk-custom-msg" rows="3" placeholder="Type a custom message..." style="width:100%;border:1.5px solid var(--offwhite-100);border-radius:var(--r-sm);padding:8px 10px;font-size:13px;font-family:inherit;color:var(--foreground);outline:none;resize:none;box-sizing:border-box"></textarea>'
+    +'<button onclick="sendBulkCustomReply()" style="margin-top:6px;width:100%;height:36px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Send Custom Message</button>'
+    +'</div>'
+    +'<div style="padding:0 16px 6px;font-size:11px;font-weight:600;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Or pick a canned response</div>';
+  CANNED_RESPONSES.forEach(function(cr){
     h+='<div class="bs-item" onclick="doBulkReply(\''+cr.id+'\')">'
-      +'<div class="bs-ico" style="background:var(--offwhite-60)">💬</div>'
-      +'<div class="bs-info"><h4>'+cr.title+'</h4><p>'+cr.text+'</p></div></div>';
+      +'<div class="bs-ico" style="background:var(--offwhite-60);font-size:12px">💬</div>'
+      +'<div class="bs-info"><h4>'+cr.title+'</h4><p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px">'+cr.text.substring(0,80)+'</p></div></div>';
   });
   h+='<button class="bs-cancel" onclick="hideBS()">Cancel</button>';
   showBS(h);
 }
-function doBulkReply(crId){
+function sendBulkCustomReply(){
+  var el=document.getElementById('bulk-custom-msg');
+  var msg=el?el.value.trim():'';
+  if(!msg){el.style.borderColor='var(--destructive)';el.focus();return;}
+  var now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  var agent=role==='admin'?'Admin':'Nusrat';
+  bulkSelected.forEach(function(id){
+    var c=CONVS.find(function(x){return x.id===id;});
+    if(c){c.msgs.push({t:'text',s:'human',text:msg,time:now,agent:agent,status:'sent'});c.unread=0;}
+  });
+  var cnt=bulkSelected.size;
   hideBS();bulkMode=false;bulkSelected.clear();rInbox();
-  showToast('Reply sent to selected chats');
+  showToast('Custom reply sent to '+cnt+' chats');
+}
+function doBulkReply(crId){
+  var cr=CANNED_RESPONSES.find(function(x){return x.id===crId;});
+  if(!cr)return;
+  var now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  var agent=role==='admin'?'Admin':'Nusrat';
+  var cnt=bulkSelected.size;
+  bulkSelected.forEach(function(id){
+    var c=CONVS.find(function(x){return x.id===id;});
+    if(c){c.msgs.push({t:'text',s:'human',text:cr.text,time:now,agent:agent,status:'sent'});c.unread=0;}
+  });
+  hideBS();bulkMode=false;bulkSelected.clear();rInbox();
+  showToast('Canned reply sent to '+cnt+' chats');
 }
 function openBulkTransfer(){
   var h='<div class="bs-title">Transfer '+bulkSelected.size+' chats</div>'
