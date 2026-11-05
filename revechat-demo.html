@@ -1475,6 +1475,25 @@ function addCanned(){
   rSettings();
 }
 
+function reveServicesHTML(){
+  const svcs=[
+    {key:'revesms',icon:'SMS',label:'ReveSMS',desc:'Bulk SMS & OTP',color:'var(--primary-light)',tcolor:'var(--primary-dark)'},
+    {key:'phone',icon:'📞',label:'Phone',desc:'Click-to-call',color:'var(--purple-10)',tcolor:'var(--purple-100)'},
+    {key:'kloudtalk',icon:'KT',label:'KloudTalk',desc:'Cloud call center',color:'var(--foreground)',tcolor:'var(--primary-light)'}
+  ];
+  return svcs.map(s=>{
+    const bdr=s.key!=='revesms'?'border-top:1px solid var(--offwhite-100);':'';
+    const fsz=s.icon.length>2?'10px':'14px';
+    const bst=intStatus[s.key];
+    const dis=!reveApiKey?'opacity:0.5;pointer-events:none':'';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;'+bdr+'">'
+      +'<div style="width:30px;height:30px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:'+fsz+';font-weight:800;background:'+s.color+';color:'+s.tcolor+';flex-shrink:0">'+s.icon+'</div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;color:var(--foreground)">'+s.label+'</div><div style="font-size:10px;color:var(--gray-100)">'+s.desc+'</div></div>'
+      +'<button style="padding:4px 10px;border-radius:var(--r-sm);font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid '+(bst?'var(--success)':'var(--offwhite-100)')+';background:'+(bst?'var(--success-lt)':'var(--background)')+';color:'+(bst?'var(--success)':'var(--gray-100)')+';'+dis+'" onclick="toggleInt(\''+s.key+'\')">'+(bst?'Active ✓':'Enable')+'</button>'
+      +'</div>';
+  }).join('');
+}
+
 function rSettings(){
   if(cannedMgmtOpen&&role==='admin'){
     let h=`<div style="padding:12px 16px;display:flex;align-items:center;gap:8px">
@@ -1557,15 +1576,7 @@ function rSettings(){
       <!-- Reve Services (stacked) -->
       <div style="padding:10px 16px 4px;font-size:11px;font-weight:700;color:var(--gray-60);text-transform:uppercase;letter-spacing:0.04em">Reve Services</div>
       <div class="int-card" style="padding:10px">
-        ${[
-          {key:'revesms',icon:'SMS',label:'ReveSMS',desc:'Bulk SMS & OTP',color:'var(--primary-light)',tcolor:'var(--primary-dark)'},
-          {key:'phone',icon:'📞',label:'Phone',desc:'Click-to-call',color:'var(--purple-10)',tcolor:'var(--purple-100)'},
-          {key:'kloudtalk',icon:'KT',label:'KloudTalk',desc:'Cloud call center',color:'var(--foreground)',tcolor:'var(--primary-light)'}
-        ].map(s=>\`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;\${s.key!=='revesms'?'border-top:1px solid var(--offwhite-100);':''}">
-          <div style="width:30px;height:30px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:\${s.icon.length>2?'10px':'14px'};font-weight:800;background:\${s.color};color:\${s.tcolor};flex-shrink:0">\${s.icon}</div>
-          <div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;color:var(--foreground)">\${s.label}</div><div style="font-size:10px;color:var(--gray-100)">\${s.desc}</div></div>
-          <button style="padding:4px 10px;border-radius:var(--r-sm);font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid \${intStatus[s.key]?'var(--success)':'var(--offwhite-100)'};background:\${intStatus[s.key]?'var(--success-lt)':'var(--background)'};color:\${intStatus[s.key]?'var(--success)':'var(--gray-100)'};\${!reveApiKey?'opacity:0.5;pointer-events:none':''}" onclick="toggleInt('\${s.key}')">\${intStatus[s.key]?'Active ✓':'Enable'}</button>
-        </div>\`).join('')}
+        ${reveServicesHTML()}
         ${!reveApiKey?'<div style="font-size:9px;color:var(--destructive);padding:4px 0 0">Enter your Reve API Key above to enable these services</div>':''}
       </div>
 
