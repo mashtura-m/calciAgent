@@ -1451,6 +1451,8 @@ let settingsOpen={profile:true,integrations:false,routing:false,preferences:fals
 let metaConnected={whatsapp:true,messenger:true,instagram:false};
 let reveApiKey='';
 let intStatus={revesms:false,payment:false,phone:false,kloudtalk:false};
+let payMethods={bkash:true,nagad:true,sslcommerz:true,card:false};
+function togglePay(k){payMethods[k]=!payMethods[k];rSettings();}
 function toggleSection(s){settingsOpen[s]=!settingsOpen[s];rSettings();}
 function metaOneClick(){metaConnected={whatsapp:true,messenger:true,instagram:true};rSettings();}
 function saveReveKey(){var v=document.getElementById('reve-key-input');if(v&&v.value.trim()){reveApiKey=v.value.trim();rSettings();}}
@@ -1479,6 +1481,25 @@ function addCanned(){
   rSettings();
 }
 
+function paymentTilesHTML(){
+  var tiles=[
+    {key:'bkash',icon:'b',label:'bKash',color:'#E2136E'},
+    {key:'nagad',icon:'N',label:'Nagad',color:'#F4721C'},
+    {key:'sslcommerz',icon:'SSL',label:'SSLCommerz',color:'#2A4894'},
+    {key:'card',icon:'CC',label:'Card',color:'var(--gray-100)'}
+  ];
+  return tiles.map(function(t){
+    var on=payMethods[t.key];
+    var bg=on?'var(--offwhite-40)':'var(--background)';
+    var brd=on?'2px solid var(--primary)':'1.5px solid var(--offwhite-100)';
+    var fsz=t.icon.length>2?'8px':'12px';
+    return '<div onclick="togglePay(\''+t.key+'\')" style="padding:6px;background:'+bg+';border-radius:var(--r-sm);text-align:center;cursor:pointer;border:'+brd+';position:relative">'
+      +(on?'<div style="position:absolute;top:2px;right:3px;width:12px;height:12px;border-radius:50%;background:var(--primary);color:#fff;font-size:7px;display:flex;align-items:center;justify-content:center">✓</div>':'')
+      +'<div style="font-size:'+fsz+';font-weight:800;color:'+t.color+'">'+t.icon+'</div>'
+      +'<div style="font-size:9px;font-weight:600;color:var(--foreground)">'+t.label+'</div>'
+      +'</div>';
+  }).join('');
+}
 function metaChannelsHTML(){
   const chs=[
     {key:'whatsapp',icon:'WA',label:'WhatsApp',color:'#25D366'},
@@ -1602,22 +1623,7 @@ function rSettings(){
           <span class="int-status ${intStatus.payment?'connected':'disconn'}">${intStatus.payment?'Active':'Off'}</span>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-bottom:6px">
-          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:12px;font-weight:800;color:#E2136E">b</div>
-            <div style="font-size:9px;font-weight:600;color:var(--foreground)">bKash</div>
-          </div>
-          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:12px;font-weight:800;color:#F4721C">N</div>
-            <div style="font-size:9px;font-weight:600;color:var(--foreground)">Nagad</div>
-          </div>
-          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:12px;font-weight:800;color:#2A4894">SSL</div>
-            <div style="font-size:9px;font-weight:600;color:var(--foreground)">SSLCommerz</div>
-          </div>
-          <div style="padding:6px;background:var(--offwhite-40);border-radius:var(--r-sm);text-align:center">
-            <div style="font-size:12px;font-weight:800;color:var(--gray-100)">💳</div>
-            <div style="font-size:9px;font-weight:600;color:var(--foreground)">Card</div>
-          </div>
+          ${paymentTilesHTML()}
         </div>
         <button class="btn-connect" onclick="toggleInt('payment')" style="padding:8px;font-size:12px;${intStatus.payment?'background:var(--offwhite-60);color:var(--gray-100);box-shadow:none':''}">${intStatus.payment?'Disconnect':'Enable Payments'}</button>
       </div>
