@@ -108,7 +108,8 @@ body {
 .ch .ct { font-weight:700; margin-left:2px; opacity:0.7; }
 
 /* Inbox sort bar */
-.sort-bar { display:flex; align-items:center; padding:4px 16px; gap:6px; flex-shrink:0; }
+.sort-bar { display:none; align-items:center; padding:4px 16px; gap:6px; flex-shrink:0; }
+.sort-bar.open { display:flex; }
 .sort-bar select { height:26px; border:1px solid var(--offwhite-100); border-radius:var(--r-sm); font-size:10px; font-family:inherit; color:var(--gray-100); padding:0 6px; background:var(--background); outline:none; }
 .sort-bar .sb-label { font-size:10px; color:var(--gray-60); font-weight:500; }
 .queue-badge { font-size:9px; font-weight:700; color:var(--primary-dark); background:var(--primary-light); padding:2px 6px; border-radius:var(--r-md); margin-left:auto; }
@@ -686,7 +687,7 @@ const CL={whatsapp:'W',messenger:'M',instagram:'I',livechat:'L'};
 const AGC={Nusrat:'#1A59A4',Rahat:'#18A326',Mim:'#D92020'};
 let cur=null,flt='all',tkF='all',role='admin',whisperMode=false,fpOpen=false,infoOpen=false,
     ctFlt={ch:'all',seg:'all',label:'all',time:'all'},inboxSort='fifo',inboxChFlt='all',isOnline=true;
-let inboxSearchOpen=false, inboxSearchQuery='', searchDateFlt='all', searchChFlt='all';
+let inboxSearchOpen=false, inboxSearchQuery='', searchDateFlt='all', searchChFlt='all', sortBarOpen=false;
 let cannedMgmtOpen=false;
 
 const AGENTS=[
@@ -1016,9 +1017,12 @@ function rInbox(){
   document.getElementById('inbox-sub').textContent=ur+' unread · FIFO Queue';
   try{document.getElementById('ib-bg').textContent=ur;}catch(e){}
   const lb={all:'All',ai:'AI',human:'Human',bot:'Bot',pending:'Review',snoozed:'Snoozed'};
-  document.getElementById('filters').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${flt===f?'on':''}" onclick="flt='${f}';rInbox()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('');
+  document.getElementById('filters').innerHTML=Object.keys(lb).map(f=>`<button class="ch ${flt===f?'on':''}" onclick="flt='${f}';rInbox()">${lb[f]} <span class="ct">${cts[f]}</span></button>`).join('')
+    +`<button class="ch" onclick="sortBarOpen=!sortBarOpen;rInbox()" style="padding:4px 6px;font-size:10px;color:var(--gray-60);border-color:transparent;background:none" title="Sort & filter">⇅</button>`;
 
-  document.getElementById('sort-bar').innerHTML=`
+  const sbEl=document.getElementById('sort-bar');
+  sbEl.className='sort-bar'+(sortBarOpen?' open':'');
+  sbEl.innerHTML=`
     <span class="sb-label">Sort:</span>
     <select onchange="inboxSort=this.value;rInbox()">
       <option value="fifo" ${inboxSort==='fifo'?'selected':''}>Queue (FIFO)</option>
